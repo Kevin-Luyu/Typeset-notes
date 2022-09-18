@@ -1,0 +1,337 @@
+\documentclass{article}
+\usepackage[thmmarks, framed]{ntheorem} % ntueorem must come before amsmath, or the cross-reference will not be working
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{xcolor}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+%
+\usepackage{bm}
+\newtheorem{theorem}{Theorem} 
+\newframedtheorem{frm-thm}{Theorem} %needed for framed theorems 
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-res}{Result}
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-def}{Definition}
+\theoremstyle{nonumberplain} 
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{Proof}
+\title{Quantum Mechanics Formalism}
+\author{Yu Lu}
+\begin{document}
+\maketitle
+\section{States and Observables}
+\subsection{States and wavefunctions}
+The most general thing describing a quantum system is its \textit{\textbf{state}} $\ket{S(t)}$, which is often represented in the position space by the \textit{\textbf{wavefunction}} $\Psi(x,t)$ (the exact process for decomposition will be discussed later). The wavefunction $\Psi (x,t)$ is a complex-valued function living in the \textit{\textbf{Hilbert space}} so that 
+\( \int_{-\infty}^{\infty} \left\vert \Psi  \right\vert ^2 \,\mathrm{d}x  \)  
+is finite. 
+The \textit{\textbf{observables}} (such as position and momentum) are operators that can be represented by (sometimes infinite dimensional) matrices. To make a measurement, we need to act the operator on the wavefunction (though the exact process is more subtle). In the finite-dimensional case, this is simply matrix multiplication, though it is more complicated in the infinite-dimensional case. 
+
+The wavefunctions are like vectors. For example, we define the \textit{\textbf{inner product}} of two functions $f(x)$ and $g(x)$ as 
+\[
+    \braket{f}{g} \equiv \int_{-\infty}^{\infty} f(x)^* g(x) \,\mathrm{d}x, 
+\]
+which satisfies
+\[
+    \braket{f}{g} = \braket{g}{f}^*.
+\]
+A function $f(x)$ can be decomposed into a set of basis functions $\{f_n(x)\}$ as 
+\[
+    f(x) = \sum_{i=1}^{N} c_n f_n(x).
+\]
+The basis is \textit{\textbf{complete}} if any function in the Hilbert space could be represented as above and is \textit{\textbf{orthonormal}} if any two member satisfy 
+\[
+    \braket{f_m}{f_n} = \delta _{mn}.
+\]
+Sometimes the basis $f_p(x)$ are continuous and satisfy Dirac orthonormality
+\[
+    f(x) = \int_{-\infty}^{\infty} c(p) f_p(x) \,\mathrm{d}p,
+    \quad 
+    \braket{f_p}{f_p^\prime } = \delta (p-p^\prime ),
+\]
+where $\delta (x)$ is the Dirac delta function satisfying
+\[
+    \int_{-\infty}^{\infty} e^{i p x} \,\mathrm{d}x = \delta (p),
+    \quad
+    \int_{-\infty}^{\infty} \delta (x^\prime -x) f(x^\prime ) \,\mathrm{d}{x}  = f(x), 
+    \quad 
+    \delta (a x) = \frac{\delta (x)}{\left\vert a \right\vert }.
+\]
+Assuming orthonormality, the coefficients $c_n$ could be given by Fourier's trick 
+\[
+    c_n = \braket{f_n}{f}.
+\]
+\subsection{Operators}
+Operators $\hat{Q}$ act on wavefunction $\Psi (x,t)$ and represent observables only if they are \textit{\textbf{Hermitian}}, satisfying 
+\[
+    \braket{f}{\hat{Q} f} = \braket{\hat{Q} f}{f} \quad \forall f(x).
+\]
+This, in turn, defines the Hermitian conjugate $\hat{{Q}}^{\dagger} $ of $\hat{Q} $ such that  
+\(
+    \braket{f}{\hat{Q} g} = \braket{{\hat{Q} }^{\dagger} f}{g}.
+\)
+
+The expectation value of $\hat{Q} $ could be computed as 
+\[
+    \boxed{
+    \expval{\hat{Q} } = \ev{\hat{Q} }{\Psi }.}
+\]
+We would need the Copenhagen interpretation to make sense of this equation. Also, the standard deviation of $\hat{Q} $ is defined as 
+\[
+    \boxed{
+    \sigma ^{2}  = 
+    \expval{(\hat{Q} - \expval{Q})^2} = \expval{Q^2} - \expval{Q}^2 . }
+\]
+
+We are mostly concerned with the eigenfunction expansion of the operator $\hat{Q} $, for reasons that will become clear in the Copenhagen interpretation. Luckily, such expansion is always possible for Hermitian operators, since they have only real eigenvalues and orthonormal eigenfunctions in the case of non-degenerate discrete spectrums. Even if the spectrum is degenerate, it is always possible to choose a set of orthonormal eigenfunctions. Moreover, the eigenfunction spans the entire Hilbert space. In the case of a continuous spectrum, it is possible to choose a set of complete eigenfunctions with Dirac orthonormality and real eigenvalues. 
+
+Furthermore, the eigenfunctions $\Psi$ are \textit{\textbf{deterministic states}} of the operator $\hat{Q} $, in the sense that repeated measurements yield the same result, with $\sigma =0$ and $\expval{\hat{Q} } = q$, which is the eigenvalue. 
+
+Like matrices, operators do not generally commute. This gives rise to the uncertainty principles. However it could be demonstrated that two operators can be expanded in the same set of eigenfunctions when they do commute. 
+
+\subsection{General statistical interpretation}
+By Hamiltonian mechanics, a system can be fully specified by its position and momentum. Therefore, any observable $Q$ can be expressed as $Q(\hat{x} , \hat{p} )$. Upon observation, the wavefunction $\Psi (x,t)$ collapses into one of its eigenfunction $f_n(x)$ with probability 
+\[
+    \left\vert c_n \right\vert ^2, \quad
+    \text{where } c_n = \braket{f_n}{\Psi },
+\]
+yielding the associated eigenvalue $q_n$ as a result. The extension to a continuous spectrum is trivial. The probability is properly normalised in a orthonormal basis, since $\sum_{n=1}^{N} \left\vert c_n \right\vert ^2 = \braket{\Psi } = 1. $
+\subsection{Schrödinger's equation}
+Between measurements, the wavefunction $\Psi (x,t)$ evolves smoothly in time according to the Schrödinger's equation 
+\begin{equation} \label{eq:SE}
+    \boxed{
+        i \hbar \frac{\partial \Psi }{\partial t} = \hat{H} \Psi,
+    }
+\end{equation}
+where $\hat{H} = \frac{\hat{p}^2}{ 2m} + V(\hat{x} )$ is the Hamiltonian. By the separation of variables $\Psi (x,t) = \psi (x) \phi (t)$, the equation could be simplified into the time-independent Schrödinger's equation and the time evolution
+\[
+    \hat{H} \Psi = E \psi
+    \quad 
+    \phi (t) = e^{-i E t/ \hbar},
+\]
+where $\Psi(x)$ is the eigenfunction of the Hamiltonian and $E$ is the associated energy. 
+\subsection{Uncertainty principles}
+\subsubsection{General uncertainty principle}
+Consider two observables $A$ and $B$ that do not commute such that $[\hat{A} ,\hat{B} ] = AB - BA \neq 0.$ Their variances $\sigma ^{2} = \braket{(\hat{Q} - \expval{Q}) \Psi }$ satisfy the Cauchy Schwarz inequality 
+\[
+    \begin{aligned}
+    \sigma_A ^{2}  \sigma_B ^{2} 
+    &= \braket{(\hat{A} - \expval{A}) \Psi } \braket{(\hat{B} - \expval{B}) \Psi } \\
+    &\geq \left\vert \braket{(\hat{A} - \expval{A}) \Psi }{(\hat{B} - \expval{B}) \Psi } \right\vert^2 (\hat{{A}}^{\dagger} = \hat{A} )\\
+    &= \left\vert \braket{ \Psi }{(\hat{A} - \expval{A}) (\hat{B} - \expval{B}) \Psi } \right\vert^2 \equiv \left\vert z \right\vert ^2.
+    \end{aligned}
+\]
+Simplifying $z$ gives 
+\[
+    z = \ev{\hat{A} \hat{B} } - \expval{\hat{B} } \ev{\hat{A} } - \expval{\hat{A} } \ev{\hat{B} } + \expval{A} \expval{B} \braket{\Psi }
+    = \expval{\hat{A}  \hat{B} } - \expval{A} \expval{B}.
+\]
+Noting that $\left\vert z \right\vert ^2 \geq  \Im(z)^2 = \left[ \frac{1}{2i} (z - z^*)\right]^{2} $, we obtain the generalised uncertainty principle. 
+\begin{equation}
+    \boxed{
+        \sigma_A ^{2}  \sigma_B ^{2}  \geq  \left( \frac{1}{2i} \expval{[\hat{A} , \hat{B} ]}\right) ^2  
+        \quad \Leftrightarrow \quad 
+        \sigma_A \sigma_B \geq \frac{1}{2} \left\vert \expval{\hat{A} , \hat{B} } \right\vert. 
+    }
+    \label{eq:general-uncertainty}
+\end{equation}
+\subsubsection{Heisenburg principle}
+As will be shown later, the commutation relation between position $x$ and momentum $p$ is 
+\[
+    [\hat{x} , \hat{p} ] = i \hbar.
+\]
+Applying this directly to Eq.\eqref{eq:general-uncertainty} gives the famous Heisenberg uncertainty principle
+\begin{equation}
+    \sigma _x \sigma _p \geq  \frac{\hbar}{2}.
+\end{equation}
+By forcing equality in the deriving process (see the previous section), we could show that the equality is achieved for a Gaussian wave packet. 
+\subsubsection{Prelude to the Heisenburg picture}
+In classical mechanics, we are concerned with the time derivative of observables. In quantum mechanics, we could relate them to commutators. Taking the total derivative on an operator $Q(x,p,t)$ that depends explicitly on time gives 
+\[
+    \begin{aligned}
+        \frac{\mathrm{d}}{\mathrm{d}t} \expval{Q}
+        = \frac{\mathrm{d}}{\mathrm{d}t} \ev{\hat{Q} }
+        &= \mel{\frac{\partial \Psi }{\partial t} }{\hat{Q} }{\Psi } + 
+        \mel{\Psi }{\frac{\partial \hat{Q} }{\partial t} }{\Psi} + 
+        \mel{\Psi }{\hat{Q} }{\frac{\partial \Psi }{\partial t} } \\
+        &= \frac{1}{i \hbar } (\ev{\hat{Q} \hat{H}  - \hat{H} \hat{Q} }) + \expval{\frac{\partial \hat{Q} }{\partial t} },
+    \end{aligned}
+\]
+where the second line uses the time-dependent Schrödinger's equation Eq.\eqref{eq:SE}. This gives us the generalised Ehrenfest theorem, which is the prelude to Heisenberg picture (differs by an expected value)
+\begin{equation}
+    \label{eq:gen-ehrenfest}
+    \boxed{
+        \frac{\mathrm{d}}{\mathrm{d}t} \expval{\hat{Q}}
+        = \frac{i}{\hbar } \expval{[\hat{H} ,\hat{Q} ]} + \expval{\frac{\partial \hat{Q} }{\partial t} }.
+    }
+\end{equation}
+Usually, the observable does not depend explicitly on time. Thus, observables that commutes with $\hat{H} $ have a constant expected value. 
+
+\subsubsection{Other uncertainty principles}
+Similarly, it could be shown that 
+\[
+    \sigma _x \sigma _H \geq  \frac{\hbar}{2m} \left\vert \expval{p} \right\vert,
+\]
+where $\hat{H} = \frac{\hat{p}^2}{ 2m} + V(\hat{x} )$ is the Hamiltonian. 
+
+We could also consider the uncertainty principle from a different perspective. Applying the general uncertainty principle to the Hamiltonian $H$ and a general operator $Q$ gives 
+\[
+    \sigma _H \sigma _Q \geq \frac{1}{2} \left\vert [\hat{H} ,\hat{Q} ] \right\vert 
+    = \frac{\hbar}{2} \left\vert \frac{\mathrm{d}\expval{Q}}{\mathrm{d}t}  \right\vert. 
+\]
+Taking 
+\[
+    \Delta t \equiv \frac{\sigma _Q}{\left\vert \mathrm{d}\expval{Q}/{\mathrm{d}t}  \right\vert }
+\]
+gives the energy-time uncertainty principle 
+\begin{equation} \label{eq:energy-time-uncertainty}
+    \sigma _H \Delta t \geq  \frac{\hbar}{2},
+\end{equation}
+where $\Delta t$ could be interpreted as the time it takes for \textit{any} observable $\hat{Q} $ to change substantially. In other words, the fluctuation in energy $\sigma_H$ places an upper bound on the rate of change of all observables. It should be warned that $\Delta t$ should not be interpreted as the standard deviation in time, which is not an observable in non-relativistic quantum mechanics, nor should it be interpreted as ``the duration for which an energy $\sigma _H$ could be borrowed from the system,'' since this is simply a violation of the energy conservation.  
+
+\section{Dirac Notation}
+\subsection{The notation}
+Dirac broke the two components in a inner product $\braket{\alpha }{\beta }$ into a \textit{\textbf{bra}} $\bra{\alpha }$ and a \textit{\textbf{ket}} $\ket{\beta }. $ While the ket is simply a vector in the Hilbert space, a bra is in fact a function defined by the inner product ($\bra{f} = \int f* [\ldots ] \mathrm{d} x $). Just like the ket lives in a vector space, the bra lives in the dual vector space. 
+
+With this new notation, we could define operators in terms of outer products $\dyad{\alpha }{\beta }$. For example, the \textit{\textbf{projection operator}} onto $\ket{\alpha }$ is 
+\[
+    \hat{P} \equiv \dyad{\alpha }. 
+\] 
+In this way, the completeness of orthonormal basis could be compactly expressed as 
+\begin{equation}
+    \boxed{
+        \sum\limits_{n=1} \dyad{e_n} = 1 
+        \quad \text{or} \quad 
+        \int \dyad{e_z} \mathrm{d}z = 1.
+    }
+\end{equation}
+Insertion of this identity are sometimes the first line of attack in proving quantum mechanical relationships. The following discussion of change of basis in Dirac notation shows the real power of Dirac notation\textemdash it serves as a quick visual aid so we could play with vectors and operators like playing Lego. 
+\subsection{Basis}
+We haven't explicitly pointed out the distinction between the wavefunction $\Psi(x,t)$ and the state $\ket{S(t)}$. The wavefunction $\Psi (x,t)$ is the representation of $\ket{S(t)}$ in the position space. In each eigenbasis $\ket{x}$ of the position operator $\hat{x}$, the component of $S(t)$ can be evaluated using the inner product $\Psi(x,t) = \braket{x}{S(t)}.$ In analogy to a vector in $\mathbb{R}^3,$ $\ket{S(t)}$ is like the physical vector itself, $\Psi(x,t)$ at each $x$ is like individual components of the vector (essentially a number) while the collective of $\Psi(x,t)$ at all possible $x$ forms an infinite-dimensional coordinate representing the vector in the position space, like $(1,2,3, \ldots  )$. It should be noted that the both $\ket{S(t)}$ and $\Psi (x,t)$ reside in a vector space, it is technically only $\ket{S(t)}$ that is in the Hilbert space (basis independent) while $\Psi(x,t)$ lives in the infinite-dimensional vector space spanned by $\ket{x}$ (basis dependent). 
+
+Similarly, we could also form the momentum wavefunction as $\Phi (p,t) = \braket{p}{S(t)}$ or decompose it into a discrete basis $c_n(t) = \braket{n}{S(t)}$. The representation of $S(t)$ in these basis could be achieved by inserting the identity as 
+\[
+    \ket{S(t)} =  \left(\int \mathrm{d} x \dyad{x} {x}  \right) \ket{S(t)} 
+    = \int \ket{x} \braket{x}{S(t)} \mathrm{d} x 
+    \equiv \int \Psi (x,t) \ket{x} \mathrm{d} x,
+\]
+\[
+    \ket{S(t)} = \left( \sum\limits_{n=1} \dyad{n} \right) \ket{S(t)}
+    = \sum_{n=1} \ket{n} \braket{n}{S(t)} 
+    \equiv \sum_{n=1} c_n(t) \ket{n},
+\]
+where neighbouring bras and kets can be naturally assembled into an inner product. It can be seen that bras and kets cannot be freely moved around, since that might turn an inner product into an outer product or commute two random operators. However, when a bra-ket (inner product) sticks together, they as a whole can move freely. 
+
+Operators are abstract constructs which act on a ket to yield another ket. In calculation, we normally express operators in a basis as well. Like states, operators are represented in different ways in different basis. For example, since the action of a position operator on a state can be expressed in the $p$ basis as $\mel{p}{\hat{x} }{S(t)}$, the operator can be expressed as $\bra{p}{\hat{x}}$ in the $p$ basis. Detailed examples will be given in later sections. 
+\subsection{Exemplification: position and momentum}
+\subsubsection{Eigenfunction}
+The position and momentum operator could be \textit{represented} in the position space as $\hat{x} \to x $ and $\hat{p} \to  -i \hbar  \frac{\partial }{\partial x} $. Their eigenfunction $\ket{x}$ and $\ket{p}$ could be found from the definition $Q \Psi  = \lambda \Psi $. 
+
+For the position operator, the eigenfunction equation is
+\[
+    \hat{x} \ket{S(t)} = y \ket{S(t)}
+    \implies 
+    \mel{x}{\hat{x} }{S(t)} = y \braket{x}{S(t)}
+    \implies 
+    x \Psi = y \Psi,
+\]
+where we have used the definition $\Psi = \braket{x}{S(t)}$ and the facts that $x = \bra{x} {\hat{x} }.$ Holding $y $ constant, the position $x$ can still take any value. Therefore, the eigenfunction $\Psi_{y }(x,t)$ can only be 
+\[
+    \Psi_{y }(x,t) = \delta (x-y ),
+\]
+where $y $ can take any real number to satisfy the normalisation condition. Any wavefunction could also be represented in this eigenfunction basis as 
+\[
+    f(x) = \int_{-\infty}^{\infty} c(y) \delta (x-y) \,\mathrm{d}y, \quad 
+    c(y)= f(y). 
+\]
+
+Similarly, we can formulate the eigenfunction equation for the momentum operator as ($p$ is the eigenvalue)
+\[
+    -i \hbar \frac{\partial \Psi }{\partial x} = p \Psi,
+\]
+which is a first order differential equation with normalised solution 
+\[
+    \Psi_p(x,t) = 
+    \frac{1}{\sqrt{2 \pi \hbar}} e^{i p x/\hbar}, \quad p \in \mathbb{R}.
+\]
+This gives rise to the Fourier relation between $x$ and $p$, since the change of basis is now 
+\[
+    \boxed{
+    \begin{aligned}
+        \Psi (x,t) &= \frac{1}{\sqrt{2\pi  \hbar } } \int_{-\infty}^{\infty} \Phi(p,t) e^{i p x/\hbar } \,\mathrm{d}p ,\\
+        \Phi (p,t) &= \frac{1}{\sqrt{2\pi  \hbar } } \int_{-\infty}^{\infty} \Psi(x,t) e^{-i p x/\hbar} \,\mathrm{d}x,
+    \end{aligned}}
+\]
+where $\Phi (p,t)$ is the \textit{\textbf{momentum wavefunction}} which is like $\Psi (x,t)$ in the momentum space. 
+
+\subsubsection{Commutator}
+Apparently, $\hat{x} $ and $\hat{p} $ does not commute. Since the commutator should not depend on the basis, we calculate it as 
+\[
+    [\hat{x} , \hat{p} ]\Psi  
+    = -i \hbar ( x \frac{\partial \Psi }{\partial x} - \frac{\partial (x \Psi )}{\partial x} )
+    = -i \hbar ( x \frac{\partial \Psi }{\partial x} - x \frac{\partial  \Psi }{\partial x} - \Psi ),
+\]
+giving the operator form 
+\begin{equation} \label{eq:xp-commutator}
+    \boxed{
+        [\hat{x} , \hat{p} ] = i \hbar.
+    }
+\end{equation}
+Note that the commutators are in general still operators. 
+
+Using the above relationship, together with the properties of commutators
+\[
+    \boxed{
+        [\hat{A} , \hat{B} ] = - [\hat{B} , \hat{A} ], \quad
+        [\hat{A} +\hat{B}, \hat{C} ] = [\hat{A} ,\hat{C} ] + [\hat{B} ,\hat{C} ], \quad
+        [\hat{A} \hat{B} , \hat{C} ] = \hat{A}  [\hat{B} ,\hat{C} ] + [\hat{A} , \hat{C} ] \hat{B},
+    }
+\]
+we could arrive at two more general conclusions 
+\[
+    [f(\hat{x} ), \hat{p} ] = i \hbar  \frac{\partial f}{\partial x},
+    \quad 
+    [x,f(p)] = i \hbar  \frac{\partial f}{\partial p},  
+\]
+which actually extends to all variables that are Fourier transform of each other.
+\subsubsection{Position and momentum basis}
+Since $x$ and $p$ are Fourier pairs, they should be symmetric. In other words, we could use $\Phi (x,t)$ to perform calculation in the momentum space as well, leaving the question of how to represent $\hat{x} $ and $\hat{p} $ in the momentum space. In this change of basis, we would need the inner product
+\[
+    \braket{x}{p} = \frac{1}{\sqrt{2 \pi \hbar}} \int_{-\infty}^{\infty} \delta (x-x^\prime ) e^{i p x^\prime /\hbar} \,\mathrm{d}x^\prime 
+    =  \frac{1}{\sqrt{2 \pi \hbar}} e^{i p x /\hbar},
+\]
+which is independent of the basis. Therefore, the position operator expressed in the momentum space is 
+\[
+    \begin{aligned}
+        \mel{p}{\hat{x} }{S(t)}
+        &= \int_{-\infty }^{\infty } \braket{p}{x} \mel{x}{\hat{x} }{S(t)}\mathrm{d} x \qquad \text{(inserting the identity)} \\
+        &= \int_{-\infty}^{\infty} \frac{e^{- i p x/h}}{\sqrt{2 \pi  \hbar } } x \Psi (x,t) \,\mathrm{d}x \\
+        &= i \hbar \frac{\partial }{\partial p} \int_{-\infty}^{\infty} \frac{e^{- i p x/h}}{\sqrt{2 \pi  \hbar } } \Psi (x,t) \,\mathrm{d}x \qquad \text{(using the definition of $\Phi(p,t)$)}\\
+        &= i \hbar \frac{\partial \Phi }{\partial p} .
+    \end{aligned}
+\]
+Therefore, we conclude that $\hat{x} \to i \hbar  \frac{\partial }{\partial p} $ in the momentum space. The transform from $\Psi (x,t)$ to $\Phi (p,t)$ could also be achieved in a similar fashion. The results we have obtained regarding $\hat{x} $ and $\hat{p} $ are summarised in Table \ref{tab:xp}.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cccc}
+        \toprule
+            Operator & Representation in $\ket{x}$ & Representation in $\ket{p}$ & Eigenfunction in $x$ basis    \\
+        \midrule
+            $\hat{x} $ & $x$ & $i \hbar \frac{\partial }{\partial p} $ & $\ket{x} = \delta (x-x^\prime )$    \\
+            $\hat{p} $ & $-i \hbar  \frac{\partial }{\partial x} $ & p & $\ket{p}= \frac{1}{\sqrt{2 \pi \hbar }} e^{i p x^\prime /\hbar } $  \\
+        \bottomrule
+    \end{tabular}
+    \caption{The position and momentum operators in different basis. }
+    \label{tab:xp}
+\end{table}
+
+\end{document} 

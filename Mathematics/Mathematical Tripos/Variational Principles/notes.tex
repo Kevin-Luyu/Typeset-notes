@@ -1,0 +1,467 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{xcolor}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+\usepackage[thmmarks, framed]{ntheorem}
+%
+\usepackage{bm}
+\newtheorem{theorem}{Theorem} 
+\newframedtheorem{frm-thm}{Theorem} %needed for framed theorems 
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-res}{Result}
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-def}{Definition}
+\theoremstyle{nonumberplain} 
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{Proof}
+\title{Notes on Variational Principles}
+\author{Yu Lu}
+\begin{document}
+\maketitle 
+\section*{Preface}
+This is my notes covering the 12-lecture Variational Principles course in Part IB of the Mathematical Tripos at University of Cambridge, written as a physics student. As a result of this nature, I will ignore most technical subtleties and assume well-behavedness of functions. The main intention for the notes is to give a ``guided tour'' of the subject\textemdash backgrounds and some derivation of the theorems and results will be given to create a coherent narrative, but examples will not, in most cases, be included. 
+\section{Euler-Lagrange Equation}
+A function $ f
+    \colon \mathbb{R}^n \to \mathbb{R}^m, 
+$
+maps a vector space to another vector space and can be extremised by calculus. 
+All such functions form another vector space, which can be mapped to the field of the function by a functional $I[f]
+    \colon C^k(\mathbb{R}^n) \to \mathbb{R},
+$
+where $C^k(\mathbb{R}^n)$ is the space of functions with continuous k-th derivatives on $\mathbb{R}^n$. In this course, we are primarily concerned with extremising the functional $F[y] = \int_{x_1}^{x_2} f(y,y' ; x) \,\mathrm{d}, $ where $y$ satisfies some boundary conditions $y(x_1)=y_1, \, y(x_2) = y_2.$ 
+
+Multivariate chain rule and the taylor expansion allows us to treat the derivative $y' (x)$ and $y(x)$ as if they behave independently, even though they are closely related. We extremise the functional by Taylor expanding it around the extremum as $\bar{y} = y + \varepsilon \eta$, where $y$ is the function extremising the functional and $\eta(x)$ is any function satisfying $\eta (x_1) = \eta (x_2) = 0$. Noting that the perturbation also leads to $\bar{y}^\prime = y'  + \varepsilon \eta ^\prime $, we expand $f(y, y' ; x)$ to the first order as
+\[
+    f(\overline{y}, \overline{y}^\prime ; x ) - f(y,y' ; x )
+    = (\frac{\partial f}{\partial y} , \frac{\partial f}{\partial y' } , \frac{\partial f}{\partial x} ) \cdot (\varepsilon \eta , \varepsilon \eta ^\prime ,0) + \mathcal{\MakeUppercase{o}}(\varepsilon ^2) 
+    = \varepsilon (\frac{\partial f}{\partial y} \eta  + \frac{\partial f}{\partial y' } \eta ^\prime ) + \mathcal{\MakeUppercase{o}}(\varepsilon^2). 
+\]
+In order to extremise the functional, we want to make the ``functional derivative'' $\frac{\mathrm{d}F}{\mathrm{d}\varepsilon }\vline_{\varepsilon =0} = 0$. Assuming differentiability under the integral sign, this is 
+\[
+    \begin{aligned}
+        \int_{x_1}^{x_2}  (\frac{\partial f}{\partial y} \eta  + \underbrace{\frac{\partial f}{\partial y' }\eta ^\prime}_\text{IBP} )\,\mathrm{d}x 
+        &= \eta \underbrace{\frac{\partial f}{\partial y' } \bigg\rvert^{x_2}_{x_1}}_{=0} + 
+        \int_{x_1}^{x_2}  \eta \left( \frac{\partial f}{\partial y}   -  \frac{\mathrm{d}}{\mathrm{d}x} \left(\frac{\partial f}{\partial y' } \right) \right) \,\mathrm{d}x.
+    \end{aligned}
+\]
+Combined with the fundamental lemma of variational calculus, which states that \(
+    g(x) \in C(\mathbb{R}) 
+        \colon [\alpha ,\beta ] \to \mathbb{R} \, \text{s.t.} \, \int_{\alpha }^{\beta } g(x)\eta (x) \,\mathrm{d}x =0 \, \forall \eta(x) \, \text{s.t.} \, \eta (\alpha ) = \eta (\beta ) = 0 \Rightarrow g(x)=0, x \in [\alpha , \beta ]
+\), the Euler-Lagrange equation can be derived. Many problems can be solved using this equation, including the Fermat's principle, the geodesics, and the brachistochrone. 
+\begin{frm-thm}[Euler-Lagrange Equation]
+    A \textit{necessary} condition for extremising the functional 
+    \(
+        \int_{\alpha }^{\beta } f(y,y' ; x ) \,\mathrm{d}x, 
+    \) 
+    ,where $y(x)
+        \colon \mathbb{R} \to \mathbb{R},
+    $ satisfies $y(\alpha ) = y_1, \, y(\beta ) = y_2$,
+    is
+    \[
+        \frac{\mathrm{d}}{\mathrm{d}x} \left(\frac{\partial f}{\partial y' } \right)
+        - \frac{\partial f}{\partial y} =0.
+    \]
+\end{frm-thm}
+
+
+The Euler-Lagrange equations are usually second order ODEs, but can be integrated once to give the \textit{\textbf{first integrals}} as first order ODEs, shown in the results below. 
+\begin{frm-res} \label{res:first-integral}
+    \quad 
+    \begin{itemize}
+        \item[1.] If $f(y' ; x)$ has no explicit dependence on $y$ ($\partial_y f =0$), the Euler-Lagrange equation can be integrated once to give 
+        \[
+            \frac{\partial f}{\partial y' } = \text{const}.
+        \] 
+        \item[2.] If $f(y,y' )$ has no explicit dependence on $x$ ($\partial_x f =0$) , the Euler-Lagrange equation can be converted to the first integral 
+        \[
+            f - y' \frac{\partial f}{\partial y' } = \text{const}.
+        \]
+    \end{itemize}
+\end{frm-res}
+
+\section{Extension of the Euler-Lagrange Equation}
+\subsection{Problems with constraints}
+Frequently, we want to extremise $F[y]$ with constraint, such as $G[y] = \int_{\alpha }^{\beta } g(y,y' ; x) \,\mathrm{d}x = \kappa . $ These could tackled by introducing a lagrange multiplier $\lambda $ and use the Euler-Lagrange equation to extremise the new functional $\phi[y; \lambda ] = F[y] - \lambda  G[y]$. This is illustrated in the result below. Note that the extra term in the target function is to allow for proper normalisation, though it usually doesn't matter. 
+\begin{frm-res}
+    A \textit{necessary} condition for extremising the functional $F[y] = \int_{\alpha }^{\beta } f(y,y' ; x) \,\mathrm{d}x $, subject to the constraint $\int_{\alpha }^{\beta } g(y,y'  x) \,\mathrm{d}x = \kappa $ is that the function 
+    \[
+        f - \lambda (g - \frac{\kappa }{\beta -\alpha })
+    \]
+    satisfies the Euler-Lagrange equation.
+\end{frm-res}
+
+Sometimes, we are faced with a constraint like $g(y,y'  ; x) = 0,$ which is stricter since it needs to be satisfied everywhere. To incorporate this change, we simply allow the lagrange multiplier $\lambda $ to be a function $\lambda (x)$ instead of a constant. 
+
+\subsection{Multiple dependent variables}
+When there are multiple dependent variables $y_i$ to be optimised, we could apply the Euler-Lagrange equation to each $y_i$. This result follows from the mutual independence of perturbation function $\eta_i$ (for example, we choose $\eta $ such that all of them are zero except one). The result could also be written compactly using directional derivative, as shown below. 
+
+\begin{frm-res} \label{res:EL-multiple-dependent}
+    A \textit{necessary} condition for extremising the functional 
+    \(
+        \int_{\alpha }^{\beta } f(\mathbf{y} ,\mathbf{y} ^\prime ; x ) \,\mathrm{d}x, 
+    \) 
+    where $\mathbf{y} (x) \colon \mathbb{R} \to \mathbb{R}^n,$ 
+    satisfies $\mathbf{y} (\alpha ) = \mathbf{y_1} , \, \mathbf{y}(\beta ) = \mathbf{y_2},$
+    is
+    \[
+        \frac{\mathrm{d}}{\mathrm{d}x} \left(\frac{\partial f}{\partial \mathbf{y} ^\prime } \right)
+        - \frac{\partial f}{\partial \mathbf{y} } =\textbf{0} .
+    \]
+\end{frm-res}
+The first integral follows naturally from Result.\ref{res:first-integral} as 
+\begin{itemize}
+    \item[1.] \(\frac{\partial f}{\partial y_j^\prime } =0   \) for some $1 \leq  j \leq  n,$ then 
+    \[
+        \frac{\partial f}{\partial y_j} = \text{const};
+    \] 
+    \item[2.] \(\frac{\partial f}{\partial x} =0\), then an energy integral can be obtained as
+    \[
+        f - \sum\limits_{i=1}^{n} y_i^\prime  \frac{\partial f}{\partial y_i^\prime } = \text{const}.
+    \]
+\end{itemize}
+
+\subsection{Multiple independent variables}
+When there are multiple independent variables $x_i$ to be integrated over in the functional, the Euler-Lagrange equation becomes a partial differential equation, as presented below. The proof is similar, with integration by parts being replaced by vector calculus identity and the divergence theorem. 
+\begin{frm-res} \label{res:EL-multiple-independent}
+    A \textit{necessary} condition for extremising the functional 
+    \(
+        \int_D f(\phi ,\partial_{\mathbf{x}} \phi ; \mathbf{x} ) \,\mathrm{d}^n \mathbf{x},
+    \) 
+    where $\phi(\mathbf{x} )
+        \colon \mathbb{R}^n \to \mathbb{R},
+    $ 
+    is
+    \[
+        \sum\limits_{i=1}^{n} \frac{\partial }{\partial x_i}  \left(\frac{\partial f}{\partial \left(\partial_{x_i} \phi \right)} \right)
+        - \frac{\partial f}{\partial \phi } =0.
+    \]
+\end{frm-res}
+Combining Result.\ref{res:EL-multiple-dependent} and Result.\ref{res:EL-multiple-independent}, we could easily obtain the Euler-Lagrange equation for a function $y
+    \colon \mathbb{R}^m \to \mathbb{R}^n. 
+$
+\subsection{Higher order derivatives}
+When considering the variational of a functional involving higher derivatives of $y$, we could impose a stricter  condition that derivatives of $\eta $ at all orders vanishes at the boundary and uses integration by parts multiple parts to yield the following result. 
+\begin{frm-res}
+    A \textit{necessary} condition for extremising the functional 
+    \(
+        \int_{\alpha }^{\beta } f(y,y',\ldots ,y^{(n)}  ; x ) \,\mathrm{d}x, 
+    \) 
+    ,where $y(x)
+        \colon \mathbb{R} \to \mathbb{R},
+    $ satisfies $y(\alpha ) = y_1, \, y(\beta ) = y_2$,
+    is
+    \[
+        \frac{\partial f}{\partial y} - 
+        \frac{\mathrm{d}}{\mathrm{d}x} \left(\frac{\partial f}{\partial y' } \right)
+        + \ldots  + (-1)^n \frac{\mathrm{d}}{\mathrm{d}x^n} \left(\frac{\partial f}{\partial y^{(n)}} \right)  
+        =0.
+    \]
+\end{frm-res}
+
+\section{Transformation and Symmetry}
+\subsection{Convexity}
+A function $f 
+    \colon \mathbb{R}^n \to \mathbb{R}
+$ is \textit{\textbf{convex}}  if its domain is convex (there's a precise definition for that, but can just use intuition for understanding) and $f((1-t)\mathbf{x} + t \mathbf{y} ) \leq  (1-t) f(\mathbf{x} ) + t f(\mathbf{y} ), \, \forall t \in (0,1).$ Depending on differentiability of $f$, there are more equivalent statements about convexity, summarised below. 
+\begin{frm-res}
+    \quad 
+    \begin{itemize}
+        \item[1.] If $f$ is once differentiable, it is convex iff for $\forall \mathbf{x} , \mathbf{y} \in D(f)$
+        \[
+            f(\mathbf{y} ) \geq  f(\mathbf{x} ) + (\mathbf{y}  - \mathbf{x} ) \cdot \mathbf{\nabla} f(\mathbf{x} )
+            \quad \Leftrightarrow \quad 
+            (\mathbf{\nabla} f(\mathbf{y} ) - \mathbf{\nabla} f(\mathbf{x} )) \cdot (\mathbf{y} - \mathbf{x} ) \geq 0.  
+        \]
+        \item[2.] If $f$ is twice differentiable, it is convex iff the Hessian matrix $H_{ij} = \frac{\partial^2   f}{\partial x_i \partial x_j} $ has only non-negative eigenvalues. 
+    \end{itemize}
+\end{frm-res}
+The negative of a convex function is by definition a \textit{\textbf{concave}}  function. Convex functions have an important that it only has one stationary point in its domain, which is its \textbf{absolute minimum}.  
+\subsection{Legendre Transform}
+\begin{frm-def}
+    The Legendre transform of $f
+        \colon \mathbb{R}^n \to \mathbb{R}
+    $ is 
+    \[
+        f^*(\mathbf{p} ) = \sup_{\mathbf{x} } \left(\mathbf{p}  \cdot \mathbf{x}  - f(\mathbf{x} )\right), 
+    \]
+    whose domain consists of all $\mathbf{p}  \in \mathbb{R}^n$ such that the supremum is finite. 
+\end{frm-def}
+It can be shown that the Legendre transform $f^*(\mathbf{p} )$ is convex and $f^{**}(s) = f(x) $ for convex functions. If $f$ is convex and differentiable, we could remove the supremum by noting that $\mathbf{p}  \cdot \mathbf{x}  - f(\mathbf{x} )$ is concave with only one global maximum as the stationary point, giving
+\[
+    f^*(\mathbf{p} ) = \mathbf{p}  \cdot \mathbf{x} (\mathbf{p} ) - f(\mathbf{x} (\mathbf{p} )), 
+\] 
+where $\mathbf{x}(\mathbf{p} )$ is such that $\mathbf{p}  = \mathbf{\nabla} f.$
+\subsection{Noether's theorem}
+Noether's theorem could help us find a conserved quantity for each observed symmetry\textemdash some transformation that does not change the integrand f. Formally, a 1-parameter family of transformation $y_i (x) \to Y_i (x,s)$ with $Y_i (x,0 ) = y_i(x)$ is a \textit{\textbf{continuous symmetry}} of $f$ if 
+\[
+    \frac{\mathrm{d}}{\mathrm{d}s}  f(Y_i(x,s), Y_i^\prime (x,s) ; x) = 0 \quad \forall s. 
+\] 
+\begin{frm-thm}[Noether's Theorem]
+    Given a continuous symmetry $Y_i (x,s)$ of $f$, the quantity 
+    \[
+        \sum_{i=1} \frac{\partial f}{\partial y_i^\prime } \frac{\partial Y_i}{\partial s} \bigg \rvert_{s=0} 
+    \]
+    is a first integral of the Euler-Lagrange equation  
+\end{frm-thm}
+\begin{proof}
+    Since $Y$ is a symmetry, 
+    \[
+        0 = \frac{\mathrm{d}f}{\mathrm{d}s} \bigg \rvert_{s=0}
+        = \sum_{i=1} \left( \textcolor{red}{\frac{\partial f}{\partial Y_i}} \frac{\partial Y_i}{\partial s} 
+        + \frac{\partial f}{\partial Y_i^\prime } \textcolor{blue}{\frac{\partial Y_i^\prime }{\partial s}} \right)_{s=0}. 
+    \]
+    Noting that $Y_i(x,0) = y_i(x)$ and $\partial_{y_i} f  = \frac{\mathrm{d}}{\mathrm{d}x} \partial_{y_i^\prime } f$ from the Euler-Lagrange equation, we have 
+    \[
+        0 = \sum_{i=1} \left[ \textcolor{red}{\frac{\mathrm{d}}{\mathrm{d}x} \left(\frac{\partial f}{\partial y_i^\prime } \right)} \frac{\partial Y_i}{\partial s} + \frac{\partial f}{\partial y_i^\prime } \textcolor{blue}{\frac{\mathrm{d}}{\mathrm{d}x} \left(\frac{\partial Y_i}{\partial s} \right)}\right]_{s=0} 
+        = \frac{\mathrm{d}}{\mathrm{d}x} \left(\frac{\partial f}{\partial y_i^\prime } \frac{\partial Y_i}{\partial s} \right)_{s=0},
+    \]
+where the second line follows from the product rule. This gives the desired first integral 
+\[
+    \sum_{i=1} \frac{\partial f}{\partial y_i^\prime } \frac{\partial Y_i}{\partial s} \bigg \rvert_{s=0} 
+    = \text{const}.
+\]
+\end{proof}
+\section{Applications in Physics}
+\subsection{Lagrangian Mechanics}
+A particle's motion in $\mathbb{R}^3$ could be found by the following principle of stationary action, which extremise the functional involving the \textit{\textbf{Lagrangian}}  
+\[
+    \mathcal{\MakeUppercase{l}} = T - V,
+\]
+where $T$ is the particle's kinetic energy and $V$ is its potential energy. 
+\begin{frm-thm}[Hamilton's Principle]
+    The action 
+    \[
+        S[\mathbf{x} ] = \int_{t_1}^{t_2} \mathcal{\MakeUppercase{L}} (\mathbf{q} , \dot{\mathbf{q} }, t) \,\mathrm{d}t
+    \]
+    is \textbf{stationary}, which means that $\mathcal{\MakeUppercase{L}}$ satisfies the Euler-Lagrange equation. 
+\end{frm-thm}
+\subsection{Hamiltonian Mechanics}
+We define the \textit{\textbf{Hamiltonian}} as the Legendre transform of the $ \mathcal{\MakeUppercase{L}}(\mathbf{q} ,\dot{\mathbf{q} }, t)$ with respect to $\dot{\mathbf{q}}$
+\[
+    H(\mathbf{q} ,\mathbf{p} ,t) 
+    = \sup_{\mathbf{\dot{q}} } (\mathbf{p} \cdot \dot{\mathbf{q} } - \mathcal{\MakeUppercase{L}} )
+    = \mathbf{p} \cdot \dot{\mathbf{q} }(\mathbf{p} ) - \mathcal{\MakeUppercase{L}}(\mathbf{q} , \dot{\mathbf{q} }(\mathbf{p} ), t),
+\]
+where $\dot{\mathbf{q} } = \dot{\mathbf{q} }(\mathbf{p} )$ is the solution to $\mathbf{p} = \partial_{\dot{\mathbf{q} }}\mathcal{\MakeUppercase{L}},$ which is the \textit{\textbf{generalised momentum}}.  
+Considering the total derivative of both sides of (Einstein summation convention is used and the index are put in different locations for $p$ and $q$)
+\[
+    H(\mathbf{q} , \mathbf{p} , t) = p_i \dot{q^i} - \mathcal{\MakeUppercase{L}}(q^i, \dot{q^i}, t),
+\]
+we have 
+\[
+    \begin{aligned}
+    dH 
+    = \frac{\partial H}{\partial q^ii} \mathrm{d} q^i + \frac{\partial H}{\partial p_i} \mathrm{d} p_i + \frac{\partial H}{\partial t} \mathrm{d} t % l.h.s
+    &= p_i \mathrm{d} \dot{q^i} + \dot{q^i} \mathrm{d} p_i 
+    - \textcolor{red}{\frac{\partial \mathcal{\MakeUppercase{L}} }{\partial q^i} \mathrm{d} q^i}
+    - \textcolor{blue}{\frac{\partial \mathcal{\MakeUppercase{L}} }{\partial \dot{q^i}} \mathrm{d} \dot{q^i}}
+    - \frac{\partial \mathcal{\MakeUppercase{L}} }{\partial t} \mathrm{d} t \\
+    &= p_i \mathrm{d} \dot{q^i} + \dot{q^i} \mathrm{d} p_i 
+    - \textcolor{red}{\frac{\mathrm{d}}{\mathrm{d}t} \left( \frac{\partial \mathcal{\MakeUppercase{L}} }{\partial \dot{q}^i} \right) \mathrm{d} q^i}
+    - \textcolor{blue}{\frac{\partial \mathcal{\MakeUppercase{L}} }{\partial \dot{q^i}} \mathrm{d} \dot{q^i}}
+    - \frac{\partial \mathcal{\MakeUppercase{L}} }{\partial t} \mathrm{d} t \\ 
+    &= \underline{p_i \mathrm{d} \dot{q^i}} + \dot{q^i} \mathrm{d} p_i 
+    - \textcolor{red}{\dot{p_i} \mathrm{d} q^i}
+    \underline{- \textcolor{blue}{p_i \mathrm{d} \dot{q^i}}}
+    - \frac{\partial \mathcal{\MakeUppercase{L}} }{\partial t} \mathrm{d} t \\ 
+    &= \dot{q^i} \mathrm{d} p_i 
+    - \textcolor{red}{\dot{p_i} \mathrm{d} q^i }
+    - \frac{\partial \mathcal{\MakeUppercase{L}} }{\partial t} \mathrm{d} t,
+    \end{aligned}
+\]
+where the second line uses the Euler-Lagrange equation and the third line uses the Legendre transform. Comparing the first and the last line gives the Hamilton's equations. 
+\begin{frm-thm}[Hamilton's Equations]
+    For a particle with generalised momentum $\mathbf{p} $ and generalised coordinates $\mathbf{q}$, the Hamilton's equations are 
+    \[
+        \dot{\mathbf{q}} = \frac{\partial H}{\partial \mathbf{p} } , \quad 
+        \dot{\mathbf{p}} = - \frac{\partial H}{\partial \mathbf{q} }  , \quad 
+        \frac{\partial H}{\partial t} = -\frac{\partial \mathcal{\MakeUppercase{L}} }{\partial t} .
+    \]
+\end{frm-thm}
+While Lagrangian Mechanics usually gives $N$ 2nd order ODEs as equations of motion, the time-independent Hamiltonian Mechanics gives $2N$ 1st order ODEs. It should also be noted that the two $\partial_t$ in the last Hamilton's equation does not quite mean the same thing, as $\mathbf{p}$ and $\mathbf{q} $ are held constant in the left hand side while  $\mathbf{q} $ and $\dot{\mathbf{q} }$ are held constant in the right hand side. We could as well obtain Hamilton's equations directly from Hamilton's principle by noting that the Lagrangian is the Legendre transform of Hamiltonian with respect to $\mathbf{p} $. 
+
+\subsection{Thermodynamics}
+A system can be completely characterised by two of the four thermodynamic quantities: the entropy $S$, the temperature $T$, the pressure $P$, and the volume $V$. The first law of thermodynamics (the so-called ``master equation'' by chemists) can be stated as
+\begin{equation} 
+    \mathrm{d} U = T \mathrm{d} S - P \mathrm{d} V, \label{eq:thermo-master}
+\end{equation}
+where $U$ is the internal energy of the system. The pairs of variables $(T, S)$ and $(P, V)$ are called conjugate pairs, in the sense that they are (infinitesimally) multiplied together in different versions of this ``master equation.'' The equation above allows us to investigate the change in $S$ and $V$, and can be Legendre transformed to incorporate the change in $T$ and $P$. For example, the Legendre transform with respect to $S$ (with $P$ and $V$ held fixed) gives the \textit{\textbf{Helmholtz free energy}} 
+\[
+    -F(T,V) = \sup_{S} \left( TS - U(S,V)\right),
+\]
+where $T = \left( \frac{\partial U}{\partial S} \right)_V$ from the Legendre transform coincides with the definition of temperature from the master's equation. By using this definition and the chain rule, we could express the infinitesimal change $\mathrm{d} F$ in two ways, 
+\[
+    \mathrm{d} F = \left(\frac{\partial F}{\partial T} \right)_V \mathrm{d} T +
+    \left(\frac{\partial F}{\partial V} \right)_T \mathrm{d} V,
+\]
+\[
+    \mathrm{d} F 
+    = -T \mathrm{d} S - S \mathrm{d} T + \mathrm{d} U
+    =  -S \mathrm{d} T - P \mathrm{d} V.
+\]
+Comparing the two expressions gives two of the Maxwell relations 
+\[
+    S = -\left(\frac{\partial F}{\partial T} \right)_V, 
+    \quad 
+    T =  -\left(\frac{\partial F}{\partial V} \right)_T.
+\]
+Similarly, the \textit{\textbf{enthalpy}}  $H(S,P)$ and the \textit{\textbf{Gibbs free energy}} $G(T,P)$ could be obtained from Legendre transform as well, summarised in the flow chart Fig.\ref{fig:thermo}.
+\begin{figure}[h]
+    \centering
+    \def\svgwidth{0.6\columnwidth}
+    \input{thermo.pdf_tex}
+    \caption{Legendre transform between different thermodynamic quantities.}
+    \label{fig:thermo}
+\end{figure}
+\section{The Second Variation}
+So far, we haven't determined the nature of stationary points obtained by the Euler-Lagrange equation. This, as in the case of ordinary calculus, requires the second order terms in the Taylor expansion. Similarly, considering the perturbation $y \to y + \varepsilon \eta $, we have
+\[
+    \begin{aligned}
+        F[y+\varepsilon \eta] - F[y]
+        &= \int_{\alpha }^{\beta } \left[ f(y+\varepsilon \eta , y^\prime + \varepsilon \eta ^\prime ; x) - f(y,y^\prime  ; x)\right] \,\mathrm{d}x \\
+        &= \varepsilon \int_{\alpha }^{\beta } \left(\frac{\partial f}{\partial y} \eta  + \frac{\partial f}{\partial y^\prime } \eta ^\prime  \right) \,\mathrm{d}x 
+        + \frac{\varepsilon^{2}}{2} \left(
+            (\eta , \eta ^\prime , 0)^T H (\eta , \eta ^\prime , 0)
+        \right) 
+        + \mathcal{\MakeUppercase{O}} (\left\vert \varepsilon  \right\vert ^3)\\ 
+        &= \varepsilon \int_{\alpha }^{\beta } \eta \underbrace{\left(\frac{\partial f}{\partial y}  - \frac{\mathrm{d}}{\mathrm{d}x} \left( \frac{\partial f}{\partial y^\prime } \right)  \right)}_{=0 \text{ by EL equation}} \,\mathrm{d}x 
+        + \frac{\varepsilon^{2}}{2} \int_{\alpha }^{\beta } \left[ \left(
+            \eta ^2 \frac{\partial ^2 f}{\partial y^2}  
+            + 2 \eta  \eta ^\prime  \frac{\partial ^2f}{\partial y \partial y^\prime } 
+            + (\eta ^\prime )^2 \frac{\partial ^2f}{\partial (y^\prime )^2}  
+        \right) \right] \,\mathrm{d}x 
+        + \mathcal{\MakeUppercase{O}} (\left\vert \varepsilon  \right\vert ^3)
+    \end{aligned}
+\]
+Assuming the functional is extremised, its nature is determined by the second term 
+\[
+    \begin{aligned}
+    \delta ^2 F 
+    &= \int_{\alpha }^{\beta } \eta ^2 \frac{\partial ^2 f}{\partial y^2}  
+    + \textcolor{red}{2 \eta  \eta ^\prime \frac{\partial ^2f}{\partial y \partial y^\prime } }  
+    + (\eta ^\prime )^2 \frac{\partial ^2f}{(\partial y^\prime )^2}   \,\mathrm{d}x  \\ 
+    &= \int_{\alpha }^{\beta } \eta ^2 \frac{\partial ^2 f}{\partial y^2}  
+    + \underbrace{\textcolor{red}{\left(\frac{\mathrm{d}}{\mathrm{d}x} \left(\eta ^2\right)\right) \frac{\partial ^2f}{\partial y \partial y^\prime } } }_{\text{IBP}}
+    + (\eta ^\prime )^2 \frac{\partial ^2f}{(\partial y^\prime )^2}   \,\mathrm{d}x  \\ 
+    &= \underbrace{\left( \eta^2 \frac{\partial ^2f}{\partial y \partial y^\prime }\right)^\beta_\alpha}_{=0 \text{ by b.c.s}}
+    + \int_{\alpha }^{\beta } \left[ 
+        \eta ^2 \left(
+            \frac{\partial ^2 f}{\partial y^2}  - \textcolor{red}{\frac{\mathrm{d}}{\mathrm{d}x} \left( \frac{\partial ^2f}{\partial y \partial y^\prime } \right)}
+        \right) 
+        + (\eta ^\prime )^2 \frac{\partial ^2f}{(\partial y^\prime )^2} 
+    \right]  \,\mathrm{d}x . \\ 
+    \end{aligned}
+\]
+As usual, $\delta ^2 F > 0 $ at the extremum indicates that it is a \textbf{local minimum} while $\delta ^2 F > 0$ for \textit{any} allowed function $y$ indicates that the stationary point is an \textbf{absolute minimum} (just like convexity for functions). Due to the squares in $\delta ^2 F$, we are mostly concerned with its positivity. 
+\begin{frm-res} \label{res:second-variation}
+    The nature of the stationary point obtained by the Euler-Lagrange equation for $F[y] = \int_{\alpha }^{\beta } f(y,y' ; x ) \,\mathrm{d}x$ depends on its second variation evaluated at the extremity 
+    \[
+        \delta ^2 F = 
+        \frac{1}{2} \int_{\alpha }^{\beta } \left[ Q \eta ^2 + P (\eta ^\prime )^{2} \right] \,\mathrm{d}x, 
+    \]
+    where 
+    \[
+        Q = \left[ \frac{\partial ^2f}{\partial y^2} - \frac{\mathrm{d}}{\mathrm{d}x} \frac{\partial ^2}{\partial y \partial y^\prime } \right]_{\varepsilon =0}, \quad 
+        P = \frac{\partial ^2f}{(\partial y^\prime )^{2} } \bigg \rvert_{\varepsilon =0 }. 
+    \]
+\end{frm-res}
+Of course, 
+\[
+    P>0, \quad Q \geq 0 \quad \forall \eta 
+\]
+are \textbf{sufficient} conditions guaranteeing positivity, which is rather trivial. It could be intuitively understood that the positivity of $P$ is more important than the positivity of $Q$, since we could construct a small $\left\vert \eta  \right\vert $ with large $\left\vert \eta ^\prime  \right\vert $ (a very wiggly function) but not vice versa. This gives rise to the necessary Legendre condition. 
+\begin{frm-res}[Legendre condition]
+    \quad \\
+    If $y_0(x)$ is a local \textbf{minimum} for the functional, then 
+    \[
+        P = \frac{\partial ^2f}{(\partial y^\prime )^{2} } \bigg \rvert_{y_0(x) } \geq 0
+    \]
+    is a \textbf{necessary} but not sufficient condition. 
+\end{frm-res}
+
+It is tempting to conclude that $P>0$ (the strong Legendre condition) is a sufficient condition for positivity of $\delta ^2 F$. Unfortunately, as we will demonstrate in the following, it is not. To enforce positivity, we must avoid construction of large $\left\vert \eta  \right\vert $ with small $\left\vert \eta ^\prime  \right\vert $, which is only feasible on a small interval. Thus, $P > 0$ could indicate $\delta ^2 F >0$ on a small enough interval, as discussed in the following results. 
+
+The expression in Res.\ref{res:second-variation} could be further converted by IBP, as 
+\[
+    \begin{aligned}
+        \delta ^2 F 
+        &= \int_{\alpha }^{\beta }  \left[ Q \eta ^2 + \overbrace{P (\eta ^\prime )^{2}}^{\text{IBP}} \right] \,\mathrm{d}x  \\
+        &= \underbrace{\left( P \eta  \eta ^\prime \right)_\alpha ^\beta }_{=0 \text{ b.c.s}}
+            + \int_{\alpha }^{\beta } \left[ 
+            Q \eta ^2 
+            - \frac{\mathrm{d}}{\mathrm{d}x} \left(P \eta ^\prime \right) \eta 
+        \right] \,\mathrm{d}x. \\ 
+    \end{aligned}
+\]
+Therefore, $\delta ^ 2 F$ would not be positive if the Sturm-Liouville operator in 
+\[
+    \delta ^2 F = \frac{1}{2}\int_{\alpha }^{\beta } \eta \underbrace{\left(
+        Q \eta  - \frac{\mathrm{d}}{\mathrm{d}x}  \left( P \eta ^\prime \right)
+    \right)}_{\text{Sturm-Liouville equation}} \,\mathrm{d}x 
+\]
+has a negative eigenvalue $- \omega ^{2} $, which gives 
+\[
+    \delta ^2 F = \int_{\alpha }^{\beta } - \omega ^{2}  \eta ^{2}  \,\mathrm{d}x <0.
+\]
+The existence of solution $\eta $, as expected, depends on the length of the interval $[\alpha ,\beta ]$. 
+
+A similar statement using the Sturm-Liouville operator stars from the observation that for any differentiable $\phi = \phi (x)$,
+\[
+    0 = \int_{\alpha }^{\beta } \frac{\mathrm{d}}{\mathrm{d}x} \left(\phi \eta ^{2} \right) \,\mathrm{d}x 
+    = \int_{\alpha }^{\beta } \left(\phi ^\prime  \eta ^{2}  + 2 \eta  \eta ^\prime \phi \right) \,\mathrm{d}x  
+\]
+by the product rule. Thus, we could adding the identity to $\delta ^2 F$ to give 
+\[
+    \begin{aligned}
+    \delta ^{2}  F 
+    &=  \frac{1}{2} \int_{\alpha }^{\beta } \left[ 
+        P (\eta ^\prime )^{2} + 2 \eta  \eta ^\prime  \phi + (Q + \phi ^\prime ) \eta ^{2} 
+    \right] \,\mathrm{d}x  \\
+    &= \frac{1}{2} \int_{\alpha }^{\beta } \left[
+        P (\eta ^\prime  + \frac{\phi}{P} \eta )^2 + \underline{\left(Q + \phi ^\prime  - \frac{\phi ^{2} }{P}\right)} \eta ^2
+    \right] \,\mathrm{d}x,
+    \end{aligned}  
+\]
+where the second line completes the square. Assuming $P>0$ (the strong Legendre condition), $\delta ^{2} F$ is positive as long as the underlined terms are zero, which is a non-linear first order ODE that can be converted into the Sturm-Liouville form by setting 
+\[
+    \phi  = - P \frac{u^\prime }{u},
+\]
+where $u \neq 0$ on $[\alpha ,\beta ]$. Then, the ODE is rewritten using the product rule as 
+\[
+    P \frac{(u^\prime )^{2} }{u^{2} } 
+    = Q - \left(\frac{(P u^\prime )}{u}\right)^\prime 
+    = Q - \frac{(P u)^\prime }{u}+ P \left(\frac{u^\prime}{u}\right)^{2}, 
+\]
+where the squared terms cancel, giving an ODE. Note that the solution can't be zero, otherwise the constructed $\phi $ would be undefined. Therefore. we obtain two sufficient conditions for the positivity of $\delta ^{2} F$, outlined below, both of which demonstrates the dependence of the positivity of $\delta ^{2} F $ on the length of interval. 
+
+\begin{frm-res}
+    To ensure the positivity of 
+    \[
+        \delta ^{2} F = \frac{1}{2}\int_{\alpha }^{\beta } \left[ Q \eta ^{2}  + P (\eta ^\prime )^{2} \right] \,\mathrm{d}x,
+    \]
+    \textit{assuming the strong Legendre condition} $P>0$, two sufficient conditions are 
+    \begin{itemize}
+        \item[1.] The \textit{\textbf{associated eigenvalue problem}} 
+        \[
+            - \frac{\mathrm{d}}{\mathrm{d}x} \left(P \eta ^\prime \right) +Q \eta  
+            = \lambda \eta 
+        \] 
+        does \textbf{not} have a solution with negative eigenvalue. 
+        \item[2.] (Jacobi Condition)
+        The accessory equation
+        \[
+            - \frac{\mathrm{d}}{\mathrm{d}x} \left(P u^\prime \right) + Q u =0
+        \]
+        has a solution $u$ that \textbf{never} vanishes on $[\alpha ,\beta ]$. 
+    \end{itemize}
+\end{frm-res}
+\end{document}

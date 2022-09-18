@@ -1,0 +1,260 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+\usepackage[framed]{ntheorem}
+%
+\usepackage{bm}
+\newtheorem{theorem}{Theorem} 
+\newframedtheorem{frm-thm}{Theorem} %needed for framed theorems 
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-res}{Result}
+\title{Notes on Complex Analysis}
+\author{Yu Lu}
+\begin{document}
+\maketitle
+\section*{Preface}
+\section{Holomorphic Functions} 
+A complex-valued function $
+    f(z)\colon \mathbb{S}\subseteq \mathbb{C} \to \mathbb{C}
+$
+is \textit{\textbf{differentiable}} at $z=z_0$ if the limit 
+\begin{equation}
+    f^\prime (z) = \lim\limits_{h \to 0} \frac{f(z+h)-f(z)}{h}
+    \label{eq:holo-derivative}
+\end{equation}
+exists and takes the same value however $h$ approaches $0$. If, further, f(z) is differentiable in some open set $G$, it is said to be \textit{\textbf{holomorphic}} in $G$, denoted by $f(z) \in H(G)$. Functions that are holomorphic anywhere on $\mathbb{C}$ are \textit{\textbf{entire}}. 
+
+Rules regarding differentiation for real-valued functions, such as the product rule and the chain rule, apply normally for complex-valued functions. As in the real case, addition, multiplication, and composition of holomorphic functions are still holomorphic functions. Examples of entire functions include polynomials, exponentials, sines and cosines. Complex logarithm $\ln(z)$ is holomorphic on $\mathbb{C}\backslash 0$, while functions like the rational and $\cot{z}$ are holomorphic whenever the denominator is non-zero. 
+
+As will be shown later, a holomorphic complex function is infinitely differentiable in $G$. Thus, there exists a unique Taylor expansion of $f(z)$ around $z_0$ for $z \in G$
+\begin{equation*}
+    f(z) = \sum\limits_{n=0}^{\infty} \frac{f^{(n)}(z_0)}{n!} (z-z_0)^n,
+\end{equation*}
+indicating the equivalency between holomorphism and \textit{\textbf{analyticity}}. Such a strong property stems from the strong condition implied by the direction independence in Eq.\eqref{eq:holo-derivative}, giving rise to the necessary \textit{\textbf{Cauchy-Riemann conditions}} outlined below, obtained by letting $h \to 0$ from the real and imaginary axes respectively.  
+
+\begin{frm-thm}[Cauchy-Riemann Equations]
+If \(f(z) = u(x,y)+i v(x,y)\) is differentiable at \(z = x+iy \in G\), where $u$ and $v$ are real-valued functions. Then the first order partial derivatives at $(x,y)$ satisfy 
+\[
+    u_{x} = v_{y} , \qquad u_{y}  = -v_{x}.  
+    \label{thm:holo-CRconditions} 
+\] 
+\end{frm-thm}
+
+If the four partial derivatives are continuous, then the Cauchy-Riemann conditions are sufficient for holomorphism. 
+
+\section{Introduction to Contour Integration}
+\subsection{Integration along paths}
+A path $\gamma$ between point $z_0$ and $z_1$ is a single-parameter function $
+    \gamma (t) \colon [\alpha ,\beta ] \to \mathbb{C}, t \mapsto z
+$ such that $\gamma (\alpha )=z_0, \gamma (\beta ) = z_1.$ 
+The integration along the path $\gamma $ is defined as 
+\[
+    \int_\gamma  f(z) \,\mathrm{d}z \coloneqq 
+    \int_{\alpha }^{\beta } f(\gamma (t))\gamma^\prime (t) \,\mathrm{d}t.
+\]
+From chain rules, a reparametrisation of the curve $\widetilde{\gamma} = \gamma \circ \psi,$ where $\psi$ maps the parameter interval $[\widetilde{\alpha}, \widetilde{\beta}]$ of $\widetilde{\gamma}$ onto $[\alpha ,\beta]$, does not change the integration 
+$\int_\gamma  f(z) \,\mathrm{d}z = \int_{\widetilde{\gamma}}   f(z) \,\mathrm{d}z. $ 
+
+\subsection{Cauchy's theorem} \label{sec:Cauchy's theorem}
+If $f\in H(G)$, where $G$ is simply connected, then there exists a family of antiderivatives $F \in H(G)$ of $f$ such that $F^\prime =f$. This gives the fundamental theorem of calculus in complex analysis, namely
+\[
+    \int_{\gamma }  F^\prime (z) \,\mathrm{d}z = F[\gamma (\beta )] - F[\gamma (\alpha )], 
+\]
+where $\gamma$ is defined on the parameter interval $[\alpha ,\beta ]$. Using this as a stepping stone, we can obtain the important Cauchy's theorem. 
+\begin{frm-thm}[Cauchy's Theorem]
+    For $f \in H(G)$, where $G$ is \textbf{simply connected}, then for every closed path $\gamma \in G,$
+    \[
+        \int_{\gamma }  F(z) \,\mathrm{d}z =0.
+    \]
+\end{frm-thm}
+The Cauchy's theorem can be more generally stated for any curve $\gamma$ that does not winds around $w \notin G$. This requires a more rigorous treatment of paths and the concept of winding numbers, as discussed in Chapter 4 of Priestley's book, and will not be included here. 
+
+Cauchy's theorem also leads to the deformation theorem, allowing conversion between an arbitrary closed curve and a \textit{\textbf{contour}} (closed curves consisting of connecting straight line and circular arcs). Stated in an \textit{ad hoc} fashion, the deformation theorem says that in an \textbf{open set} $G$, integration of a holomorphic function $f \in H(G)$ along two closed path $\gamma$ and $\widetilde{\gamma}$ are the same if $\gamma $ can be deformed to $\widetilde{\gamma}.$ Note that we have allowed for holes in $G$ this time. 
+
+\subsection{An important result}
+We turn our attention to an integral, which lays the foundation for Cauchy's theorem to be extended to non-holomorphic functions. 
+\begin{frm-res} \label{res:integration}
+    \[ 
+        \int_{\gamma } (z-a)^n  \,\mathrm{d}z = 
+        \begin{dcases}
+            0, &\text{ if } n \neq -1 ;\\
+            2 \pi i, &\text{ if } n = -1 ,
+        \end{dcases}
+    \] 
+    where $\gamma=\gamma (a;r)$ is a circle centred around $a$ with radius $r$ and $n$ is an integer. 
+\end{frm-res}
+\subsection{The estimation theorem}
+Just like the estimation theorem for real-valued functions, we can bound a contour integral.
+\begin{frm-thm}[The Estimation Theorem] \label{thm:estimation thm}
+    For a continuous path $\gamma $ on $[\alpha ,\beta ]$ and $f(z)$ satisfying $\left\vert f(z) \right\vert \leq M, \, \forall z \in \gamma^{*}$, 
+    \[
+        \left\vert \int_\gamma f(z) \mathrm{d}z  \right\vert 
+        \leq  \int_{\alpha}^{\beta} \left\vert  f(\gamma(t))\right\vert \left\vert \gamma'(t) \right\vert  \mathrm{d}t 
+        \leq M \int_{\alpha}^{\beta} \left\vert \gamma'(t) \right\vert  \mathrm{d}t. 
+     \]
+\end{frm-thm}
+In Thm.\eqref{thm:estimation thm}, $\int_{\alpha}^{\beta} \left\vert \gamma'(t) \right\vert  \mathrm{d}t$ can be recognised as the length of the contour, which can often be found geometrically. This theorem is sometimes used together with the inequalities below to bound either the numerator or the denominator of the integrand.
+\begin{frm-res}
+    For $z \in \mathbb{C}$ and $\theta  \in [0,\pi /2],$
+    \begin{itemize}
+        \item[1.] \(
+            \left\vert z_1 + \ldots  + z_n \right\vert \leq \left\vert z_1 \right\vert +\ldots  + \left\vert z_n \right\vert;
+        \)
+        \item[2.] 
+        \( 
+            \left\vert z_1 + \ldots  + z_n \right\vert \geq \left\vert \left\vert z_1 \right\vert -\ldots  -\left\vert z_n \right\vert  \right\vert ;
+        \)
+        \item[3.] 
+        \[
+            \frac{2}{\pi } \leq  \frac{\sin {\theta }}{\theta } \leq  1 \quad \text{(Jordan's inequality)}. 
+        \]
+    \end{itemize}
+\end{frm-res}
+\section{Dealing with singularities}
+Cauchy's theorem deals with $f(z)$ which are holomorphic in a simply connected region $G$. Complication arises when there are $w \in G$ on which $f(z)$ fails to be holomorphic (equivalently, the holes in $G$ makes it multiply connected).
+
+A point $w$ is \textit{\textbf{regular}} if $f(z)$ is holomorphic at this point. In contrast, a point $w$ is \textit{\textbf{singular}} if it is not regular but is a limiting point of regular points (so it is surrounded by them). 
+\subsection{Cauchy's integral formula}
+Following Cauchy's formula and Result \ref{res:integration}, we can obtain Cauchy's integral formula and its extension to derivatives.
+\begin{frm-thm}[Cauchy's Integral Formulae]
+    If $f(z)$ is holomorphic inside and on a positively oriented contour $\gamma$, for any point $a$ lying \textbf{inside}  $\gamma$,
+    \[
+        \begin{aligned}
+            f(a) &= \frac{1}{2\pi i} \int_\gamma \frac{f(w)}{w-a} \mathrm{d}w, \\
+            f^{(n)}(a) &= \frac{n!}{2\pi i } \int_\gamma \frac{f(w)}{(w-a)^{n+1}} \mathrm{d}w.
+        \end{aligned}
+    \]
+\end{frm-thm}
+Note that for any $a$ outside $\gamma $, the integrand is holomorphic everywhere on $I(\gamma) $ and the integral simply returns zero by Cauchy's theorem. 
+\subsection{Laurent expansion}
+Taylor expansion of a function around $z=a$ requires it to be holomorphic on an \textit{\textbf{open disc}} $D(a;r)$ , which is not always possible. The Laurent series, stated in the theorem below, allow for expansion around certain singularities by introducing negative powers. 
+\begin{frm-thm}[Laurent's Theorem]
+    Let $f \in H(A)$, where $A=\{z:R< \left\vert z-a \right\vert <S\}$ is an open annulus around $a$. Then there exists a unique Laurent series for $z \in A$ and $\gamma = \gamma (a;r) (R<r<S)$
+    \[
+        f(z) = \sum_{n=-\infty }^{\infty} c_n (z-a)^n,   
+    \]
+    where 
+    \[
+        c_n = \frac{1}{2\pi i} \int_\gamma \frac{f(w)}{(w-a)^{n+1} }\mathrm{d}w.
+    \]
+\end{frm-thm}
+The negative powers $\sum_{n=-\infty }^{-1} c_n (z-a)^n$ in the Laurent expansion are called its \textit{\textbf{principal part}}. Calculation of the Laurent coefficients from first principles is often unpractical. Usually, the first few terms of the Laurent series can be computed by direct multiplication or division of Taylor series, which is often sufficient for practical purposes. Sometimes, we may recognise parts of the function being convertible to a geometric progression $({1-z})^{-1}  = \sum_{n=0}^{\infty} z^n , \left\vert z \right\vert \leq 1$. 
+
+\subsection{The extended complex plane}
+At this point, we introduce the \textit{\textbf{extended complex plane}} $\widetilde{\mathbb{C}} $, where the limit infinity in $\mathbb{C}$ is regarded as a \textbf{single point} via projection of the Riemann sphere. With this in mind, we may write $\widetilde{\mathbb{C}} := \mathbb{C} \cup \{\infty \}. $
+
+From the one-to-one projection of the Riemann sphere, we could establish a criterion to examine the property of a function at $\infty$. A more mathematical treatment of the result is presented in 6.13 of Priestley's book. 
+\begin{frm-res}
+    $f(z)$ has the same properties at $z=\infty $ as $\widetilde{f}(z)\coloneqq f(1/z)$ at $z=0,$ including any pole, zero, or branch point. The value of the function at $\infty$ is defined formally as 
+    \(
+        \widetilde{f}(0) = f(\infty ).
+    \)
+\end{frm-res}
+
+
+\subsection{Multifunctions}
+Due to the periodicity of complex exponential in its argument $e^{i(\theta+2\pi )} = e^{i \theta}$, its inverse\textemdash the complex logarithm\textemdash is a multifunction, represented by the families of functions 
+\[
+    \text{Log}(z) = \log{r} + i (\theta_{0} + 2 k \pi ) \quad (r>0),
+\]
+where $z = re^{i \theta_0}$ and $k \in \mathbb{Z}$. If we pick any particular $k$, we would increase $\text{Log}(z)$ by $2\pi i$ whenever we go around a closed path $\gamma$ encircling $0$\textemdash we cannot define a logarithm that is both single-valued and continuous in any neighbourhood of $0$. Thus, $0$ is a \textit{\textbf{branch point}} of $\text{Log}(z)$. Note that $\infty $ is also a branch point. We could pick a single-valued function, known as a \textit{\textbf{holomorphic branch}}, by defining a \textit{\textbf{branch cut}} connecting branch points that cannot be crossed. In practice, this can be any semi-infinite line starting from $0$. Since the general power function $z^{\alpha} = r^{\alpha } e^{i \alpha(\theta +2k \pi )}$, it is also a multifunction for $\alpha \notin \mathbb{Z}$. 
+
+To examine if a function has a branch point at $z=z_0$, we simply go around a path encircling $z_0$ and see if we have a discontinuity when $\theta \mapsto \theta +2\pi $, where $\theta $ is the argument defined around $z_0$. For the functions we usually encounter, the candidates for branch points are only those that make the argument of logarithm or the base of power function zero/infinite. More details are given in Table \ref{tab:branch-points}. Note that integer powers never have branch points, since they are holomorphic at least on an annulus. 
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccc}
+        \toprule
+            Function & $0$ &  $\infty $ \\
+        \midrule
+        $\log(R(z))$ & Yes  & Usually yes  \\
+        $(R(z))^{\alpha }$     & Yes &  Usually no \\
+        \bottomrule
+    \end{tabular}
+    \caption{Branch points of $\log(R(z))$ and $(R(z))^{\alpha}$, where $R(z)$ is a rational function, and $\alpha \notin \mathbb{Z}$. }
+    \label{tab:branch-points}
+\end{table}
+
+The choice of branch cuts are usually not unique and can in general be achieved by connecting all branch points together. This, however, sometimes results in erroneously forbidding paths that does not lead to discontinuity.
+After introducing branch cuts, our path of integration cannot go through or on them (or any kind of singularities). However, we can avoid these by integrating just above or below the branch cuts, though the two ``edges'' of branch cuts will have different values. 
+
+A more rigorous approach to multifunctions involve Riemann surfaces and will not be discussed here. 
+\subsection{Classification of singularities}
+Proceeding on the definition of singularities, we call a point $a$ an \textit{\textbf{isolated singularity}} if the function $f \in H(D^\prime (a;r))$ for some open \textit{punctured} disc\textemdash indicating a unique Laurent expansion around $a$. This is in contrast to non-isolated singularities (like a branch point) where we cannot define a Laurent expansion. 
+
+Around an isolated singularity $a$, the function can be expanded as
+\(
+    \sum_{n=-\infty }^{\infty} c_n (z-a)^n, 
+\)
+where the negative powers may truncate. If $\exists N \geq 0$ such that $c_{-n} \neq 0$ for $n=N$ and $c_{-n} = 0 \, \forall n>N$ (there are only finite negative powers), then $a$ is a \textit{\textbf{pole}}  with degree $N$ if $N > 0$ or a \textit{\textbf{removable singularity}} if $N=0$. Otherwise, it is an \textit{\textbf{essential singularity}}. 
+
+In a similar fashion, a function has a zero of degree $N$ if $\exists N \geq 0$ such that $c_{n} \neq 0$ for $n=N$ and $c_{-n} = 0 \, \forall n>N$ in its Taylor expansion 
+\(
+    \sum_{n=0}^{\infty} c_n (x-a)^n. 
+\)
+Obviously, a zero is not a singularity and can only have a finite degree. However, it turns out to be nicely related with poles, as shown in the results below. 
+\begin{frm-res}
+    $f \in H(D^\prime (a;r))$ has a pole of order $m$ at $a$ iff
+    \begin{itemize}
+        \item[1.] 
+        \(\lim\limits_{z \to a} (z-a)^m f(z) = D,\) 
+        where $D$ is a non-zero constant;
+        \item[2.]
+        $1/f$ has a zero of degree $m$ at $a$. 
+    \end{itemize}
+\end{frm-res}
+The degree of poles of two functions multiplied together adds or subtracts intuitively, with zeros being negative poles. Note the subtle technicality that a pole will become a removable singularity after being multiplied with a zero of higher order. 
+
+An essential singularity, like $z=0$ for $e^{1/z}$ is nasty in the sense that the limit of the function at the singularity is different depending on the direction of approach. This point is discussed more elaborately in the Casorati \textendash Weiersrass theorem or the Picard's theorem. Thus, we shall exclude essential singularities from onward discussion. 
+
+Functions on $G$ that are holomorphic except for possible \textit{\textbf{poles}} are said to be \textit{\textbf{meromorphic}}. The following result demonstrates what a strong condition differentiability in the complex plane is. 
+
+\begin{frm-res}
+    \quad 
+    \begin{itemize}
+        \item[1.] $f(z)$ \textit{holomorphic} and \textit{bounded} on $\mathbb{C}$ is a constant (Liouville's theorem). 
+        \item[2.] $f(z)$ \textit{holomorphic} on $\widetilde{\mathbb{C}}$ is a constant. 
+        \item[3.] $f(z)$ \textit{meromorphic} on $\widetilde{\mathbb{C}}$ is a rational function. 
+    \end{itemize}
+\end{frm-res}
+
+\section{Cauchy's Residue Theorem}
+We now extend Cauchy's theorem to contours which encloses poles to give the following Cauchy's residue theorem. 
+\begin{frm-thm}[Cauchy's Residue Theorem]
+    Let $f$ be holomorphic \textbf{inside} and \textbf{on} a positively oriented contour $\gamma $ except for a finite number of poles at $a_1, a_2, \ldots , a_m $ inside $\gamma $. Then
+    \[
+        \int_\gamma f(z) \mathrm{d}z = 2 \pi i \sum\limits_{k=1}^{m} \mathrm{res}\{f(z);  a_k\},
+    \]
+    where $\mathrm{res}\{f(z); a_k\}$ is the residue of f(z) at $a_k$, defined as the Laurent coefficient $c_{-1}$ of $(z-a)^{-1} $ in the expansion of $f$ about $a$. 
+\end{frm-thm}
+The rest of this section devotes to reduce the calculation when invoking the theorem. For this, we first present a few results relating to calculation of the residue and integration along common contours. 
+
+A pole is \textit{\textbf{simple}} if it has degree $1$ and \textit{\textbf{multiple}} otherwise. A degree-$m$ pole is \textit{\textbf{overt}} if the function $f$ is written in the form $g(z)(z-a)^{-a} $ where $g(a) \neq  0$, and \textit{\textbf{covert}} otherwise. The distinction between covert and overt poles sometimes just lies in the way they are written instead of their nature. When integrating around a single overt pole, we could directly quote Cauchy's integral formulae instead of the residue theorem. Calculation of residue around these poles are presented in the result below. 
+\begin{frm-res}
+    Suppose $f(z)$ has a \textbf{simple}  pole at $z=a$, then 
+    \[
+        \mathrm{res} \{f(z); a \} = \lim\limits_{z \to a} (z-a) f(z). 
+    \]
+    Specifically, if $a$ is a 
+    \begin{itemize}
+        \item[1.] \textbf{Overt} pole with $f(z)=g(z) / (z-a),$ \[\mathrm{res} \{f(z); a \} = g(a).\]
+        \item[2.] \textbf{Covert} pole with $f(z) = h(z)/k(z)$ and $h(a) \neq 0$, $k(a)=0$, $k^\prime (a) \neq 0$, 
+        \[
+            \mathrm{res} \{f(z); a \} = \frac{h(a)}{k^\prime (a).}
+        \]
+    \end{itemize}
+\end{frm-res}
+
+\begin{frm-res}
+    If $f(z)$ has a \textbf{multiple overt} pole with order $m>1$ at $a$, then 
+    \[
+        \mathrm{res} \{f(z); a \} = \frac{1}{(m-1)!}g^{(m-1)}(a).
+    \]
+\end{frm-res}
+just a test 
+\end{document}

@@ -1,0 +1,674 @@
+\documentclass{article}
+\usepackage[thmmarks, framed]{ntheorem} % ntheorem must come before amsmath, or the cross-reference will not be working
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{xcolor}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+%
+\usepackage{bm}
+\newcommand{\up}{\ket{\uparrow}} % spin up, needs the physics package 
+\newcommand{\dn}{\ket{\downarrow}} % spin down, needs the physics package 
+\newtheorem{theorem}{Theorem} 
+\newframedtheorem{frm-thm}{Theorem} %needed for framed theorems 
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-res}{Result}
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-def}{Definition}
+\theoremstyle{nonumberplain} 
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{Proof}
+\title{Advanced Operators and 3D Quantum Mechanics}
+\author{Yu Lu}
+\begin{document}
+\maketitle
+\section{Annihilation and creation operators}
+The annihilation and creation operators $\hat{a}_{\pm}$ are a pair of operators (Hermitian conjugate) that factor the Hamiltonian $H$ into terms containing $\hat{a}_{+} \hat{a}_{-}$. This way, each operator can usually link different energy eigenstates so we can generate all energy eigenstates from just one of them. A famous example of this is the ladder operators in solving the harmonic oscillator and the angular momentum problem. 
+\subsection{The harmonic oscillator}
+Like the ubiquitousness of its presence in classical mechanics, the harmonic oscillator is a common model in quantum systems, being characterised by the potential $V(x) = \frac{1}{2}m \omega ^2 x^2$, where $\omega $ is the quantum analogy of the natural frequency. Its Hamiltonian can be factorised as 
+\[
+    \hat{H} = \hbar \omega \left(
+        \hat{a}_{\pm} \hat{a}_{\mp} \pm \frac{1}{2}
+    \right),
+\]
+where the operators $\hat{a} _{\pm}$ are linked to $\hat{x} $ and $\hat{p} $ via 
+\[
+    \boxed{
+        \begin{aligned}
+            \hat{a} _{\pm} &= \frac{1}{\sqrt{2 \hbar m \omega } } (\mp i \hat{p} + m \omega \hat{x} ), \\
+            \hat{x} = \sqrt{\frac{\hbar}{2 m \omega }} (\hat{a} _+ &+ \hat{a} _-),
+            \qquad  
+            \hat{p} = i \sqrt{\frac{\hbar  m \omega }{2}} (\hat{a} _+ - \hat{a} _-).
+        \end{aligned}
+    }
+\]
+It should be noted that while each operator are not Hermitian (${\hat{a}^{\dagger}_\pm}=\hat{a}_\mp$, their commutator is $[\hat{a}_-, \hat{a}_+] = 1$), their products $\hat{a}^{\dagger}_{\pm}\hat{a}^{\dagger}_{\mp}$ are (they are observables that count the energy level). It follows from Schrödinger's equation that the energy eigenstates $\psi_n$ must satisfy 
+\begin{equation} \label{eq:harmonic-oscil-SE}
+    \hbar \omega \left(
+        \hat{a}_{\pm} \hat{a}_{\mp} \pm \frac{1}{2}
+    \right) \psi 
+    = E \psi.  
+\end{equation}
+
+We could now verify that $\hat{a}_\pm$ are in fact \textit{\textbf{ladder operators}} that acts on an energy eigenstate to yield another energy eigenstate with different energy. By direct calculation, 
+\[
+    \begin{aligned}
+        \hat{H} (\hat{a} _+ \psi_n)
+        &= \hbar \omega \left(
+            \hat{a}_{+} \hat{a}_{-} + \frac{1}{2}
+        \right) (\hat{a} _+ \psi_n)
+        = \hbar \omega \left(
+            \hat{a}_{+} \hat{a}_{-} \hat{a}_+ + \frac{1}{2} \hat{a}_+
+        \right)  \psi_n \\
+        &= \hbar \omega \hat{a}_{+} \left(
+             \hat{a}_{-} \hat{a}_+ + \frac{1}{2} 
+        \right)  \psi_n
+        = \hbar \omega \hat{a}_{+} \left(
+            \hat{a}_{+} \hat{a}_- + 1 + \frac{1}{2} 
+       \right)  \psi_n \qquad \text{(from the commutation relation)} \\
+       &= \hat{a}_{+} \left(
+        \hat{H}  + \hbar \omega 
+        \right) \psi_n 
+        = (E_n+\hbar \omega ) (\hat{a}_+ \psi_n)
+        \equiv E_{n+1} \psi_{n+1}. 
+    \end{aligned}
+\]
+Similarly, $\hat{H} (\hat{a} _- \psi_n) = E_{n-1} \psi_{n-1}.$ It can therefore deduced that $\hat{a}_-$ and $\hat{a}_+$ yield a neighbouring energy eigenstate with energy separated by $\hbar \omega $, apart from a normalisation constant (thus they are also called the lowering and raising operators). After reducing the task to obtaining just one energy eigenstate, we hope that this ``ladder of states'' has an terminal state at either end, giving
+\[
+    \hat{a}_\pm  \psi_0 = 0, \quad \implies \quad 
+    \frac{\mathrm{d}\psi _0}{\mathrm{d}x} = \pm \frac{m \omega }{\hbar } x \psi_0.
+\]
+Apparently, the equation $\hat{a}_+  \psi_0 = 0$ has no normalisable solution, giving the normalised energy ground state at the bottom of the ladder as 
+\[
+    \boxed{
+        \psi_0(x) = 
+        \left( \frac{m \omega }{\pi  \hbar }\right)^{1 /4} e^{-\frac{m \omega }{2 \hbar } x^2}, \quad 
+        \text{ with } E_0 = \frac{1}{2} \hbar \omega .
+    }
+\]
+Other eigenstates could be obtained by repeatedly applying $\hat{a} _+$, with the energy level $\boxed{E_n = (n+\frac{1}{2}) \hbar  \omega .}$ Combining this with Eq.\eqref{eq:harmonic-oscil-SE} gives 
+\[
+    \hat{a}_+ \hat{a}_- \psi_n = n \psi _n, \quad \hat{a}_- \hat{a}_+ \psi_n = (n+1) \psi _n. 
+\] 
+Therefore, assuming that $\hat{a} _+ \psi_n = c_n \psi _{n+1}$ and $\hat{a} _- \psi_n = d_n \psi _{n-1}$ and exploiting the normalisation of wavefunction, we could obtain the normalisation constant by noting (the Dirac's notation has been abused)
+\[
+    (n+1) \braket{\psi_n} =\braket{\psi_n}{\hat{a}_- \hat{a}_+ \psi_n} =\braket{ \hat{a}_+ \psi_n} = \left\vert c_n \right\vert ^2 \braket{\psi_{n+1}},
+\]
+\[
+    n \braket{\psi_n} =\braket{\psi_n}{\hat{a}_+ \hat{a}_- \psi_n} =\braket{ \hat{a}_- \psi_n} = \left\vert d_n \right\vert ^2 \braket{\psi_{n-1}},
+\]
+thus giving 
+\[
+    \boxed{
+    \hat{a} _+ \psi_n = \sqrt{n+1} \psi_{n+1}, 
+    \qquad
+    \hat{a} _- \psi_n = \sqrt{n} \psi_{n-1}.
+    }
+\]
+where $n$ runs from $0$ to infinity. We can thus give a general expression $\psi_n = \frac{1}{\sqrt{n!} } (\hat{a} _+)^n \psi_0$ in terms of the raising operator $\hat{a} _+$, though the analytical evaluation of $(\hat{a} _+)^n$ leads to the Legendre polynomial. 
+
+In appreciation of its simplicity, we tend to do everything using the ladder operators instead of $\hat{x} $ and $\hat{p} $. For example, to calculate $\expval{x^2}$ in $\psi_n$, we use 
+\[
+    \begin{aligned}
+    \expval{x^2} 
+    &= \frac{\hbar }{2 m \omega }\expval{(\hat{a}_+ + \hat{a} _-)^2} \\
+    &= \frac{\hbar }{2 m \omega } \ev{(\hat{a} _+)^2 + (\hat{a} _-)^2 + \hat{a} _+ \hat{a} _- + \hat{a} _- \hat{a} _+}{\psi_n} \\ 
+    &= \frac{\hbar }{2 m \omega } \left(
+        (n + n + 1) \braket{\psi_n} 
+        + \sqrt{(n+1)(n+2)} \braket{\psi_n}{\psi_{n+2}}
+        + \sqrt{n(n-1)} \braket{\psi_n}{\psi_{n-2}} 
+    \right) \\
+    &= \frac{\hbar }{ m \omega } (n + \frac{1}{2}).
+    \end{aligned}  
+\]
+\subsection{A preface to supersymmetry*}
+Using a similar mindset, we could construct a supersymmetric Hamiltonian $\hat{H}_2$ for a Hamiltonian $\hat{H}_1$ that could be factorised in a nice way. Consider the annihilation and creation operators 
+\[
+    \hat{A} = i \frac{\hat{p} }{\sqrt{2m} } + W(x), \quad 
+    \hat{A}^{\dagger} = - i \frac{\hat{p} }{\sqrt{2 m } } + W(x),
+\]
+for some function $W(x).$ The supersymmetric Hamiltonian pairs could be constructed as 
+\[
+    \hat{H}_1 \equiv \hat{A}^{\dagger} \hat{A} = \frac{\hat{p} ^2}{2m} + V_1(x), 
+    \quad 
+    \hat{H}_2 \equiv \hat{A} \hat{A}^{\dagger} = \frac{\hat{p} ^2}{2m} + V_2 (x), 
+\]
+where $V_1(x)$ and $V_2(x)$ are the \textit{\textbf{supersymmetric partner potentials}}, related to $W(x)$ as 
+\[
+    V_1(x) = W^2(x) - \frac{\hbar }{\sqrt{2 m} } W^\prime (x), 
+    \quad 
+    V_2 (x) = W^{2} (x) + \frac{\hbar }{\sqrt{2 m} } W^\prime (x). 
+\] 
+
+Usually, $W(x)$ is taken so that the ground state of $\hat{H} _1$ satisfies 
+\[
+    \hat{A} \psi_0^{(1)} (x) =0 \implies 
+    W(x) = \frac{\hbar }{\sqrt{2m} } \frac{\psi_0^{^\prime (1)}(x)}{ \psi_0^{(1)}(x)}. 
+\]
+This way, the spectra of $\hat{H} _1$ and $\hat{H} _2$ are related in a interested way such that if $\psi_n^{(1)}$ is an eigenstate of $\hat{H} _1$ with eigenvalue $E_n^{(1)}$, then $\hat{A} \psi_n^{(1)}$ is an eigenstate of $\hat{H} _2$ with the same energy $E_n^{(1)}$. Similarly, if $\psi_n^{(2)}$ is an eigenstate of $\hat{H} _2$ with eigenvalue $E_n^{(2)}$, then $\hat{A} ^{\dagger} \psi_n^{(2)}$ is an eigenstate of $\hat{H} _1$ with the same energy eigenvalue. Combining this with $\hat{A} \psi_0^{(1)} (x) =0$, we get that the $E_0^{(1)} = 0 $ for $\hat{H} _1$ \textemdash the energy eigenvalue and eigenstate is missing from the spectrum of $\hat{H}_2$ since $0$ cannot be an eigenstate. Apart from this, $\hat{H}_1$ and $\hat{H} _2$ has exactly the same spectra. Note that the annihilation and creation operators in this case do not generate the adjacent energy eigenstate in the same Hamiltonian. Instead, it converts the eigenstate between $\hat{H} _1$ and $\hat{H} _2$ (the difference is like climbing a ladder against going around circles).
+This supersymmetry machinery can sometimes explain the similar spectra for two seemingly unrelated potentials. 
+
+\section{Angular Momentum Operator}
+\subsection{Operators}
+In light of its classical definition $\mathbf{L} = \mathbf{r} \times \mathbf{p}$, we define the components of quantum angular momentum operators as (the hats are omitted where ambiguity won't occur)
+\[
+    L_x = y p_z - z p_y, \quad  L_y = z p_x- x p_z, \quad  L_z = x p_y - y p_x ,
+\]
+where $\mathbf{p} \to -i \hbar \mathbf{\nabla}. $The three components allow cyclic permutation and can define the angular momentum tensor $\mathbf{L} = L_x \hat{i} + L_y \hat{j} + L_z \hat{k} $ with its magnitude $\hat{L} ^{2} = \mathbf{L} \cdot \mathbf{L} = \hat{L} _x^2 + \hat{L} _y^2 + \hat{L} _z^2. $ Noting that the position and momentum operator in 3D follows $\boxed{[r_i, p_j]= i \hbar \delta _{ij}},$ we could obtain the commutation relations 
+\[
+    \boxed{
+        [\hat{L} _i, \hat{L} _j] = i \hbar \epsilon_{ijk} \hat{L}_k, \quad 
+        [L^2, \mathbf{L} ] = \textbf{0}.  
+    }
+\]
+\begin{proof}
+\[
+        \begin{aligned}
+            [L_x, L_y] 
+            &= [y p_z - z p_y, z p_x - x p_z]  
+            = [y p_z, z p_x] - [y p_z , x p_z] - [z p_y, z p_x] + [z p_y, x p_z] \\ 
+            &= y p_x [p_z, z] + x p_y [z, p_z]
+            = i \hbar (x p_y - y p_x) = i \hbar L_z; 
+        \end{aligned}
+\]
+\[
+        \begin{aligned}
+            [L^2, L_x] 
+            &= [L_x^2 + L_y^2 + L_z^2 , L_x]
+            = [L_y^2, L_x] + [L_z^2, L_x] \\
+            &= L_y[L_y, L_x] + [L_y, L_x] L_y + L_z[L_z, L_x] + [L_z, L_x] L_y \\
+            &= i \hbar (-L_y L_z - L_z L_y + L_z L_y + L_y L_z ) = 0.
+        \end{aligned}  
+\]
+\end{proof}
+From the spectral theorem, commuting operators $L^2$ and $L_z$ share the same set of eigenfunctions $f$, with 
+\[
+    L^2 f = \lambda f, \quad L_z f = \mu f.
+\]
+Although $L^2$ and $L_x$, $L_y$ also share the same set of eigenfunctions respectively, those are different from $f$, since $[L_x, L_z] \neq 0$. This is an illustration of the loss of transitivity in commutation relationships due to degenerate eigenstates. 
+
+Due to the similarity in their commutation relations, the angular momentum operator could have ladder operators, just like those in the harmonic oscillator problem, defined by $\boxed{\hat{L}_{\pm} = L_x \pm i L_y},$ satisfying $\boxed{[L_z, L_\pm] = \pm \hbar L_{\pm}, \quad [L^2, L_\pm] = 0 } $ (defining characteristics of ladder operators). As expected, $L_+$ and $L_-$ are Hermitian conjugates of each other and acts on energy eigenstates $f$ like 
+\[
+    L^2 (L_\pm f) = \lambda (L_\pm f), \quad 
+    L_Z (L_\pm f) = (\mu \pm \hbar ) (L_\pm f). 
+\]
+Therefore, eigenstates of $L_z$ with the same $\lambda$ are separated by $\hbar$, forming a ladder like that in the harmonic oscillator. However, since the physical constraint $\expval{L_z^2} \leq \expval{L^2},$ the ladder does not extend to infinity on either end, giving a top eigenstate $f_t$ and a bottom one $f_b$ satisfying 
+\[
+    \begin{aligned}
+        L_z f_t &= l f_t, \quad L_+ f_t = 0; \\
+        L_z f_b &= \overline{l} f_b, \quad L_- f_{b} =0. 
+    \end{aligned}
+\]
+To express $\lambda $ in terms of the maximum angular momentum along the $z$ direction $l$, $L^2$ needs to be  expressed in terms $L_z$ and $L_\pm$, whose action on $f$ are known. Noting that 
+\[
+    L_\pm L_\mp = L_x^2 + L_y^2 \mp i (L_x L_{y} - L_{y} L_{x} ) = L^2 - L_z^2 \pm \hbar L_z,
+\]
+we now have 
+\[
+    \lambda f_t = L^2 f_t = \underbrace{(L_- L_+ + L_z^2 + \hbar L_z ) f_t}_{L_+ f_t = 0} = \hbar ^2 l (l+1) f_t, 
+\]
+\[
+    \lambda f_b = L^2 f_b = \underbrace{(L_+ L_- + L_z^2 - \hbar L_z ) f_b}_{L_- f_b = 0} = \hbar ^2 \overline{l}  (\overline{l} -1) f_b,
+\] 
+giving $ \overline{l} = -l, \quad \lambda = l(l+1).$ Therefore, for the eigenstates with the same magnitude of angular momentum specified by $l$, the z-component of the angular momentum specified by $\mu $ (usually denoted $m$) has $2l+1$ discrete levels, running from $-l$ to $l$ in integer steps. This requires $l$ to be either a half-integer or an integer. Further symmetry from the spatial representation of angular momentum operators requires that $l$ can only be a non-negative integer. Thus, the action of angular momentum operators on the eigenstates $\ket{l m}$ could be summarised as 
+\[
+    \boxed{
+        L^2 \ket{l \, m} = l(l+1) \ket{l \, m}, \quad
+        L_z \ket{l \, m} = m \ket{l \, m},
+    }
+\]
+where $l = 0,1, \ldots $ and $m = -l, -l+1, \ldots , l-1, l $. It is worth noting that the maximum allowed of $L_z$ is still smaller than the magnitude of $L$, which is in line with the uncertainty principles of different components of $\mathbf{L}.$ 
+
+The ladder operators acts on the eigenstates as $L_{\pm} \ket{l \, m} = c_{l \pm}^m \ket{l \, m \pm 1} $, where the constant can be determined by taking the norm on both sides 
+\[
+    \left\vert c_{l \pm}^m \right\vert ^2 \braket{l\, m \pm 1} 
+    = \left\vert c_{l\, \pm}^m \right\vert ^2
+    = \left\vert {L_{\pm}} \ket{l\, m} \right\vert^2
+    = \ev{L_{\mp} L_{\pm}}{l\, m}.
+\]
+Noting that
+\[
+    \ev{L_{\mp} L_{\pm}}{l\, m} = \ev{L^2 - L_z^2 \mp \hbar  L_z}{l\,m}
+    = \hbar^2 (l(l+1) - m(m \mp 1)),
+\]
+we obtain the normalisation constant $c_{l \pm}^m = \hbar \sqrt{l(l+1) - m(m \mp 1)}$ and claim that 
+\[
+    \boxed{
+        L_{\pm} \ket{l \, m}
+        = \hbar \sqrt{(l \mp m) (l \pm m + 1)} \ket{l \, (m\pm 1)}. 
+    }
+\]
+\subsection{Eigenfunctions of $\hat{L} _z$ and $\hat{L} ^2$} \label{sec:eigenfunction}
+For symmetry consideration, we usually work with spherical coordinates when expressing angular momenta. With the expression of $\mathbf{\nabla}$ in spherical polars, this could be expressed as 
+\[
+    \mathbf{L}  = 
+    -i \hbar  \left( 
+        \hat{\phi} \frac{\partial }{\partial \theta } - \hat{\theta} \frac{1}{\sin \theta } \frac{\partial }{\partial \phi} .
+    \right)
+\]
+Expressing the unit vector in terms of cartesian components, we could obtain the various operators of concern as 
+\[
+    L_x = - i \hbar \left( 
+        -\sin \phi \frac{\partial }{\partial \theta } - \cos \phi  \cot \theta \frac{\partial }{\partial \phi } 
+    \right), \quad 
+    L_y = -i \hbar \left( 
+        + \cos{\phi} \frac{\partial }{\partial \theta } - \sin \phi  \cot \theta \frac{\partial }{\partial \phi } 
+    \right),
+\]
+\[
+    \boxed{
+        L_z = -i \hbar \frac{\partial }{\partial \phi } ,
+    }
+\]
+\[
+    L_{\pm} = \pm \hbar  e^{\pm i \phi } \left( 
+        \frac{\partial }{\partial \theta } + i \cot \theta \frac{\partial }{\partial \phi }
+    \right). 
+\]
+Thus, after evaluating $L_+ L_-$, we could obtain 
+\[
+    \boxed{
+        L^2 = L_+ L_- + L_z^2 - \hbar L_z 
+        = -\hbar^2 \left[ 
+            \frac{1}{\sin \theta } \frac{\partial }{\partial \theta } \left( 
+                \sin \theta \frac{\partial }{\partial \theta } 
+            \right) + \frac{1}{\sin ^2 \theta } \frac{\partial ^2 }{\partial \phi ^2 } 
+        \right].
+    }
+\]
+
+With these representation, the eigenfunctions can be written as solutions $\psi = Y_l^m (\theta , \phi )$ to the partial differential equations 
+\[
+    L_z \psi = \hbar m \psi  
+    \implies  - i \hbar \frac{\partial \psi }{\partial \phi }  = \hbar m \psi, 
+\]
+\[
+    L^2 \psi = \hbar ^2 l(l+1) \psi 
+    \implies  -\hbar^2 \left[ 
+        \frac{1}{\sin \theta } \frac{\partial }{\partial \theta } \left( 
+            \sin \theta \frac{\partial }{\partial \theta } 
+        \right) + \frac{1}{\sin ^2 \theta } \frac{\partial ^2 }{\partial \phi ^2 } 
+    \right] \psi = \hbar ^2 l(l+1) \psi.
+\]
+By separation of variables $Y(\theta ,\phi ) = \Theta (\theta ) \Phi (\phi )$, the system could be transformed into two ordinary differential equations  
+\[
+    \frac{\mathrm{d}\Phi }{\mathrm{d}\phi } = im \implies 
+    \Phi (\phi ) = e^{i m \phi }, 
+\]
+\[
+    \sin \theta \frac{\mathrm{d}}{\mathrm{d}\theta } \left( 
+        \sin \theta  \frac{\mathrm{d}\Theta }{\mathrm{d}\theta } 
+    \right) + \left[ 
+        l(l+1) \sin ^2 \theta - m^2
+    \right] \Theta =0,
+\]
+whose solution is 
+\(
+    \Theta (\theta ) = A P_m^l (\cos \theta ),
+\) 
+where $A$ is some normalisation constant, and $P_l^m(x)$ is the \textit{\textbf{associated Legendre function}} defined by 
+\[
+    P_l^m(x) =
+    \begin{dcases}
+        (-1)^m (1-x^2)^{m /2} \left( 
+            \frac{\mathrm{d}}{\mathrm{d}x} 
+        \right)^m P_l (x), &\text{ if } m \geq 0 ;\\
+        (-1)^{-m} \frac{(l+m)!}{(l-m)!} P_l^{-m}(x), &\text{ if } m<0 .
+    \end{dcases}
+\]
+where $P_l(x)$ is the $l$th-order \textit{\textbf{Legendre polynomial}}, defined as 
+\[
+    P_l(x) = \frac{1}{2^l l!} \left( 
+        \frac{\mathrm{d}}{\mathrm{d}x}  
+    \right)^l (x^2 -1)^l. 
+\] 
+The entire solutions are called \textit{\textbf{spherical harmonics}}, defined as 
+\begin{equation}
+    \label{eq:spherical-harmonics}
+    Y_m^l(\theta ,\phi ) 
+    = \sqrt{\frac{(2l+1)}{4 \pi } \frac{(l-m)!}{(l+m)!}} e^{i m \phi } P_l^m (\cos \theta ).
+\end{equation}
+
+\subsection{Spins}
+In our previous discussion, the (extrinsic) angular momentum $\mathbf{L}$ is dependent on the potential $V$ (more precisely, the azimuthal quantum number $l$ depends on $V$). However, it turns out that they also carry some intrinsic angular momentum $\mathbf{S},$ whose quantum number $s$ is immutable for a specific type of particles. This should be understand in the sense that their Hamiltonian has some contribution from terms that \textit{acts like} some intrinsic angular momentum (but these has no dependence on any of the existing spatial coordinates), since we do not postulate the structure of any particle here. Therefore, we \textit{define} the operators in terms of the following properties 
+\[
+    [S_i, S_j] = i \hbar \epsilon_{ijk} S_k,
+\]
+\[
+    S^2 \ket{s \, m} = \hbar ^2 s (s+1) \ket{s \, m}, \quad 
+    S_z \ket{s \, m} = \hbar  m \ket{s \, m},
+\]
+\[
+    S_{\pm} \ket{s \, m} = \hbar \sqrt{s(s+1) - m(m \pm 1)} \ket{s \, (m \pm 1)}, 
+\]
+where $S_{\pm} = S_x \pm i S_y.$ Therefore, the eigenstates $\ket{s \, m}$ have the same ladder structure as those of $L^2.$ It should be noted, however, the restriction for $l$ to be integer comes from the spatial representation of $\mathbf{L}.$ Since $S$ has no possible spatial dependence (it effectively extends the Hilbert space), $s$ can now take either integer or half-integer values, which comes from the structure of the eigenstate ladder only. 
+
+An important class of examples is the spin-$1/2$ particles, which includes electrons, protons, and neutrons. By definition, they have $s = 1 /2 $ and thus two possible $m$ values ($1 / 2$, or spin up $\up$, and $- 1/2$, or spin down $\dn$). Since there are no spatial representation of spins, we can only represent them in the eigenstates 
+\[
+    \up = \begin{pmatrix}
+         1 \\
+         0 \\
+    \end{pmatrix},
+    \quad 
+    \dn = \begin{pmatrix}
+         0 \\
+         1 \\
+    \end{pmatrix}.
+\]
+The general state could be represented by a column vector (called \textit{\textbf{spinor}})
+\[
+    \chi = \begin{pmatrix}
+         a \\
+         b \\
+    \end{pmatrix} = a \up + b \dn. 
+\]
+
+The diagnosable operators $\mathbf{S}$ and $S^2$ could be determined form their eigenstate decomposition as
+\[
+    Q = \sum\limits_{n=1} \lambda_n \dyad{e_n}.
+\]
+For example, 
+\[
+    S_z = \frac{\hbar}{2} \dyad{\uparrow} - \frac{\hbar}{2} \dyad{\downarrow} = \frac{\hbar}{2} \begin{pmatrix}
+        1 &  0 \\
+        0 &  -1 \\
+    \end{pmatrix}.
+\]
+Similarly, since 
+\[
+    S^2 \up = \hbar ^2 s(s+1) \up = \frac{3}{4}\hbar ^2 \up, 
+    \quad 
+    S^2 \dn = \hbar ^{2}  s(s+1) \dn = \frac{3}{4} \hbar ^{2} \dn,
+\]
+\[
+    S^2 = \frac{3}{4}\hbar ^2 (\dyad{\uparrow} + \dyad{\downarrow})
+    = \frac{3}{4}\hbar ^2 \begin{pmatrix}
+        1 & 0 \\
+        0 &  1 \\
+    \end{pmatrix}. 
+\]
+The ladder operators, however, are not hermitian. Therefore, they need to be determined term by term from their operations on the eigenstates 
+\[
+    S_- \up = \hbar  \dn, \quad 
+    S_+ \dn = \hbar  \up, \quad 
+    S_- \dn = S_+ \up = 0, 
+\]
+\[
+    \implies  
+    S_+ = \hbar \begin{pmatrix}
+        0 &  1 \\
+        0 &  0 \\
+    \end{pmatrix}, \quad 
+    S_- = \hbar  \begin{pmatrix}
+        0 &  0 \\
+        1 &  0 \\
+    \end{pmatrix}.
+\]
+From $S_{\pm}$, we could obtain the $S_x$ and $S_{y} $. Writing compactly, the spin operator is $\mathbf{S} = \hbar  /2 \mathbf{\sigma}$, where $\mathbf{\sigma} $ is a tensor with components (called the \textit{\textbf{Pauli matrices}} )
+\[\boxed{
+    \sigma _x = \begin{pmatrix}
+        0 &  1 \\
+        1 &  0 \\
+    \end{pmatrix}, \quad 
+    \sigma _y = \begin{pmatrix}
+        0 &  -i \\
+        i &  0 \\
+    \end{pmatrix}, \quad 
+    \sigma _z = \begin{pmatrix}
+        1 &  0 \\
+        0 &  -1 \\
+    \end{pmatrix}. }
+\]
+Note that $\sigma_z$ is \textbf{not} the identity matrix. With these, the spin about any axi s could be calculated as  $S_n = \hbar /2 \mathbf{\sigma} \cdot \hat{n}. $ The representation of $S_x$ and $S_y$ allows for the determination of their eigenvalues (unsurprisingly, $\pm \hbar /2$) and eigenspinors as 
+\[
+    \chi_+^{(x)} = \frac{1}{\sqrt{2} }\begin{pmatrix}
+         1 \\
+         1 \\
+    \end{pmatrix}, \quad 
+    \chi_-^{(x)} = \frac{1}{\sqrt{2} }\begin{pmatrix}
+         1 \\
+         -1 \\
+    \end{pmatrix}.
+\] 
+\[
+    \chi_+^{(y)} = \frac{1}{\sqrt{2} } \begin{pmatrix}
+         1 \\
+         i \\
+    \end{pmatrix}, \quad 
+    \chi_+^{(y)} = \frac{1}{\sqrt{2} } \begin{pmatrix}
+         1 \\
+         -1 \\
+    \end{pmatrix}. 
+\]
+It is also straightforward to see that the action of $S_x$ and $S_y$ on the eigenstates gives 
+\[
+    S_x \up = \frac{\hbar}{2} \dn, \quad S_x \dn = \frac{\hbar}{2} \up;
+\]
+\[
+    S_y \up = \frac{i \hbar}{2} \dn, \quad S_y \dn = -\frac{i \hbar}{2} \up. 
+\]
+It is worth noting, though, that a measurement of $S_x$ on $\up$ does not make it $\dn$. The measurement leads to the collapse of the wavefunction into eigenstates of $S_x$ according to the statistical interpretation. The results presented above are only useful during intermediate calculations (e.g. calculating the expectation value). 
+\subsection{Addition of angular momenta} 
+Suppose we want to study the \textit{net} angular momentum of two particles with spins $s_1$ and $s_2$\textemdash we need to work in a new Hilbert space that joins the two particle's Hilbert space together. Since the combined angular momentum is still angular momentum, we could use expand the general states using the eigenstates $\ket{s \, m}$ of $\mathbf{S} = \mathbf{S^{(1)}} + \mathbf{S^{(2)}} $. However, we also know the states by combining the angular momentum of each particle like $\ket{s_1 \, m_1} \ket{s_2 \, m_2}$ (meaning that particle with spin $s_1$ is in $\ket{s_1 \, m_1}$ AND the other is in $\ket{s_2, m_2}.$) 
+
+Obviously, measurement on one particle is not ``felt'' by the other particle, so $ S^{(2)} \ket{\chi^{(1)}} \ket{\chi^{(2)}} =  \ket{\chi^{(1)}} (S^{(2)} \ket{\chi^{(2)}}).$ Also, $S^{(1)}$ commutes with $S^{(2)}$ for the same reason. However, due to the same problem of degeneracy as that with $L^2$, $L_x$, and $L_z$, the basis $\ket{s_1 \, m_1} \ket{s_2 \, m_2}$ is different from the basis $\ket{s \, m}$, the conversion between which are what we need to find. Unfortunately, this task is not always easy in most cases, and we will only present the simplest case in detail \textemdash combining two spin-$1 /2$ particles. 
+
+The combination in $m$ is trivial, with $m = m_1 + m_2,$ since all the operations are linear. Due to the non-linearity, however, we cannot find a easy formula for combining $s$. What we know, though, is that the combined $s$ takes every value from $s_1 + s_2$ to $\left\vert s_1 - s_2 \right\vert $ with integer steps (analogous to vector addition). For example, in the case of two spin-$1/2$ particles, the combined state could take either $s=1$ (with a degeneracy of three, i.e. a triplet) or $s = 0$ (with no degeneracy). 
+
+It is known for sure that the state $\ket{1 \, 1}$ with highest $s$ and $m$ could only come from the composition of two $\up$ (this can be generalised in other cases). Thus, 
+\[
+    \ket{1 \, 1} = \up \up. 
+\]
+Then, we can go down the ladder of $s = 1$ by introducing 
+\[
+    S_- = S_-^{(1)} + S_-^{(2)}
+\]
+which acts on the eigenstate $\ket{s \, m}$ as expected:
+\[
+    S_- \ket{s \, m} = \hbar  \sqrt{s(s+1) - m(m-1)} \ket{s \, (m-1)}.  
+\]
+For example, acting $S_-$ on the top state gives 
+\[
+    \left. 
+    \begin{aligned}
+        S_- \ket{1 \, 1} &= \sqrt{2} \hbar \ket{1 \, 0}, \\
+        S_- \ket{1 \, 1} &= (S_-^{(1)} + S_-^{(2)}) \up \up =  (S_-^{(1)} \up ) \up + \up (S_-^{(2)} \up) \\
+        &= \hbar (\dn \up + \up \dn)
+    \end{aligned}
+    \right\}\implies 
+    \ket{1 \, 0 } = \frac{1}{\sqrt{2} } (\dn \up + \up \dn). 
+\]
+After going down the $s=1$ ladder, we could generate the remaining state using the fact that it must be orthonormal to all the three states in $s=1$ (Note that $S_{\pm}$ does not allow switching to another $s$). Therefore, the four possible eigenstates of $S^2$ could be decomposed into $\chi^{(1)} \otimes \chi^{(2)}$ as 
+\[ \boxed{
+        \left. 
+            \begin{aligned}
+                \ket{1 \, 1} &= \up \up \\ 
+                \ket{1 \, 0} &= \frac{1}{\sqrt{2} } (\up \dn + \dn \up ) \\
+                \ket{1 \, -1} &= \dn \dn  
+            \end{aligned}                \right\} \quad s=1 \, (\text{triplet}), }
+\]
+\[\boxed{
+    \ket{0 \, 0} = \frac{1}{\sqrt{2} } ( \up \dn - \dn \up ) \qquad s=0 \, (\text{singlet}).}
+\]
+In general, such representation can be written as 
+\[
+    \ket{s \, m} = \sum\limits_{m_1 + m_2=m} {C_{m_1 \, m_2 \, m}^{s_1 \, s_2 \, s} \ket{s_1 \, m_1} \ket{s_2 \, m_2}} ,
+\]
+where $C_{m_1 \, m_2 \, m}^{s_1 \, s_2 \, s}$ is the \textit{\textbf{Clebsch-Gordan coefficient}} obtained from group representation theories. 
+\section{3D Schrödinger's Equation}
+The 1D Schrödinger's equation can be easily generalised into 
+\begin{equation} \label{eq:3D-SE}
+    i \hbar \frac{\partial \Psi }{\partial t}  = 
+    -\frac{\hbar^{2}}{2 m } \nabla ^2 \Psi  + V(\mathbf{r},t) \Psi, 
+\end{equation}
+which is separable is $V$ does not depend on $t$, giving $\Psi (\mathbf{r} ,t) = \sum_{n} c_n \psi_n (\mathbf{r} ) \phi(t),$ where 
+\begin{equation}
+    \label{eq:3D-SE-TI}
+    -\frac{\hbar^{2}}{2 m } \nabla ^2 \Psi_n  + V(\mathbf{r},t) \Psi_n = E_n \psi_n, \quad 
+    \phi_n = e^{-i E_n t/ \hbar }. 
+\end{equation}
+\subsection{Central force problem}
+Working under spherical polar coordinates and assuming a central potential $V(r)$, we could look for separable solutions $\psi (r,\theta ,\phi ) = R(r) Y(\theta ,\phi )$ by separating Eq.\eqref{eq:3D-SE-TI} into a radial and a angular equation
+\begin{equation}
+    \label{eq:SE-radial}
+    \frac{1}{R} \frac{\mathrm{d}}{\mathrm{d}r}   \left( 
+        r^2 \frac{\mathrm{d}R}{\mathrm{d}r} 
+    \right) - \frac{2 m r^2 }{\hbar ^{2} } [V(r) - E] = l (l +1) ,
+\end{equation}
+\begin{equation}
+    \label{eq:SE-angular}
+    \frac{1}{Y} \left[ 
+        \frac{1}{\sin \theta } \frac{\partial }{\partial \theta } \left( 
+            \sin \theta \frac{\partial Y}{\partial \theta } 
+        \right) + \frac{1}{\sin ^2 \theta } \frac{\partial ^2 Y }{\partial \phi ^2 }
+    \right] = -l(l+1),
+\end{equation}
+where spherical representation of the Laplacian 
+\[
+    \nabla ^{2}  = 
+    \frac{1}{r^{2} }\frac{\partial }{\partial r} \left( 
+        r^{2}  \frac{\partial }{\partial r} 
+    \right)
+    + \frac{1}{r^{2} \sin \theta } \frac{\partial }{\partial \theta } \left( 
+        \sin \theta  \frac{\partial }{\partial \theta } 
+    \right)
+    + \frac{1}{r^{2} \sin ^{2} \theta }\left( 
+        \frac{\partial ^{2} }{\partial \phi ^{2} } 
+    \right)
+\]
+has been used. Eq.\eqref{eq:SE-angular} could be recognised as the eigenfunction equation for $L^2$, discussed in Section \ref{sec:eigenfunction} (note that $S_z \psi = m \hbar \psi $ arises when further separating this PDE). This is not surprising since Noether's theorem in classical mechanics tells us that angular invariance of the Hamiltonian leads to the conservation of angular momentum. Thus, there always exists separable solutions $\psi (r,\theta ,\phi ) = R(r) Y_l^m(\theta ,\phi )$ to the time-independent Schrödinger's equation with a central force, were $Y_l^m(\theta ,\phi )$ is the usual spherical harmonics. It is rather remarkable that the form of angular solutions does \textbf{not} depend on $V(r)$. Instead, it only dictates how $l$ is connected to the overall energy level. 
+
+The radial equation Eq.\eqref{eq:SE-radial} could be simplified using the usual trick in central force problems $\boxed{u(r) = r R(r)}$, giving 
+\[
+    \boxed{ 
+        -\frac{\hbar ^{2} }{2 m } \frac{\mathrm{d}^{2} u}{\mathrm{d}r^{2} } + \left[ 
+            V + \frac{\hbar ^{2} }{2m } \frac{l(l+1)}{r^{2} }u 
+        \right]
+        = E u,
+    }
+\]
+which has the identical form to the 1D Schrödinger's equation under $V \to V +\frac{\hbar ^{2} }{2m } \frac{l(l+1)}{r^{2} },$ which is analogous to the effective one-body problem in classical mechanics with $V_{\text{eff}} = V + \frac{L^2 }{2 m r^2}. $
+
+It should be noted that $\psi (\mathbf{r})$ is now the probability density in three dimensions, with the normalisation being 
+\[
+    \int \left\vert \psi (\mathbf{r} ) \right\vert ^{2} \mathrm{d}^3 \mathbf{r} = 
+    \int_{0}^{\infty} \int_{0}^{2\pi } \int_{0}^{\pi } \left\vert \psi (r,\theta ,\phi ) \right\vert ^{2} r^{2} \sin \theta  \,\mathrm{d}\theta   \,\mathrm{d}\phi   \,\mathrm{d}r = 1.  
+\]
+In a central force problem, the radial and angular parts are usually normalised separately, giving 
+\[
+    \boxed{ 
+        \int_{0}^{\infty} \left\vert u(r) \right\vert ^{2}  \,\mathrm{d}r = 1, 
+    }
+\]
+while the spherical harmonics are automatically normalised in their definition with 
+\[
+    \int_{0}^{2\pi } \int_{0}^{\pi } \left\vert Y_l^m(\theta ,\phi ) \right\vert^{2}   \sin \theta  \,\mathrm{d}\theta   \,\mathrm{d}\phi  =1. 
+\]
+\subsection{Hydrogen atom}
+Unlike the angular equation, the solutions to the radial equation are highly dependent on the potential $V(r).$ Out of the possible choices with analytic solutions, the most useful and meaning case is the Columb potential $V(r) = -\frac{e^2}{4\pi \varepsilon_0}\frac{1}{r}$ that models the Hydrogen atom, with the radial Schrödinger's equation being 
+\[
+    -\frac{\hbar ^{2} }{2 m } \frac{\mathrm{d}^{2} u}{\mathrm{d}r^{2} } + \left[ 
+        -\frac{e^2}{4\pi \varepsilon_0}\frac{1}{r} + \frac{\hbar ^{2} }{2m } \frac{l(l+1)}{r^{2} }u 
+        \right]
+        = E u. 
+\]
+Omitting the unbounded $E>0$ representing scattering, we try to find analytical solutions with $E<0$. The above equation could be simplified to its dimensionless form 
+\begin{equation} 
+    \label{eq:Culumb-SE}
+    \frac{\mathrm{d}^{2} u}{\mathrm{d}\rho ^{2} } = \left[ 
+        1 - \frac{\rho _0}{\rho } + \frac{l(l+1)}{\rho ^{2} }
+    \right] u
+\end{equation}
+by introducing 
+\[
+    \kappa \equiv \frac{\sqrt{-2 m_e E} }{\hbar }, \quad 
+    \rho  \equiv \kappa  r, \quad 
+    \rho _0 \equiv \frac{m_e e^{2} }{2 \pi \varepsilon_0 \hbar ^{2} \kappa }. 
+\] 
+
+Due to the singularity at $\rho =0$, we could not hope for the solution to be analytical, incentivising a transform
+\[
+    u(\rho ) = \rho ^{l+1} e^{-\rho } v(\rho ),
+\]
+where the asymptotic behaviours around $\rho \to 0$ and $\rho \to \infty $ has been considered with non-normalisable solutions omitted. This gives a differential equation of $v(\rho )$
+\[
+    \rho \frac{\mathrm{d}^{2} v}{\mathrm{d}\rho ^{2} } + 2(l + 1 - \rho ) \frac{\mathrm{d}v}{\mathrm{d}\rho } +
+    [\rho _0 - 2(l + 1)] v = 0,
+\]
+for which we seek a series solution 
+\(
+    v(\rho ) = \sum\limits_{j=0}^{\infty} c_j \rho ^j. 
+\) 
+This gives the recursion relation 
+\[
+    c_{j+1} = \left \{ 
+        \frac{2(j+l+1)-\rho _0}{(j+1)(j+2l+2)} c_j
+    \right\} \to \frac{2}{j+1} c_j \quad \text{for large $j$, $\rho$}.
+\]
+This would roughly yield the Taylor series for an exponential function, giving $u(\rho) \propto \rho ^{l+1} e^{\rho }$, which is not normalisable. Thus, the series representing physical systems would truncate at some $j=N-1(N \geq 1)$ such that 
+\[
+    2(N+l) - \rho _0 = 0 
+    \implies \rho _0 = 2n,
+\]
+where $n \equiv N+l.$ This gives the allowed energy levels
+\[ \boxed{
+    E_n = - \left[ 
+        \frac{m_e}{2 \hbar ^{2} } \left( 
+            \frac{e^{2} }{4 \pi  \varepsilon _0 }
+        \right)^{2} 
+    \right] \frac{1}{n^{2} } = \frac{E_1}{n^{2} }, \qquad n = 1, 2, \ldots   }
+\]
+Interestingly, the energy levels depend only on $n$, with possible $l = 0, 1, \ldots , n-1 $. For each $l$, $m = -l, -l-1, \ldots , l-1, l$ are possible, giving a total degeneracy of $n^2$ (the degeneracy in spins haven't been included yet). This extra degeneracy comes from the special symmetry in the Columb potential. 
+
+Finally, we can calculate the full normalised solutions as
+\[
+    \boxed{
+        \psi_{nlm}(r,\theta ,\phi ) = 
+        \sqrt{\left( \frac{2}{n a}\right)^3 \frac{(n-l-1)!}{2n (n+l)!}} 
+        \underbrace{e^{-r/na}\left( \frac{2r}{na}\right)^l \overbrace{\left[ 
+        L_{n-l-1}^{2l+1} \left( \frac{2r}{na}\right)
+        \right]}^{v(\rho )}}_{R_{nl}(r)}  Y_l^m(\theta , \phi ),
+    }
+\]
+where $a \equiv \frac{4 \pi \varepsilon_0 \hbar ^{2} }{m_e e^{2} }$ is the Bohr radius, 
+\[
+    L_p^q(x) \equiv (-1)^p \left( \frac{\mathrm{d}}{\mathrm{d}x} \right)^p L_{p+q}(x)
+\]
+is the \textit{\textbf{associated Laguerre polynomial}} defined by the $q$th \textit{\textbf{Laguerre polynomial}} 
+\[
+    L_q(x) \equiv \frac{e^x}{q!} \left( \frac{\mathrm{d}}{\mathrm{d}x}  \right)^q \left( e^{-x} x^q\right). 
+\]  
+\subsection{Larmor precession} 
+The magnetic dipole $\mathbf{\mu}  $ caused by spin $\mathbf{S} $ is given by $\mathbf{\mu}   = \gamma  \mathbf{S}, $ where $\gamma $ is the gyromagnetic ratio. In an external magnetic field $\mathbf{B},$ the Hamiltonian of the system is 
+\[
+    H = -\gamma \mathbf{B} \cdot \mathbf{S}. 
+\] 
+
+Suppose the magnetic field $\mathbf{B}  = B_0 \hat{k}$ is constant along $+z$ direction. Its Hamiltonian 
+\[
+    H = -\gamma B_0 S_z
+\]
+has the same eigenstate $\chi_+$ and $\chi_-$ as that of $S_z$ with eigenvalue $E = \pm (\gamma  B_0 \hbar ) /2$. Should the potential be time dependent, we would have to solve the matrix differential equation 
+\[
+    i \hbar \frac{\partial \chi }{\partial t} = H \chi. 
+\]
+Luckily, this is not the case and we could just linearly combine the stationary states as 
+\[
+    \chi(t) = \cos (\alpha /2) \chi _+ e_{i \gamma  B_0 t /2} + \sin (\alpha /2) \chi _- e_{-i \gamma  B_0 t /2},
+\]
+giving the expectation value 
+\[
+    \expval{S_x} = \frac{\hbar}{2} \sin \alpha \cos (\gamma B_0 t), \quad 
+    \expval{S_y} = - \frac{\hbar}{2} \sin \alpha \sin (\gamma B_0 t), \quad 
+    \expval{S_z} = \frac{\hbar}{2} \cos \alpha . 
+\]
+Therefore, the expected value $\expval{\mathbf{S}}$ is tilted $\alpha$ from the z-axis and processes around the magnetic field at $\omega  = \gamma  B_0,$ which is in accordance with the classical \textit{\textbf{Larmor precession}} (as expected from Ehrenfest's theorem). 
+\end{document}
