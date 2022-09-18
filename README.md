@@ -1,9 +1,9 @@
-# Typeset-notes
+# Typeset Notes
 This is a repository organising my typeset notes for maths and physics in the Natural Sciences Tripos at University of Cambridge.  The notes are best use as a short reference, since most derivation are skipped. I intend to use them during the intensive review period before the exam (so they are short compared to lecture handouts etc., but still longer than the "cheat sheets" that only contain formulae). As a result, they may not be suitable for people with no prior exposure to the course. There are some personal commentaries, though most of them are more like a ''guided tour'' of the course. 
 
 There are not a lot of notes currently (apparently, IA maths and physics are so easy that they don't deserve the efforts), but I aim to make typeset notes for most courses I take/audit from the coming term. Hopefully, this repository will get populated soon. Below are short introduction to the different notes. 
 
-I haven't proofread any of the notes, so they are certain to contain (a considerable number of) typos and mistakes. I would be incredibly grateful if you can just submit a pull request after spotting mistakes. 
+I haven't proofread any of the notes (they're mostly just for my personal use), so they are certain to contain (a considerable number of) typos and mistakes. I would be incredibly grateful if you can just submit a pull request after spotting mistakes. 
 
 ## Mathematics 
 I learn about mathematics mostly from the natural sciences tripos, which treat it like a tool for science. For some topics that I find interesting, though, I will go to lectures in the mathematical tripos (mostly from DAMTP) and write notes. Since I have little incentive to remember the proof of theorems, I tend not to include them, other than cases where direct calculation can do the work. 
