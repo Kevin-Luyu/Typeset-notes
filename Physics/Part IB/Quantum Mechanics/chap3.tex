@@ -1,0 +1,237 @@
+\documentclass{article}
+\usepackage[thmmarks, framed]{ntheorem} % ntueorem must come before amsmath, or the cross-reference will not be working
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{xcolor}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+%
+\usepackage{bm}
+\newcommand{\up}{\ket{\uparrow}} % spin up, needs the physics package 
+\newcommand{\dn}{\ket{\downarrow}} % spin down, needs the physics package 
+\newtheorem{theorem}{Theorem} 
+\newframedtheorem{frm-thm}{Theorem} %needed for framed theorems 
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-res}{Result}
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-def}{Definition}
+\theoremstyle{nonumberplain} 
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{Proof}
+\title{Identical Particles}
+\author{Yu Lu}
+\begin{document}
+\maketitle
+\section{Symmetrisation postulate}
+\subsection{Schrödinger's equation for multiple particles}
+The Hamiltonian for a system with $N$ particles can be written as 
+\[
+    \hat{H} = - \sum\limits_{j=1}^{N} \frac{\hbar ^{2} }{2 m_j} \nabla^{2}_j + V(\mathbf{r_1}, \mathbf{r_2}, \ldots , \mathbf{r_N},  t ),
+\]
+where $\nabla^{2}_j$ is the laplacian in the coordinate system $\mathbf{r_j}$ of the $j$-th particle. The wavefunction $\Psi (\mathbf{r_1}, \mathbf{r_2}, \ldots , \mathbf{r_N}, t),$ satisfying the Schrödinger's equation as usual, has the statistical interpretation that 
+\[
+    \left\vert \Psi (\mathbf{r_1}, \mathbf{r_2}, \ldots , \mathbf{r_N}, t) \right\vert ^{2} \mathrm{d} ^3 \mathbf{r_1} \mathrm{d} ^3 \mathbf{r_2} \ldots \mathrm{d} ^3 \mathbf{r_N}  
+\]
+is the probability of finding particle 1 in $\mathrm{d} ^3 \mathbf{r_1} ,$ particle 2 in $ \mathrm{d} ^3 \mathbf{r_2},$ etc. 
+
+For a time-independent potential $V(\mathbf{r_1}, \mathbf{r_2}, \ldots , \mathbf{r_N} ),$ the spatial and temporal parts can be separated as usual, giving 
+\[
+    \Psi (\mathbf{r_1}, \mathbf{r_2}, \ldots , \mathbf{r_N} , t)
+    = \psi (\mathbf{r_1}, \mathbf{r_2}, \ldots , \mathbf{r_N}) e^{i E t/\hbar },
+\] 
+\begin{equation}
+    \label{eq:SE-multiple}
+    -\sum\limits_{j=1}^{N} \frac{\hbar ^{2} }{2 m_j} \nabla ^{2} _j + V \psi = E \psi.
+\end{equation} 
+
+For non-interacting particles (i.e. the system is only subject to external forces), the potential energy can be separated into $V(\mathbf{r_1}, \mathbf{r_2}, \ldots , \mathbf{r_N} ) = \sum_{j=1}^{N} V_j(\mathbf{r_j} ). $ In this case, Eq.\eqref{eq:SE-multiple} will adopt separable solutions $\psi(\mathbf{r_1}, \mathbf{r_2}, \ldots , \mathbf{r_N}) = \psi_1(\mathbf{r_1}) \psi_1(\mathbf{r_2}) \ldots \psi_1(\mathbf{r_N}),$ where each wavefunction will satisfy the one-particle Schrödinger's equation 
+\[
+    -\frac{\hbar ^{2} }{2 m_j} \nabla ^{2} _j \psi_j (\mathbf{r_j}) + V_j(\mathbf{r_j} ) + E_j \psi_j(\mathbf{r_j} ),
+\]
+and the energy is $E = \sum_{j=1}^{N} E_j.$ 
+
+Here, we are effectively combining wavefunctions from different Hilbert spaces using a direct product ($\ket{\psi_1}\otimes \ket{\psi_2}$ in the Dirac notation). Solutions that can be written as a direct product of two wavefunctions from their respective Hilbert space are said to be \textit{\textbf{pure}}, most generally 
+\[
+    \psi_{\text{pure}} = \psi_{1}(\mathbf{r_1}) \psi_{2}(\mathbf{r_2} ) \ldots  \psi_N (\mathbf{r_N}) =   
+    \left( 
+        \sum_{i=1} a_i f_{i} (\mathbf{r_1} )
+    \right)
+    \left( 
+        \sum_{j=1} b_j g_{j} (\mathbf{r_2} )
+    \right)
+    \ldots 
+    \left( 
+        \sum_{k=1} d_k h_{k} (\mathbf{r_N} )
+    \right), 
+\]
+where $a_i, b_j, \ldots , d_k \in \mathbb{C} $ and $f_i, g_j, \ldots , h_k $ are the eigenfunctions. More generally, any wavefunction in the new Hilbert space can be written as a linear combination of pure states, as the direct products of the eigenfunctions form a complete basis for the new Hilbert space. When the linear combination has more than one term (i.e. it cannot be expressed as a single direct product of two wavefunctions in the respective subspace), the wavefunction is said to be \textit{\textbf{mixed}} (or \textit{\textbf{entangled}}). An important example is the singlet state of two spin-$1/2$ particles 
+\[
+    \ket{0 \, 0} = \frac{1}{\sqrt{2} } (\up \dn - \dn \up).
+\]
+In this example, the spin of one particle is completely dependent on the other particle's \textemdash though each particle can be spin up or down, once measurement of one particle's particle is done, the other particle will automatically take the opposite spin (collapse of the wavefunction turns it into a pure state). 
+
+In the case of a two-particle system, the Schrödinger's equation Eq.\eqref{eq:SE-multiple} could also be simplified when the particles only interact with each other (i.e. $V(\mathbf{r_1},\mathbf{r_2} ) \to V(\left\vert \mathbf{r_1} - \mathbf{r_2}   \right\vert   )$). This is done in a similar fashion as the effective one-body problems in classical mechanics by introducing the centre of mass and relative position 
+\[
+    \mathbf{R}  = \frac{\mathbf{r_1} + \mathbf{r_2} }{2}, \quad 
+    \mathbf{r}  = \mathbf{r_1} - \mathbf{r_2}
+\] 
+and converting the Schrödinger's equation into 
+\[
+        -\frac{\hbar ^{2} }{2(m_1+ m_2)} \nabla^{2}_R \psi = E_R \psi ,\quad 
+        -\frac{\hbar ^{2} }{2\mu } \nabla ^{2} _r \psi + V(\mathbf{r} ) \psi  = E_r \psi.
+\]
+\subsection{The symmetrisation postulate}
+By constructing the wavefunction $\psi(\mathbf{r_1}, \mathbf{r_2},\ldots ,\mathbf{r_N}  ) = \psi (\mathbf{r_1} ) \psi (\mathbf{r_2} )\ldots \mathbf{r_N}  $, we are distinguishing the particles\textemdash particle 1 is in $\psi_1$, particle 2 is in $\psi_2$, and so on. This, however, is not always allowed by the inherent indeterminacy of quantum mechanics that we can never know if two particles has secretly exchanged position with each other. Following this reasoning, we are \textit{forced} to conclude that all electrons are identical (so are other types of particles) and that $\left\vert \psi(\mathbf{r_1}, \mathbf{r_2},\ldots ,\mathbf{r_N} )  \right\vert ^2$ must be unchanged under interchange of any $\mathbf{r_i} \longleftrightarrow \mathbf{r_j}. $ Furthermore, we \textbf{postulate} that there are only two possibilities: 
+\[
+    \psi(\mathbf{r_1}, \mathbf{r_2}, \ldots  , \mathbf{r_i}, \ldots  , \mathbf{r_j}, \ldots  \mathbf{r_N}     )
+    = \pm \psi(\mathbf{r_1}, \mathbf{r_2}, \ldots  , \mathbf{r_j}, \ldots  , \mathbf{r_i}, \ldots  \mathbf{r_N}  ). 
+\]
+Particles that take the plus sign are called \textit{\textbf{bosons}} while those with the minus sign are \textit{\textbf{fermions}}. From the \textit{\textbf{spin statistics theorem}}, bosons have integral spins while fermions have half-integral spins. Noting that this ``exchange operator'' $\hat{P} $ between identical particles would leave the system's Hamiltonian unchanged, $\expval{\hat{P} }$ is a constant of motion\textemdash bosons will stay bosons and fermions will stay fermions. 
+
+In the case of a two-particle systems, we can easily construct wavefunctions for fermions and bosons from the distinguishable wavefunction 
+\(
+    \psi_d(\mathbf{r_1}, \mathbf{r_2}  ) = \psi_1 (\mathbf{r_1} ) \psi_2 (\mathbf{r_2} ):   
+\) 
+\[
+    \psi_{\pm}(\mathbf{r_1}, \mathbf{r_2}  )
+    = \frac{1}{\sqrt{2} } \left( 
+        \psi_1 (\mathbf{r_1} ) \psi_2 (\mathbf{r_2} ) \pm
+        \psi_2 (\mathbf{r_1} ) \psi_1 (\mathbf{r_2} )
+    \right),
+\]
+where bosons take the plus sign and fermions take the minus sign, as usual. Failing to be pure, this no longer has the distinguishable interpretation ``particle 1 is in $\psi_1 $ while particle 2 is in $\psi_2$.'' Instead, either of the two particle can be in $\psi_1$ or $\psi_2$. However, we can still claim that \textit{one} particle is in $\psi_1$ while \textit{the other} is in $\psi_2$. Noting that the fermions' wavefunction would be zero if $\psi_1 = \psi_2,$ we arrive at the \textit{\textbf{Pauli exclusion principle}} for all fermions that the \textit{total wavefunction} (which may not only have the spatial dependence) of two identical particles must be different.
+
+For a more complete description, though, we need to incorporate spins into the picture by constructing the total wavefunction $\Psi = \psi(\mathbf{r_1},\mathbf{r_2} ) \chi(1,2)$, where $\chi (1,2)$ is the general spinor. In this sense, the antisymmetric requirement becomes 
+\[
+    \psi (\mathbf{r_1}, \mathbf{r_2}  ) \chi (1,2) = - \psi (\mathbf{r_2}, \mathbf{r_1}  ) \chi (2,1),
+\]
+giving the possibilities of an antisymmetric wavefunction combined with a symmetric spinor (the triplets) or a symmetric wavefunction combined with an antisymmetric spinor (singlet). This allows two fermions to have the same spatial wavefunction, as long as they have opposite spins.  
+
+When the system has more than two states, the symmetrisation may not be as trivial. Luckily, for non-interacting systems, we could always find separable solutions to the Schrödinger's equations, thus concluding (for a three-particle system) that one particle is in $\psi_1$, one other in $\psi_2 $, and the other in $\psi_3.$ The antisymmetric wavefunction can be constructed from the \textit{\textbf{Slater determinant}}
+\[
+    \left\vert  
+    \begin{matrix}
+        \psi_1 (\mathbf{r_1} ) & \psi_2 (\mathbf{r_1} ) & \psi_3(\mathbf{r_1} ) \\
+        \psi_1 (\mathbf{r_2} ) & \psi_2 (\mathbf{r_2} ) & \psi_3(\mathbf{r_2} ) \\
+        \psi_1 (\mathbf{r_3} ) & \psi_2 (\mathbf{r_3} ) & \psi_3(\mathbf{r_3} ) 
+    \end{matrix} \right\vert
+\] 
+while the symmetric wavefunction can be constructed in a similar fashion by replacing the determinant by a permanent (no minus sign). It should be noted that a non-zero determinant requires $\psi_1 \neq \psi_2 \neq \psi_3 $ (generalised exclusion principle). Therefore, it is not possible to form an antisymmetric spinor $\chi(1,2,3)$ in this way. This sometimes implies that we could form a wavefunction by symmetrising $\psi$ and $\chi $ individually. Instead, we could construct an antisymmetric wavefunction by 
+\[\Psi = 
+    \left\vert 
+    \begin{matrix}
+        \psi_1(\mathbf{r_1} ) \up_1 & \psi_1(\mathbf{r_1} ) \dn_1 & \psi_2(\mathbf{r_1} ) \up_1 \\ 
+        \psi_1(\mathbf{r_2} ) \up_2 & \psi_1(\mathbf{r_3} ) \dn_2 & \psi_2(\mathbf{r_2} ) \up_2 \\ 
+        \psi_1(\mathbf{r_3} ) \up_2 & \psi_1(\mathbf{r_3} ) \dn_2 & \psi_2(\mathbf{r_3} ) \up_3 \\ 
+    \end{matrix}
+    \right\vert .
+\]
+
+When the particles are interacting with each other, the time-independent Schrödinger's equation may not be separable. In this case, it may not be possible to express any state by a single Slater determinant. Instead, a linear combination of Slater determinant might be needed. This means that the interpretation ``one particle is in $\psi_1$ while the other is in $\psi_2$'' loses its meaning as well. 
+\subsection{Exchange interactions}
+The symmetrisation (in one dimension)
+\[
+    \psi_{\pm} = \frac{1}{\sqrt{2} } \left( 
+        \psi_a(x_1) \psi_b(x_2) \pm \psi_a(x_2) \psi_b(x_1)
+    \right)
+\]
+could impact the expected distance 
+\[
+    \expval{(x_{1-x_2} )^{2} } = \expval{x_1^2} + \expval{x_2^2} - 2 \expval{x_1 x_2} 
+\]
+between the two particles of interest due to the difference in $\expval{x_1 x_2}$. 
+
+For distinguishable particles, this simply separates and gives 
+\[
+    \expval{(x_{1-x_2} )^{2} } = \expval{x^2}_a + \expval{x^2}_b - 2 \expval{x}_a \expval{x}_b.   
+\]
+For identical particles, the cross terms are more complicated with 
+\[
+    \expval{x_1 x_2} = \expval{x}_a \expval{x}_b \pm \left\vert \expval{x}_{ab} \right\vert ^{2},
+\]
+where 
+\begin{equation}
+    \label{eq:overlap-integral}
+    \boxed{
+    \expval{x}_{ab} = \int x \psi_a(x)^{\star} \psi_b(x) \mathrm{d} x}
+\end{equation}
+is the overlap integral, giving 
+\[
+    \boxed{ 
+        \expval{(\Delta x)^{2} }_{\pm} = \expval{(\Delta x)^{2} }_d \mp 2 \left\vert \expval{x}_{ab} \right\vert ^{2}.
+    }
+\]
+
+Therefore, identical particles with symmetric spatial wavefunctions are closer to each others while those with antisymmetric spatial wavefunctions are further from each other compared to distinguishable particles. This geometrical result is called the \textit{\textbf{exchange interaction}}, which are only related to the spatial wavefunctions and are not necessarily associated with either fermions or bosons. 
+
+\section{Atoms}
+The Hamiltonian for a neutral atom with atomic number $Z$ is 
+\[
+    \hat{H} = 
+    \sum\limits_{j=1}^{Z} \left\{ -\frac{\hbar ^{2}}{2m} \nabla ^{2} _j -\left( \frac{1}{4 \pi \varepsilon_0}   \right) \frac{Ze^{2} }{r_j}\right\} + 
+    \frac{1}{2} \left( \frac{1}{4 \pi  \varepsilon_0}\right) \sum\limits_{j\neq k}^{Z} \frac{e^{2} }{\left\vert \mathbf{r_j} - \mathbf{r_k}  \right\vert },
+\]
+where the nucleus is assumed to be stationary. This is, in general, not solvable due to the electron-electron interaction. Dropping the second term, we could arrive at a separable Hamiltonian, which is identical in form to that of the hydrogen atom, except that the effective Bohr radius becomes $\frac{a_0}{Z}$. Similarly, the total energy of the system becomes 
+\[
+    E = Z^{2} \sum\limits_{j=1}^{N} E_i, 
+\]
+where $E_i$ is the corresponding energy level for hydrogen. The wavefunction, as usual, can be symmetrised from the pure state 
+\(
+    \psi(\mathbf{r_1}, \mathbf{r_2}  ) = \psi_{nlm} (\mathbf{r_1} ) \psi_{n^\prime l^\prime m^\prime } (\mathbf{r_2} ).
+\) 
+
+It should be noted that the energy levels are indifferent to the azimuthal quantum number $l$ (and of course, $m$ as well) for a hydrogen atom. The degeneracy on $l$ disappears, though, after introduction of electron-electron repulsions and states with lower $l$ have lower energy. 
+\section{Solids}
+In the solid state, a large number of atoms are put together, making it practically impossible to solve for the Schrödinger's equation by combining all the atoms. Instead, we treat as if some \textit{\textbf{valence electrons}} furthermost from the nucleus become free of any columb interaction. Instead, they are subject to a combined potential stemming from the crystalline nature and filled to the ``energy bands'' according to Pauli's exclusion principle.
+\subsection{The free electron gas}
+The most elementary approach to confine the electrons into a solid with dimensions $l_x, l_y, l_z$ is the 3D infinite potential well
+\[
+    V(x,y,z) = 
+    \begin{dcases}
+        0, &\text{ if } 0<x<l_x, 0<y<l_y, 0<z<l_z ;\\
+        \infty , &\text{ otherwise}  .
+    \end{dcases}
+\]
+
+The normalised stationary solutions and the associated energies are 
+\[
+    \psi_{n_x,n_{y} ,n_{z} } = \sqrt{\frac{8}{l_{x} l_{y} l_{z} }} 
+    \sin \left( \frac{n_{x} \pi }{l_{x} }x \right)
+    \sin \left( \frac{n_{y} \pi }{l_{y} }y \right)
+    \sin \left( \frac{n_{z} \pi }{l_{z} }z \right),
+\]
+\[
+    E_{n_{x} ,n_{y} ,n_{z} } = 
+    \frac{\hbar ^{2} \pi ^{2} }{2 m } \left( \frac{n_{x} ^{2} }{l_{x} ^{2} } + \frac{n_{y} ^{2} }{l_{y} ^{2} } + \frac{n_{z} ^{2} }{l_{z} ^{2} }\right)
+    \equiv \frac{\hbar ^{2} \left\vert \mathbf{k}  \right\vert ^{2} }{2m}, 
+\]
+where $n_x$, $n_{y} ,$ and $n_{z} $ are independent positive integers and $\mathbf{k} $ is the wave-vector. 
+The allowed wave-vectors $\mathbf{k} $ form a rectangular grid in the first octant of the $k-$space (reciprocal space) and the contour plot of the energy is (one eighth of) a sphere. 
+
+In accordance with Pauli's exclusion principle, each state will be filled by two electrons, with increasing energy. Due to the large number of states, the spherical surface is well approximated by the rectangular grids, giving the position of the surface separating the occupied and unoccupied states for a solid with $N$ atoms, each contributing $d$ valence electrons, as 
+\[
+    k_F = \left( 3 \rho \pi ^{2} \right)^{1 /3}, 
+    \rho  = \frac{Nd}{V}, 
+    \implies E_F = \frac{\hbar ^{2} }{2m } \left( 3 \rho \pi ^{2} \right)^{2 /3}.  
+\]
+where $E_F$ is called the \textit{\textbf{Fermi energy}}. Integrating the energy up to the Fermi states then gives the total energy 
+\[
+    E_{tot} = \frac{\hbar ^{2} (e \pi ^{2} N d)^{5 /3}}{10 \pi ^{2} m } V^{-2/3}
+    = \frac{3}{5} E_F Nd. 
+\]
+This gives a degeneracy pressure of 
+\[
+    P \equiv - \frac{\mathrm{d}E_{tot}}{\mathrm{d}V}
+    = \frac{2}{3} \frac{E_{tot}}{V}, 
+\]
+which partly explains why a solid does not collapse spontaneously. 
+\subsection{Periodic delta spikes}  
+\end{document}
