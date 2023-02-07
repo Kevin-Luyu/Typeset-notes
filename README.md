@@ -23,3 +23,9 @@ The physics notes are, in general, more detailed than the maths ones, mostly bec
 
 ### Quantum Mechanics (IB Physics A, 2022-2023)
 The course is the first formal introduction to quantum mechanics for NST students, covering the Shcrodinger's equation, the operator formalism, angular momenta, and identical particles. I attended the lectures in 2021/22 and took some initial notes on it. The presented notes, however, are mostly based on Griffiths' *Introduction to Quantum Mechanics.* Currently, the notes are divided into chapters, correspondings contents after Chapter 3 in Griffiths' book. I'll compile them into a single file after completing the whole book. As I learn about the materials again later in the year, I might add some more contents to the notes as well. 
+
+### Quantum Mechanics Supplements(IB Physics A, 2022-2023)
+The supplementary notes include detailed calculations and elaborations of the skipped derivations in the notes. They also answer the "questions of the day" sections in the lecture notes. 
+
+### Classical Dynamics (IB Physics B, 2022-2023)
+Partial notes about rigid body dynamics are added. Orbits and Lagrangian mechanics will go shortly.
