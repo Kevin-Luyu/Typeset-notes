@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage[thmmarks, framed]{ntheorem} % ntueorem must come before amsmath, or the cross-reference will not be working
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{xcolor}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+%
+\usepackage{bm}
+\newcommand{\tn}[1]{\underline{\underline{\mathbf{#1}}}} % a tensor
+\newtheorem{theorem}{Theorem} 
+\newframedtheorem{frm-thm}{Theorem} %needed for framed theorems 
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-res}{Result}
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-def}{Definition}
+\theoremstyle{nonumberplain} 
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{Proof}
+\title{Electrodynamics and Optics}
+\date{Michaelmas 2022}
+\author{Yu Lu}
+\begin{document}
+\maketitle
+\section{Preliminary knowledge}
+Classical electrodynamics is governed by the four Maxwell's equations
+\begin{equation}    
+    \begin{aligned}
+        \nabla \cdot \mathbf{D} &= \rho  \\
+        \nabla \cdot \mathbf{B} &= 0 \\
+        \nabla \times \mathbf{E} &= -\dot{\mathbf{B} } \\ 
+        \nabla \times \mathbf{H} &= \mathbf{J} + \dot{\mathbf{D} }, 
+    \end{aligned}
+\end{equation}
+where $\mathbf{D}$ and $\mathbf{B} $ are the electric/magnetic flux density while $\mathbf{E} $ and $\mathbf{H} $ are the corresponding fields. These are related via 
+\(
+    \mathbf{D} = \epsilon_0 \tn{\epsilon } \cdot \mathbf{E}, 
+\quad  \mathbf{B} = \mu_0 \tn{\mu} \cdot \mathbf{H}, 
+\) 
+where $\tn{\epsilon } $ and $\tn{\mu} $ are Hermitian tensors (thus diagonalisable) of the second rank. 
+
+In the absence of charge and current, the EM field can propagate as harmonic waves
+\[  
+    \mathbf{E} = \mathbf{E_0} e^{i (\mathbf{k} \cdot \mathbf{r} - \omega  t)}, \quad 
+    \mathbf{B} = \mathbf{B_0} e^{i (\mathbf{k} \cdot \mathbf{r} - \omega  t)},
+    \] 
+satisfying 
+\(
+    \mathbf{k} \cdot D = 0, \quad \mathbf{k} \cdot \mathbf{B} =0, \quad \mathbf{k} \times \mathbf{E} = \omega \mathbf{B} , \quad \mathbf{k} \times \mathbf{H} = - \omega \mathbf{D}. 
+\) 
+The wave also carries an energy density $u = \frac{1}{2} \mathbf{E} \cdot \mathbf{D} + \frac{1}{2} \mathbf{B} \cdot \mathbf{H} $ and the energy flux is $\mathbf{N} = \mathbf{E} \times  \mathbf{H}.$
+\section{Optics}
+The Maxwell's equations are linear, making it possible to investigate polarised orthogonal components of fields separately. 
+\subsection{Jones Notation}
+\end{document}

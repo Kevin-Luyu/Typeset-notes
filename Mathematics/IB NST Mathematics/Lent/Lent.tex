@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage[thmmarks, framed]{ntheorem} % ntheorem must come before amsmath, or the cross-reference will not be working
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{xcolor}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+%
+\usepackage{bm}
+\newframedtheorem{frm-res}{Result}
+\theorembodyfont{\upshape}
+\title{NST IB Mathematical Methods II}
+\date{Lent, 2023}
+\author{Yu Lu}
+\begin{document}
+\maketitle
+\section{Sturm-Liouville Theory}
+\subsection{The operator}
+A Sturm-Liouville operator
+\[
+\boxed{
+    \mathcal{\MakeUppercase{L}} 
+    = -\frac{\mathrm{d}}{\mathrm{d}x} \left( \rho (x) \frac{\mathrm{d}}{\mathrm{d}x}   \right) + \sigma(x), \qquad \rho(x) >0, \, \sigma(x) \in \mathbb{\MakeUppercase{R}} 
+}
+\]
+can be shown to be self-adjoint under appropriate boundary conditions
+\[
+    \rho \left( vu^{*\prime} - u^* v^\prime \right)\big\rvert_\alpha ^\beta =0,
+\]
+meaning \( \braket{u}{\mathcal{\MakeUppercase{L}} v} = \braket{\mathcal{\MakeUppercase{L}} u}{v}\) (equivalently, \( {\mathcal{\MakeUppercase{L}} }^{\dagger} = \mathcal{\MakeUppercase{L}} \) ). 
+
+Such self-adjointness provides many convenient features. Just like Hermitian matrices, for example, in the eigenvalue equation for a self-adjoint operator \(\mathcal{\MakeUppercase{L}} y_n = \lambda_{n} y_{n}, \) the eigenvalues $\lambda_{n} $ are real and \textbf{non-degenerate} eigenfunctions $y_n$ are mutually orthogonal. Moreover, the eigenfunctions commonly form a complete basis, from which we could solve inhomogeneous linear differential equations. 
+
+\subsection{A generalisation to any 2nd order linear ODE}
+Despite being seemingly restrictive, the Sturm-Liouville operator could express any second order linear differential operator ($a = -p, b = p^\prime -q$)
+\[
+    \tilde{\mathcal{\MakeUppercase{L}}}
+    = p(x) \frac{\mathrm{d}^{2} }{\mathrm{d}x^{2} } + q(x) \frac{\mathrm{d}}{\mathrm{d}x} + r(x)
+    = -\frac{\mathrm{d}}{\mathrm{d}x} \left( a(x) \frac{\mathrm{d}}{\mathrm{d}x} \right) - b(x) \frac{\mathrm{d}}{\mathrm{d}x} +r(x)
+\]
+could be converted into a Sturm-Liouville form by choosing $w(x)$ such that 
+\[
+    w \tilde{\mathcal{\MakeUppercase{L}} } = 
+    - \frac{\mathrm{d}}{\mathrm{d}x} \left( a w \frac{\mathrm{d}}{\mathrm{d}x} \right) + 
+    (a w^\prime  - b w) \frac{\mathrm{d}}{\mathrm{d}x} + r w
+\]
+has a vanishing coefficient for the first derivative term: 
+\[ \boxed{
+    w(x) = C \exp\left[ \int^x \frac{b(x^\prime )}{a(x^\prime )}\mathrm{d} x^\prime \right] > 0.}
+\] 
+
+This way, a Sturm-Liouville operator
+\[
+    \mathcal{\MakeUppercase{L}} = w(x) \tilde{\mathcal{\MakeUppercase{L}} }
+    = -\frac{\mathrm{d}}{\mathrm{d}x} \left( \rho (x) \frac{\mathrm{d}}{\mathrm{d}x} \right) + \sigma (x), \qquad 
+    \rho = a w, \, \sigma  = r w 
+\]
+could be constructed. From this, an eigenvalue problem $\tilde{\mathcal{\MakeUppercase{L}} } y_n = \lambda y_n$ involving $\tilde{\mathcal{\MakeUppercase{L}} }$ could be converted to a generalised eigenvalue problem $\mathcal{\MakeUppercase{L}} y_n = \lambda w(x) y_n$ of the Sturm-Liouville operator $\mathcal{\MakeUppercase{L}}.$ Alternatively, we could stick with the original operator $\tilde{\mathcal{\MakeUppercase{L}}}$ and introduce the weight in the definition of inner product such that
+\[
+    \braket*{u}{v}_w = \int_{\alpha }^{\beta } w^* u v \,\mathrm{d}x 
+    \implies \left\lVert v\right\rVert ^{2}_m = \int_{\alpha }^{\beta } w^* \left\vert v \right\vert ^{2}  \,\mathrm{d}x, 
+\]
+and the self-adjoint condition becomes 
+\( 
+    \braket{u}{\mathcal{\MakeUppercase{L}} v}_w = \braket{\mathcal{\MakeUppercase{L}} u}{v}_w.
+\) 
+Under this convention, $\tilde{\mathcal{\MakeUppercase{L}} }$ satisfying the original eigenvalue equation is self-adjoint with weight $w(x)$ while $\mathcal{\MakeUppercase{L}} $ satisfying the generalised eigenvalue equation is self-adjoint with weight 1. 
+\end{document} 

@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[thmmarks, framed]{ntheorem} % ntheorem must come before amsmath, or the cross-reference will not be working
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{xcolor}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+%
+\usepackage{bm}
+\newcommand{\up}{\ket{\uparrow}} % spin up, needs the physics package 
+\newcommand{\dn}{\ket{\downarrow}} % spin down, needs the physics package 
+\newtheorem{theorem}{Theorem} 
+\newframedtheorem{frm-thm}{Theorem} %needed for framed theorems 
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-res}{Result}
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-def}{Definition}
+\theoremstyle{nonumberplain} 
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{Proof}
+\title{Perturbation theory}
+\author{Yu Lu}
+\begin{document}
+\maketitle
+\section{Non-degenerate perturbation theory}
+Often, the Hamiltonian $\hat{H} = \hat{H}^{(0)} + \hat{H}^{(1)}$ of our interest has a major component $\hat{H}_0 \ket{n^{(0)}} = E_n^{(0)} \ket{n^{(0)}} $ whose spectrum can be solved analytically and a perturbative component $\hat{H}^{(1)}$ whose spectrum are unknown. When the perturbation is small ($\expval{\hat{H}^{(1)}} \ll \expval{\hat{H}^{(1)}}$), we could expect an adiabatic change to the original eigenvalues and eigenstates $E_n^{(0)} \to E_n$ and $\ket{n^{0}} \to  \ket{n}$ such that
+\[
+    \begin{aligned}
+    E_n &= E_n^{(0)} + \lambda E_n^{(1)} + \ldots 
+    = \sum_{k=1}^{\infty} \lambda ^k E_n^{(k)}, \\
+    \ket{n} &= \ket{n}^{(0)} + \lambda \ket{n^{(1)}} + \ldots 
+    = \sum_{k=1}^{\infty} \lambda ^k \ket{n^{(k)}}
+    \end{aligned},
+\]
+where the $\lambda $ are just to remind us of the relative magnitude of different terms. 
+
+Equating terms of the first order on both sides gives 
+\[
+    \hat{H}^{(0)} \ket{n^{(1)}} + \hat{H}^{(1)}\ket{n^{(0)}} = E_0^{(0)} \ket{n^{(1)}} + E_n^{(1)} \ket{n^{(0)}}. 
+\]
+Forming an inner product with $\bra{n^{(0)}}$ on both sides and recalling $\bra{n^{(0)}} \hat{H} = \bra{n^{(0)}} E_n^{(0)}$, $\braket{n^{(0)}}{n^{(0)}}=1$ gives the first order correction in energy 
+\[
+    \boxed{
+        \Delta E_n^{(1)} = \ev{H^{(1)}}{n^{(0)}}.
+    }
+\]
+Similarly, forming the inner product with $\bra{m^{(0)}}$ on both sides and exploiting the orthogonality gives 
+\[
+    \braket{m^{(0)}}{n^{(1)}} = \frac{\mel{m^{(0)}}{H^{(1)}}{n^{(0)}}}{E_n^{(0)} - E_m^{(0)}} 
+    \implies  
+    \boxed{ 
+        \ket{n^{(1)}} = \sum\limits_{E_m^{(0)} \neq E_n^{(0)}} \frac{\mel{m^{(0)}}{H^{(1)}}{n^{(0)}}}{E_n^{(0)} - E_m^{(0)}}  \ket{m^{(0)}},
+    }
+\]
+where a non-degenerate spectrum is assumed. 
+
+Expanding both sides to $\lambda ^{2} $ gives the second-order equation 
+\[
+    \hat{H}^{(0)} \ket{n^{(2)}} + \hat{H}^{(1)}\ket{n^{(1)}} = E_0^{(0)} \ket{n^{(2)}} + E_n^{(1)} \ket{n^{(1)}} + E_n^{(2)} \ket{n^{(0)}}. 
+\]
+It is convenient to take $\braket{n^{(0)}}{n} = 1 \implies \braket{n^{0}}{n^{i}} = 0 \quad \forall i>1,$ giving 
+\[
+    \boxed{ 
+        E_n^{(2)} = \mel{n^{(0)}}{\hat{H} ^{(1)}}{n^{(1)}}
+        = \sum_{m \neq n} \frac{}{} 
+    }
+\]
+\end{document}

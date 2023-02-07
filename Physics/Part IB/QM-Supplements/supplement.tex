@@ -1,0 +1,153 @@
+\documentclass{article}
+\usepackage[thmmarks, framed]{ntheorem} % ntheorem must come before amsmath, or the cross-reference will not be working
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{xcolor}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+%
+\usepackage{bm}
+\title{Supplementary Notes to IB Quantum Physics}
+\author{Yu Lu}
+\begin{document}
+\maketitle
+In this supplementary notes, I try to answer the ``thought of the day'' questions in the Cavendish quantum physics notes and anything ``left as an exercise'' in the lectures. References to the original notes are made by noting down the pages. Sometimes, interesting tangents will also be included. A secondary aim of the notes is to present the mathematical derivations, so most of the time algebra is \textit{not} omitted. 
+\section{The Quantum Revolution}
+\begin{framed}
+    \textbf{(p.p.27) Derive Planck's spectral distribution for the blackbody radiation. How can the ``modes of a cavity'' be used to describe free-space blackbody without a cavity. }
+\end{framed}
+
+
+Consider a blackbody confined in a conductor with dimensions $a,b,$ and $c$. The electromagnetic fields are governed by the Maxwell's equations with no free charge or current
+\begin{align*}
+    \nabla \cdot \mathbf{E} &= 0, \qquad \nabla \times \mathbf{E} = -\dot{\mathbf{B}}, \\
+    \nabla \cdot \mathbf{B} &= 0, \qquad \nabla \times \mathbf{B} = \frac{1}{c^{2} } \dot{\mathbf{E},} 
+\end{align*}
+which can be converted to a 3D wave equation
+\[
+    \nabla ^{2} \mathbf{E} =-\frac{1}{c^{2} } \ddot{\mathbf{E} }, \quad 
+    \nabla ^{2} \mathbf{B} =-\frac{1}{c^{2} } \ddot{\mathbf{B} }. 
+\]
+
+Assuming each component $E_i$ admits a separable form (the trigonometric ansatz is from the wave equation)
+\(
+    E_i = E_{i0} \sin \left( \frac{m_{x} x}{a} + \phi_x \right) 
+    \sin \left( \frac{m_{x} y}{b} + \phi_y \right)
+    \sin \left( \frac{m_{x} z}{c} + \phi_z \right)
+    \sin \left( \omega t \right),
+\) 
+the boundary conditions that parallel components of $\mathbf{E}$ vanishes at the six faces and the requirement of zero divergence everywhere (the requirement on curl is equivalent to the wave equation) gives
+\begin{align*}
+    E_x &= E_{x0} \cos \left( \frac{m_{x} x}{a} \right) \sin \left( \frac{m_{y} y}{b} \right) \sin \left( \frac{m_{z} z}{c} \right) \sin \left( \omega t \right), \\ 
+    E_y &= E_{y0} \sin \left( \frac{m_{x} x}{a} \right) \cos \left( \frac{m_{y} y}{b} \right) \sin \left( \frac{m_{z} z}{c} \right) \sin \left( \omega t \right), \\ 
+    E_z &= E_{z0} \sin \left( \frac{m_{x} x}{a} \right) \sin \left( \frac{m_{y} y}{b} \right) \cos \left( \frac{m_{z} z}{c} \right) \sin \left( \omega t \right),
+\end{align*}
+with transversality requirement $\mathbf{k} \cdot \mathbf{E_0} = 0$ and the quantisation requirement
+\[
+    \left( \frac{m_{x} }{a}\right)^{2} + 
+    \left( \frac{m_{y} }{b}\right)^{2} + 
+    \left( \frac{m_{z} }{c}\right)^{2} = 
+    \frac{\omega ^{2} }{\pi ^{2} c^{2} }, \quad 
+    m = 1, 2, \ldots
+\]
+
+In the space of $m_{x}  / a$ etc., the allowed modes forms a square lattice in the first quadrant with a number density of 1 and modes with frequency ranging from $\omega $ to $\omega  + \mathrm{d} \omega $ falls on the surface of a sphere with radius $r = \frac{\omega }{\pi c}$. Thus, the number of modes in the frequency range is
+\[
+    N(\omega ) \mathrm{d} \omega  = \left( \frac{1}{8} \right) 4 \pi r^{2} \mathrm{d} r
+    = \frac{\omega ^{2}}{2 \pi ^{2} c^3} \mathrm{d} \omega . 
+\]
+With $\mathbf{k} $ known, the plane of polarisation $\mathbf{E_0} $ can be determined from $\mathbf{k} \cdot \mathbf{E_0} = 0$, giving two linearly independent modes. In classical physics, the energy is equally partitioned amongst every possible mode with average energy $\bar{\epsilon} = N k_B T/ 2 = k_{B} T,$ where $N=2$ is the number of quadratic terms in electromagnetic radiations. Therefore, the special energy density between $\omega $ and $\omega + \mathrm{d} \omega $ is 
+\[
+    \rho (\omega , T) \mathrm{d} \omega = 
+    \frac{\omega ^{2}}{2 \pi ^{2} c^3} (2) (k_{B} T) \mathrm{d} \omega
+    = \frac{\omega ^{2} k_{B} T}{\pi ^{2} c^{3} } \mathrm{d} \omega ,
+\]
+which is the Rayleigh-Jeans law. Since this expression blows up for large $\omega ,$ we need to resolve such ultraviolet catastrophe by quantising energy: EM radiation with frequency $\omega $ could only have energy $\hbar \omega , 2 \hbar \omega , \ldots $ instead of any value given by the magnitude of $\mathbf{E_0},$ the average energy in a mode would be instead given by the Boltzmann distribution (which is still valid since it only assumes a canonical setting) 
+\begin{equation}
+    \bar{\epsilon }
+    = \frac{\sum_{m=0}^{\infty} m \hbar \omega e^{-m \hbar \omega / k_{B} T}}{\sum_{m=0}^{\infty} e^{-m \hbar \omega / k_{B} T}}.
+    \label{eq:eavg-planck}
+\end{equation}
+
+The denominator of Eq.\eqref{eq:eavg-planck} could be recognised as a geometric series 
+\[
+    \sum_{m=0}^{\infty} e^{-m \hbar \omega / k_{B} T} = 
+    \frac{1}{1 - e^{- \hbar \omega / k_{B} T}},
+\]
+and the numerator is the derivative of one:
+\begin{align*}
+    S(x=1) = -k_{B} T \frac{\mathrm{d} }{\mathrm{d} x} \sum_{m=0}^{\infty} e^{-m \hbar \omega / k_{B} T} \bigg \rvert_{x = 1}
+    = -k_{B} T \frac{\mathrm{d} }{\mathrm{d} x} \frac{1}{1 - e^{- \hbar \omega x / k_{B} T}} \bigg \rvert_{x = 1}
+    = \frac{\hbar \omega }{\left(1 - e^{- \hbar \omega  / k_{B} T} \right)^{2} }. 
+\end{align*}
+Therefore, the average energy per mode is 
+\[
+    \bar{\epsilon } = \frac{\hbar \omega }{ e^{\hbar \omega  / k_{B} T} - 1}
+\]
+and the spectral energy density is given by the Planck's distribution
+\[
+    \rho (\omega ,T) \mathrm{d} \omega = \frac{\hbar \omega ^3 }{\pi ^{2} c^{3} } \frac{1}{e^{\hbar \omega  / k_{B} T} - 1} \mathrm{d}\omega  .
+\]
+
+Note that this result does not, at all, depend on the dimension of confinement. We could rationalise an ideal blackbody as a (infinitely large such that the spectrum is roughly continuous) cavity with a highly reflective inner surface and a small aperture such that any radiation incident on the aperture is reflected many times before getting transmitted. Effectively, we form a standing wave inside the cavity while allowing it to emit radiation. A more sensible treatment without the idea of a cavity could be found in \cite{Smerlak_2011}.
+
+\section{Wavefunction}
+\begin{framed}
+    \textbf{(p.p.39) In the double slit experiment, does it make sense to speculate about which slit a photon has passed through prior to a detection being made? Does a photon exist as a localised entity until it has been detected?} 
+\end{framed}
+
+
+According to the wavefunction interpretation, the photon exists as a delocalised plane wave before a detection is made. That is, the two slits act as point sources of photon matter wave (but how do we know that?) which then interferes on the screen. When it arrives at the screen, its wavefunction collapses into a localised delta function and leaves a trace on the screen. 
+\begin{framed}
+    \textbf{(p.p.45) Find the wavefunction of the Gaussian momentum wavepacket $g(k)$ and find the uncertainty in $x$, where }
+\[
+    g(k) = \left( \frac{a^{2} }{\pi }\right)^{1 /4} e^{-a^{2} (k-k_0)^{2} /2}. 
+\]
+\end{framed}
+
+The momentum wavefunction $g(k)$ is properly normalised: 
+\begin{align*}
+    \int_{-\infty}^{\infty} \left\vert g(k) \right\vert ^{2}  \,\mathrm{d}k 
+    &= \left( \frac{a^{2} }{\pi }\right)^{1 /2}\int_{-\infty}^{\infty} e^{-a^{2} (k-k_0)^{2} } \,\mathrm{d}k \\ 
+    &= \left( \frac{a^{2} }{\pi }\right)^{1 /2}\int_{-\infty}^{\infty} e^{-u^{2} } \left( \frac{1}{a}\right) \,\mathrm{d}k
+    \qquad (u = a(k-k_0)) \\ 
+    &= \left( \frac{a}{\sqrt{\pi } }\right) \left(\frac{1}{a}\right) \sqrt{\pi } = 1. 
+\end{align*}
+By the Fourier inversion theorem, the wavefunction at $t=0$ is 
+\begin{align*}  
+    \Psi(x,0)  
+    &= \frac{1}{\sqrt{2\pi } }\int_{-\infty}^{\infty} g(k) e^{i k x} \,\mathrm{d}k \\
+    &= \left(\frac{a^{2} }{\pi }\right)^{1/ 4} \frac{1}{\sqrt{2\pi } }\int_{-\infty}^{\infty} e^{-a^{2} (k-k_0)^{2} /2 + ikx} \,\mathrm{d}k \\ 
+    &= \left(\frac{a^{2} }{\pi }\right)^{1/ 4} \frac{1}{\sqrt{2\pi } }\exp(-a^{2} k_0 ^{2} /2) \int_{-\infty}^{\infty} \exp(-\frac{a^{2}}{2} k^{2}  + (a^{2} k_0+ix)k) \,\mathrm{d}k \\ 
+    &= \left(\frac{a^{2} }{\pi }\right)^{1/ 4} \frac{1}{\sqrt{2\pi } }\exp(-a^{2} k_0 ^{2} /2) 
+    \sqrt{\frac{\pi }{a^{2} /2}} \exp( \frac{(a^{2} k_0 + ix)^{2} }{2a^{2} } ) \\
+    &= \left( \frac{1}{\pi a^{2} }\right)^{1 /4} \exp(ik_0 x) \exp(-\frac{x^{2} }{2a^{2} }),
+\end{align*} 
+where the standard integral 
+\[
+    \int_{-\infty}^{\infty} \exp(-ax^{2} +bx) \,\mathrm{d}x  = \sqrt{\frac{\pi }{a}} \exp(\frac{b^{2} }{4a}), \qquad a>0, b \in \mathbb{R}
+\]
+has been used in the fourth line. 
+This is a propagating wave with wavevector $k_0$ modulated by a Gaussian with a reciprocal width. 
+
+By the symmetry of $\Psi(x,0),$ the expected value of $x$ is zero, and the expected value of $x^{2} $ could be calculated as 
+\begin{align*}
+    \expval{x^{2} } 
+    &= \int_{-\infty}^{\infty} x^{2} \left\vert \Psi(x) \right\vert ^{2}  \,\mathrm{d}x  \\ 
+    &= \left( \frac{1}{\pi a^{2} }\right)^{1 /2} \int_{-\infty}^{\infty} x \left( x\exp(-\frac{x^{2} }{a^{2} }) \right) \,\mathrm{d}x \\
+    &= \left( \frac{1}{\pi a^{2} }\right)^{1 /2} \left[ \underbrace{\left( -a^{2} x \exp(-\frac{x^{2}}{a^{2} })\right)^{\infty}_{-\infty}}_{=0} +\frac{a^{2}}{2} \int_{-\infty}^{\infty}  \exp(-\frac{x^{2}}{a^{2} })\,\mathrm{d}x   \right]
+    = \frac{a^{2} }{2}. 
+\end{align*}
+Therefore, the uncertainty in $x$ is 
+\[
+    \Delta x = \sqrt{ \expval{x^2} - \expval{x}^2} = \frac{a}{\sqrt{2} }.
+\]
+\bibliographystyle{plain} % We choose the "plain" reference style
+\bibliography{ref.bib}
+\end{document}

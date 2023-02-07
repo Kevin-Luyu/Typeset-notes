@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage[thmmarks, framed]{ntheorem} % ntheorem must come before amsmath, or the cross-reference will not be working
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\usepackage{empheq} % box aligned equations
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{bm} % bold greek letters 
+\usepackage{physics}
+\usepackage{xcolor}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+%
+\usepackage{bm}
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\title{NST IB Physics B Classical Dynamics Notes}
+\date{Lent, 2023}
+\author{Yu Lu}
+\begin{document}
+\maketitle
+\section{Rigid body dynamics}
+\subsection{Dynamical quantities and the inertial tensor}
+The general motion of a rigid body in three dimensions can be quite complicated. However, it is always possible to define an instantaneous angular momentum vector (Euler's theorem) about which the body momentarily rotates. Therefore, we could always decompose the motion of a rigid body into translation of its centre of mass and the rotation in the CM frame (only in this frame can we neglect the angular momentum of the translational motion). In the centre of mass frame, the body can rotate, precess, or nutate around axes through the origin. 
+
+In the CM frame, external forces acting uniformly across the body can be neglected, since that only brings about translational motion of the CM via $M \ddot{\mathbf{R} } = \mathbf{F_0}. $ The total angular momentum 
+\[
+    \mathbf{J} = \sum\limits_{\text{body}} m \mathbf{r} \times \mathbf{v} 
+    = \sum\limits_{\text{body}} m \mathbf{r} \times (\boldsymbol{\mathbf{\omega}}  \times \mathbf{r} )
+\]
+can be related to the instantaneous angular velocity via a tensor relationship
+\[\boxed{
+    \mathbf{J} = \overline{\overline{I}} \cdot \boldsymbol{\mathbf{\omega}},}
+\]
+where the \textbf{moment of inertia tensor} is determined as 
+\[
+    \overline{\overline{I}} = 
+    \begin{pmatrix}
+        \Sigma m(y^{2} + z^{2} ) & -\Sigma m x y &  - \Sigma m x z \\
+        - \Sigma  m x y & \Sigma m(x^{2} +z^{2} ) &  -\Sigma myz \\
+        -\Sigma mxz & -\Sigma myz &  \Sigma m(x^{2} +y^{2} ). \\
+    \end{pmatrix}
+\]
+From its definition $T = \Sigma m\mathbf{v} ^{2}, $ the kinetic energy can be determined as a quadratic form:
+\[\boxed{
+    T = \frac{1}{2} \mathbf{J} \cdot \boldsymbol{\mathbf{\omega}} 
+    = \frac{1}{2} \boldsymbol{\mathbf{\omega}}^{\top} \cdot \overline{\overline{I}} \cdot \boldsymbol{\mathbf{\omega}}.}
+\]
+
+Since the inertial tensor $\overline{\overline{I}} $ is by construction real and symmetric, it has real eigenvalues and mutually orthogonal eigenvectors, making it always possible to be diagonalised. The mutually orthogonal eigenvectors are called \textbf{principal axes} of the rigid body and are fixed in the body frame. In the principal axes coordinates, the inertial tensor is diagonal:
+\[
+    \overline{\overline{I}} = 
+    \begin{pmatrix}
+        I_1 & 0 &  0 \\
+        0 & I_2 &  0 \\
+        0 & 0 &  I_3, \\
+    \end{pmatrix}
+\]
+and expressions for the angular momentum and the kinetic energy are simple:
+\[
+    T = \frac{1}{2} (I_1 \omega_1^2 + I_2 \omega_2^2 + I_3 \omega_3^2), 
+    \qquad 
+    \mathbf{J} = I_1 \omega_1 \hat{\mathbf{e_1} } + I_2 \omega_2 \hat{\mathbf{e_2} } + I_3 \omega_3 \hat{\mathbf{e_3} }.  
+\]
+In the special case that $I_1 = I_2$, the body is called a symmetric top and only $\hat{\mathbf{e_3} } $ is uniquely determined. The other two axes can be any two orthogonal axes in the plane perpendicular to the extraordinary axis $\hat{\mathbf{e_3} }.$
+
+It can be seen from direct calculation that $I_i + I_j \geq I_k,$ where equality is taken iff the body is a laminar in the $ij$ space (perpendicular axes theorem). Also, for an axis parallel to to one of the principal axis through the origin, the parallel axes theorem tells that
+\[
+    \boxed{
+        I = I_{\text{CM}} + M r^2,
+    }
+\]
+where $r$ is the distance from the CM to the axis of interest. This, once again, stresses the unique standing of CM in a rigid body. 
+
+In $\boldsymbol{\mathbf{\omega}}$-space, the surface of constant kinetic energy is an ellipsoid (\textbf{inertia ellipsoid}), with $\mathbf{J} $ being the surface normal and $\boldsymbol{\mathbf{\omega}}$ being the position vector. The three axes of the ellipsoid coincide with the principal axes of the body (though the length is proportional to $1/\sqrt{I_i}$), so the inertia ellipsoid rotates with the body in space. 
+
+It may be useful to memorise that the MoI of a sphere is $I = \frac{2}{5} M a^{2} $ and that of a thin rod through its CoM is $I = \frac{1}{12} M l^2. $
+
+\section{Equation of motion}
+It is vitally important to recognise that the body frame, in which most calculation involving the inertial tensor is done, is a rotating frame with non-uniform angular velocity. Thus, we need to establish the connection of rate of change of vectors in the body frame to the lab frame (the space frame). The rate of change of a basis vector (or any vector fixed in the body frame) is 
+\[
+    \frac{\mathrm{d}}{\mathrm{d}t} \hat{\mathbf{e_i} } = \boldsymbol{\mathbf{\omega}}  \times \hat{\mathbf{e_i} }.
+\]
+This can be regarded as the definition of $\boldsymbol{\mathbf{\omega}}$ and can be rationalised by noting the fact that $\frac{\mathrm{d}}{\mathrm{d}t} (\left\lVert \hat{\mathbf{e_i} } \right\rVert^{2}  ) = \hat{\dot{\mathbf{e_i}}}\cdot \hat{\mathbf{e_i} } = 0$ from normalisation or exploiting the unitarity of rotation (see Goldstein for a formal discussion). Then, from product rule of differentiation, the rate of change in the inertial frame $S_0$ can be connected to that in the body frame $S$ as 
+\[
+    \boxed{
+        \left[ \frac{\mathrm{d}}{\mathrm{d}t} \right]_{S_0}
+        = \left[ \frac{\mathrm{d}}{\mathrm{d}t} \right]_{S} + \boldsymbol{\mathbf{\omega}}  \times .
+    }
+\]
+
+The rotational Newton's 2nd law 
+\[
+    \boxed{ 
+        \mathbf{G} = \frac{\mathrm{d}\mathbf{J} }{\mathrm{d}t}
+    }
+\]
+holds in the space frame, and can be converted to \textbf{Euler's equations} in the body frame as 
+\begin{empheq}[box = \widefbox]{align*}
+    G_1 &= I_1 \dot{\omega}_1 + (I_3 - I_2) \omega_2 \omega_3, \\ 
+    G_2 &= I_2 \dot{\omega}_2 + (I_1 - I_3) \omega_3 \omega_1, \\ 
+    G_3 &= I_3 \dot{\omega}_3 + (I_2 - I_1) \omega_1 \omega_2.  
+\end{empheq}
+
+\section{The symmetric top}
+\subsection{Free precession}
+\subsection{Gyroscope precession and nutation}
+
+\end{document}
