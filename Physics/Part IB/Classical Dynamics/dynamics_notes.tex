@@ -78,11 +78,11 @@ In $\boldsymbol{\mathbf{\omega}}$-space, the surface of constant kinetic energy 
 
 It may be useful to memorise that the MoI of a sphere is $I = \frac{2}{5} M a^{2} $ and that of a thin rod through its CoM is $I = \frac{1}{12} M l^2. $
 
-\section{Equation of motion}
+\subsection{Equation of motion}
 It is vitally important to recognise that the body frame, in which most calculation involving the inertial tensor is done, is a rotating frame with non-uniform angular velocity. Thus, we need to establish the connection of rate of change of vectors in the body frame to the lab frame (the space frame). The rate of change of a basis vector (or any vector fixed in the body frame) is 
-\[
+\begin{equation}
     \frac{\mathrm{d}}{\mathrm{d}t} \hat{\mathbf{e_i} } = \boldsymbol{\mathbf{\omega}}  \times \hat{\mathbf{e_i} }. \label{eq:rate-of-change}
-\]
+\end{equation}
 This can be regarded as the definition of $\boldsymbol{\mathbf{\omega}}$ and can be rationalised by noting the fact that $\frac{\mathrm{d}}{\mathrm{d}t} (\left\lVert \hat{\mathbf{e_i} } \right\rVert^{2}  ) = \hat{\dot{\mathbf{e_i}}}\cdot \hat{\mathbf{e_i} } = 0$ from normalisation or exploiting the unitarity of rotation (see Goldstein for a formal discussion). Then, from product rule of differentiation, the rate of change in the inertial frame $S_0$ can be connected to that in the body frame $S$ as 
 \[
     \boxed{
@@ -109,10 +109,10 @@ Due to the curvature of the inertial ellipsoid, the 1-axis and the 3-axis are lo
 
 In other cases where the magnitude of angular momentum is conserved while the kinetic energy is dissipated, aligning $L$ with the major axis minimises the total energy and is therefore most stable ($T = \frac{J^2}{2I}$). 
 
-\section{The symmetric top}
+\subsection{The symmetric top}
 A symmetric top is defined as a rigid body with $I_1 = I_2 \neq I_3,$ where the equality usually comes from antisymmetry around the 3-axis (also called the extraordinary axis). Consequently, the angular momentum $\mathbf{J} $ and the angular velocity $\boldsymbol{\mathbf{\omega}} $ are collinear iff there is no component of $\mathbf{L}$ along the 3-direction. Furthermore, only the 3-axis is unique and we can chose any set of orthogonal axes in the plane normal to the extraordinary axis. This often greatly simplifies the problem. 
 
-\subsection{Free precession}
+\subsubsection{Free precession}
 In the absence of external torques (such as an unsupported heavy body), the angular momentum of the symmetric top is conserved. The free motion of a symmetric top can be characterised by its rotation along the $\boldsymbol{\mathbf{\omega}}$ vector and the precession of $\boldsymbol{\mathbf{\omega}}$ around the fixed $\mathbf{L} $. This is a consequence of $\mathbf{G} = \textbf{0} $ and $I_2 - I_1 = 0$, leading to $\omega_3 = 0$. Together with the conservation of kinetic energy, the only permitted trace of $\boldsymbol{\mathbf{\omega}}$ is a cone (known as the space cone, see Poinsot's construction)
 
 In the body frame of the top, the 3-axis is fixed while $\mathbf{J}$ and $\boldsymbol{\mathbf{\omega}}$ precesses around it with the same body frequency $\Omega_b.$ The motion in the body frame is governed by Euler's equations:
@@ -144,7 +144,7 @@ Therefore, in the space frame, the angular velocity $\boldsymbol{\mathbf{\omega}
 \]
 where $\theta_b$ is the angle between $\boldsymbol{\mathbf{\omega}}$ and $\hat{\mathbf{e_3} }$ while $\theta_s$ is the angle between $\boldsymbol{\mathbf{\omega}}$ and $\mathbf{L}.$ 
 
-\subsection{Gyroscope precession and nutation}
+\subsubsection{Gyroscope precession and nutation}
 A more general treatment of rigid body involves a convenient set of generalised coordinates $\{\theta, \phi, \chi\}$ called the Euler angles, where $\chi$ describes the rotation about the 3-axis, $\phi$ describes the precession of the angular momentum around the precession axis, and $\chi$ describes the nutation in the angle between the 3-axis and the precession axis. Apparently, such description would be much harder in the case of a asymmetric top where precession could happen around any axis. For a symmetric top, however, we have straightforwardly 
 \[
     \boldsymbol{\mathbf{\omega}} = \dot{\phi} \hat{\mathbf{e_z}} + \dot{\theta} \hat{\mathbf{e_z}} + \dot{\chi } \hat{\mathbf{e_3}}, 
@@ -179,5 +179,110 @@ where $\mathbf{\Omega}$ is the precession angular velocity.
 
 \section{Lagrangian and Hamiltonian Mechanics}
 \subsection{Euler-Lagrange Equation}
+It is usually easier to derive the equation of motion of a system on each particle's position $\{\mathbf{r_k}\}$ by the energy method so that we do not need to add vectors. The normal consideration on conservation of energy relies on separability in the $\dot{x}$ and $\ddot{x} $ terms. Thus, we need to work in mutually independent generalised coordinates $\{q_i\}$ with holonomic transform $\mathbf{r_k} = \sum_{i=1}^{n} q(q_1, q_2, \ldots, q_n ).$
 
+From Newton's second law, for a set of virtual displacement $\{\delta \mathbf{r_k}\}$ compatible with the constraints,
+\begin{equation}
+    \sum\limits_{k=1}^{N} (m_k \ddot{\mathbf{r_k}} - \mathbf{F_k}) \cdot \delta \mathbf{r_k} = 0.  
+    \label{eq:dlambert-thm}
+\end{equation}
+Our goal is to take the summation off, like what is done in deriving the Euler-Lagrange equation in variational calculus, which requires orthogonality of the coordinates. It can be argued that a set of independent generalised coordinates $\{q_i\}$ can always be obtained such that 
+\begin{align*}
+    \sum\limits_{k=1}^{N} m_k \ddot{\mathbf{r_k}}  \cdot \textcolor{red}{\delta \mathbf{r_k}} 
+    &= \sum_{i,k} m_k \ddot{\mathbf{r} } \cdot  \textcolor{red}{\frac{\partial \mathbf{r} }{\partial q_i} \delta q_i }
+    = \sum_{i,k} \left[ \frac{\mathrm{d}}{\mathrm{d}t} \left( m_k \dot{\mathbf{r_k}}\cdot \frac{\partial \mathbf{r_k} }{\partial q_i}  \right) - m_k \dot{\mathbf{r_k} } \cdot \frac{\mathrm{d}}{\mathrm{d}t} \left(\frac{\partial \mathbf{r_k}}{\partial q_i}  \right)\right],
+\end{align*}
+where the second line follows from the product rule of differentiation. Since the coordinate transformation $\mathbf{r_k} = \mathbf{r_k}(q_1, q_2, \ldots, q_n ) $ is time independent, the chain rule gives
+\[
+    \dot{\mathbf{r_k}} = \frac{\mathrm{d}\mathbf{r_k} }{\mathrm{d}t} = 
+    \sum_{i=1}^{n} \frac{\partial \mathbf{r_k}}{\partial q_i} \dot{q_i} 
+    \implies  
+    \frac{\partial \dot{\mathbf{r_k} }}{\partial \dot{q_i} } =  \frac{\partial \mathbf{r_k} }{\partial q_i};
+    \qquad 
+    \frac{\mathrm{d}}{\mathrm{d}t} \left( \frac{\partial \mathbf{r_k} }{\partial q_i} \right)
+    = \sum_{j=1}^{n} \frac{\partial ^{2} \mathbf{r_k} }{\partial q_i \partial q_j} \dot{q_j} 
+    = \frac{\partial \dot{\mathbf{r_k} } }{\partial q_i},
+\]
+which essentially states that $\mathrm{d} / \mathrm{d} t $ and $\partial / \partial q_i$ commutes due to the holonomicity. Noting that the total kinetic energy is 
+\[
+    T = \frac{1}{2} \sum_{k=1}^{N} m \dot{\mathbf{r_k} } \cdot \dot{\mathbf{r_k} } 
+    = \frac{1}{2} \sum_{i,j,k}m_k \frac{\partial \mathbf{r_k}}{\partial q_i} \cdot \frac{\partial \mathbf{r_k}}{\partial q_j} \dot{q_i} \dot{q_j},
+\]
+\[ \implies 
+    \frac{\partial T}{\partial \dot{q_i} } = 
+    2 \cdot \frac{1}{2} \sum_{j,k} m_k \frac{\partial \mathbf{r_k} }{\partial q_i} \cdot \textcolor{red}{\frac{\partial \mathbf{r_k}}{\partial q_j} \dot{q_j}}
+    = \sum_{k=1}^{N} m_k \textcolor{red}{\dot{\mathbf{r_k}}} \cdot \frac{\partial \mathbf{r_k} }{\partial q_i };
+    \qquad 
+    \frac{\partial T}{\partial q_i} = \sum_{k=1}^{N} m_k \dot{\mathbf{r_k}} \cdot \frac{\partial \dot{\mathbf{r_k}}}{\partial q_i},  
+\]
+where the factor of $2$ comes from double counting in the symmetric expression of $T.$ The first term in Eq.\eqref{eq:dlambert-thm} can thus be converted to
+\begin{align*}
+    \sum_{k=1}^{N} m_k \ddot{\mathbf{r_k} } \cdot \delta \mathbf{r_k} 
+    &= \sum_{i,k} \left[ \frac{\mathrm{d}}{\mathrm{d}t} \left( \textcolor{blue}{m_k \dot{\mathbf{r_k}}\cdot \frac{\partial \mathbf{r_k} }{\partial q_i}}  \right) - \textcolor{red}{m_k \dot{\mathbf{r_k} } \cdot \frac{\mathrm{d}}{\mathrm{d}t} \left(\frac{\partial \mathbf{r_k}}{\partial q_i} \right)}\right] \\
+    &= \sum_{i,k} \left[ \frac{\mathrm{d}}{\mathrm{d}t} \left( \textcolor{blue}{m_k \dot{\mathbf{r_k}}\cdot \frac{\partial \mathbf{r_k} }{\partial q_i}}  \right) - \textcolor{red}{m_k \dot{\mathbf{r_k} } \cdot \frac{\partial \dot{\mathbf{r_k} } }{\partial q_i} }\right] \\
+    &= \sum_{i=1}^{n} \textcolor{blue}{\frac{\mathrm{d}}{\mathrm{d}t} \left( \frac{\partial T}{\partial \dot{q_i} } \right)} - \textcolor{red}{\frac{\partial T}{\partial q_i} }.
+\end{align*}
+If we define \textbf{generalised forces} $Q_i$ such that
+\[
+    \sum_{k=1}^{N} \mathbf{F_k} \cdot \delta \mathbf{r_k}
+    = \sum_{i=1}^{n} Q_i \delta q_i 
+    \implies  
+    \boxed{Q = \sum_{k=1}^{N} \mathbf{F_k} \cdot \frac{\partial \mathbf{r_k} }{\partial q_i},}  
+\] 
+then Eq.\ref{eq:dlambert-thm} turns into
+\[
+    \sum_{i=1}^{n} \left[ \frac{\mathrm{d}}{\mathrm{d}t} \left( \frac{\partial T}{\partial \dot{q_i} } \right) - \frac{\partial T}{\partial q_i} -Q_i = 0\right]
+    \implies 
+    \boxed{\frac{\mathrm{d}}{\mathrm{d}t} \left( \frac{\partial T}{\partial \dot{q_i} } \right) - \frac{\partial T}{\partial q_i} -Q_i = 0.}
+\]
+due to independence of $\{q_i\}.$ If all the applied forces are conservative such that 
+\[
+    V = \sum_{k=1}^{N} \phi_k,\quad \mathbf{F_k} = -\nabla_k \phi_k \implies 
+    Q_i = -\frac{\partial V}{\partial q_i}, 
+\]
+we obtain the Euler-Lagrange equation for conservative $V= V(q_1, q_2, \ldots, q_n )$:
+\[
+    \boxed{ 
+        \frac{\mathrm{d}}{\mathrm{d}t} \left( \frac{\partial \mathcal{\MakeUppercase{L}} }{\partial \dot{q_i} } \right) - \frac{\partial \mathcal{\MakeUppercase{L}} }{\partial q_i} =0, \quad i = 0, 1, \ldots , n, 
+    }
+\]
+where $\mathcal{\MakeUppercase{L}} = T - V$ is the Lagrangian. From calculus of variation, this is equivalent to extremise the action functional $\int_{t_1}^{t_2} \mathcal{\MakeUppercase{L}} \mathrm{d} t$ (Hamilton's principle). Holonomic constraints of the coordinates can be introduced by the Lagrange multipliers. Further conservation could be obtained from Noether's theorem. 
+
+(The derivations are non-examinable)
+
+If any of the $Q_i$ is zero, we get a conserved quantity 
+\[
+    \frac{\partial \mathcal{\MakeUppercase{L}} }{\partial q_i} = \mathrm{const}.  
+\]
+If the Lagrangian is independent of time, then we obtain a first integral 
+\[
+    E = \sum_{i=1}^{n} \dot{q_i} \frac{\partial \mathcal{\MakeUppercase{L}} }{\partial \dot{q_i} } - \mathcal{\MakeUppercase{L}}  = \mathrm{const}, 
+\]
+which remains under a change of generalised coordinates $\{q_i\} \to \{Q_i(q_1, q_2, \ldots , q_n )\}.$
+\subsection{Hamiltonian Mechanics}
+In Lagrangian mechanics, the Lagrangian is regarded as a function of independent $\{q_i\}$ and $\{\dot{q_i}\}.$ A Legendre transform involving the conjugate momentum 
+\[
+    p_i = \frac{\partial \mathcal{\MakeUppercase{L}} }{\partial q_i} 
+\]
+gives Hamiltonian 
+\[
+    \boxed{ 
+        H(q_i, p_i, t) = 
+        \sum_{i=1}^{n} p_i \dot{q_i}(p_i) - \mathcal{\MakeUppercase{L}}(q_i, \dot{q_i}(p_i),t ). 
+    }
+\]
+From this transform and the chain rule, we have the Hamilton's equations of motion
+\[
+    \dot{q_i} = \frac{\partial H}{\partial p_i}, \quad \dot{p_i} = -\frac{\partial H}{\partial q_i}, \quad 
+    -\left( \frac{\partial L}{\partial t}   \right)_{q, \dot{q} } = \left(\frac{\partial H}{\partial t}\right)_{q,p}. 
+\]
+Thus, if $\mathcal{\MakeUppercase{L}} $ is independent of time, $H$ is conserved and equals the total energy. Note that $H$ is an explicit function of $p_i,$ which does not explicitly depend on $q_i.$ This symmetric ground is not provided in the Lagrangian formalism. 
+
+\section{Normal Modes}
+Most many-body problems do not have analytical solutions, with the notable exception of quadratic interaction. In such a system, the total energy could be expressed as a sum of quadratic forms:
+\[
+    T = \dot{\mathbf{x} } \cdot \overline{\overline{M}} \cdot \dot{\mathbf{x} }, \quad 
+    U = \mathbf{x} \cdot \overline{\overline{K}} \cdot \mathbf{x}, 
+\]
+where the tensors $\overline{\overline{M}} $ and $\overline{\overline{K}} $ are constructed to be symmetric. 
 \end{document}
