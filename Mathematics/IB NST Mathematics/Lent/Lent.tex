@@ -71,4 +71,113 @@ and the self-adjoint condition becomes
     \braket{u}{\mathcal{\MakeUppercase{L}} v}_w = \braket{\mathcal{\MakeUppercase{L}} u}{v}_w.
 \) 
 Under this convention, $\tilde{\mathcal{\MakeUppercase{L}} }$ satisfying the original eigenvalue equation is self-adjoint with weight $w(x)$ while $\mathcal{\MakeUppercase{L}} $ satisfying the generalised eigenvalue equation is self-adjoint with weight 1. 
+
+\section{Laplace's and Poisson's equation}
+Many physical systems, including incompressible irrotational fluids, heat conduction, and electrostatics, can be described by Poisson's equation 
+\begin{equation}
+    \nabla^{2} \Phi(\mathbf{r}) = \rho(\mathbf{r}), 
+    \label{eq:Poisson}
+\end{equation}
+where $\Phi(\mathbf{r})$ is defined in some region $V$ with \textbf{Dirichlet} boundary conditions $\Phi(\mathbf{r} ) = \Psi(\mathbf{r})$ or \textbf{Neumann} boundary conditions $\nabla \Phi \cdot \hat{n} = \Psi(\mathbf{r} )$ on $\partial V.$ Sometimes $\Phi$ is itself an observable, like temperature, while sometimes it is only $\nabla \Phi$ that is physical, like in electrostatics. The distinction sometimes brings about a difference in boundary conditions. We are sometimes (like in heat conduction) also interested in the flux $\mathbf{F} = \kappa \nabla \Phi,$ where $\kappa$ is (piecewise) constant. 
+
+\subsection{Laplace's equation}
+When $\rho(\mathbf{r}) = 0$ in Eq.\eqref{eq:Poisson}, it simplifies into Laplace's equation 
+\[
+    \nabla^{2} \Phi(\mathbf{r} ) = 0,
+\]
+where $\Phi(\mathbf{r})$ satisfies the same types of boundary conditions as described above. We could express $\Phi (\mathbf{r} )$ as a superposition of separable solutions in cartesian coordinates, planar polar, or spherical polar coordinates. 
+
+\subsubsection{Cartesian coordinates}
+Separation into cartesian coordinates gives $\Phi(x,y,z) = X(x)Y(y)Z(z)$ and the Laplace's equation reads 
+\[
+    \frac{X^{\prime\prime} (x)}{X} + \frac{Y^{\prime\prime} (y)}{Y} + \frac{Z^{\prime\prime} (z)}{Z} = 0, 
+\] 
+\[
+    \implies \frac{\mathrm{d}^{2} X}{\mathrm{d}x} = - k_x ^{2}  X, \quad 
+    \frac{\mathrm{d}^{2} Y}{\mathrm{d}y} = -k_y ^{2} Y, \quad 
+    \frac{\mathrm{d}^{2} Z}{\mathrm{d}z} = (k_x ^{2} + k_y ^{2} ) Z. 
+\]
+Therefore, one part of the solution must be qualitatively different from the other two. The most general solution is 
+\[
+    X = A \cos(k_x x + B) \quad 
+    Y = C \cos(k_y y + D), \quad
+    Z = E \exp(\sqrt{k_x ^{2}  + k_y ^{2} }z ) + F \exp(-\sqrt{k_x ^{2}  + k_y ^{2} }z ),
+\]
+but the boundary conditions often immensely simplifies the expression. For example, $k_x$ and $k_y$ may be quantised to integer multiplies of some quantities and $B=D=0$ if oscillatory boundary conditions are given in $X$ and $Y.$ Furthermore, the exponential growth solution in $Z$ are often killed due to regularity constraint at infinity.
+
+\subsubsection{Planar polar coordinates}
+In planar polar coordinates, the solution can be separated as $\Phi(r,\phi) = P(\phi) R(r)$ and the Laplace's equation reads 
+\[
+    \nabla ^{2} \Phi  = \frac{1}{r}\frac{\partial }{\partial r} \left( r \frac{\partial \Phi }{\partial r} \right) 
+    + \frac{1}{r^{2} } \frac{\partial ^{2} \Phi }{\partial \phi ^{2} } = 0,
+\]
+giving the separated ODE as
+\[
+    \frac{\mathrm{d}^{2} P}{\mathrm{d}\phi } + n^{2} P = 0, \quad 
+    r^{2} \frac{\mathrm{d}^{2} R}{\mathrm{d}r^{2} } + r \frac{\mathrm{d}R}{\mathrm{d}r} - n^{2} R = 0,
+\]
+where $n = 0, 1, 2, \ldots $ from the physical requirement on periodicity of $P$ or $P^\prime$: if $\Phi$ is physically meaningful, then we require $P(\phi + 2\pi ) = P(\phi)$ and if only $\nabla \Phi$ is physical, only $P^\prime$ needs to be periodic. The ODE on $P$ gives oscillatory solution while that on $R$ is of Euler's type and gives a power function solution $R = r^{\pm n}$ or $R = \ln{r}$. Thus, the general solution is 
+\[
+    \boxed{
+    \Phi(r,\phi) = A_0 + B_0 \phi + C_0 \ln{r} + 
+    \sum_{\substack{n=-\infty \\ n \neq 0}}^{\infty } r^n (A_n \cos(n \phi ) + B_n \sin(n \phi )).} 
+\]
+The $B_0 \phi$ term is only present when the physical quantity is $\nabla \Phi.$ Regularity condition at $r=0$ kills $\ln{r}$ and all the $r^{-n}$ while regularity at infinity kills all the $r^{-n}$ dependence (and $\ln{r}$ if it is posted on $\Phi$ itself). Specifying one more boundary condition then gives $A_n$ and $B_n$ in terms of Fourier coefficients. 
+
+The only solution to the Laplace's equation in all space is a constant function, which is consistent with Liouville's theorem in complex analysis (though this is true in 3D as well). Therefore, we usually study the behaviour parts of the space (e.g. a circular disc). Alternatively, we could allow $\hat{n}\cdot \nabla \Phi$ to have a jump discontinuity across some boundaries and split the solution into two piecewise parts. This may correspond to a point source or a discontinuity in the conductivity $\kappa $ (conserving flux $\mathbf{F} $). 
+
+\subsubsection{Spherical polar coordinates}
+Laplace's equation in axisymmetric spherical polar coordinates (no $\phi$ dependence) is 
+\[
+    \nabla ^{2} \Phi = \frac{1}{r^{2} } \frac{\partial }{\partial r} \left(r ^{2} \frac{\partial \Phi }{\partial r} \right) + \frac{1}{r^{2} \sin{\theta }}\frac{\partial }{\partial \theta } \left( \sin{\theta} \frac{\partial \Phi }{\partial \theta } \right) = 0,
+\]
+where $\Phi(r, \theta) = \Theta(u) R(r)$ and $u = \cos{\theta }.$ The equation can then be separated as
+\[
+    \frac{\mathrm{d}}{\mathrm{d}u} \left[ (1-u^{2}) \frac{\mathrm{d}\Theta }{\mathrm{d}u} \right] + l(l+1) T = 0, \quad 
+    r^{2} \frac{\mathrm{d}^{2} R}{\mathrm{d}r} + 2 r \frac{\mathrm{d}R}{\mathrm{d}r} - l(l+1)r = 0.
+\]
+The ODE on $\Theta$ is of the Legendre type and is only regular at $u = \pm 1$ when $l = 0, 1, \ldots $ The second ODE is of Euler's type and admits power function solutions $R = r^{l}, r^{-l-1}.$ Thus, the general solution is
+\[
+    \boxed{ 
+        \Phi(r,\theta ) = \sum_{l=0}^{\infty} \left( A_l r^l + B_l r^{-l-1}\right) P_l(\cos{\theta}),
+    }
+\]
+where $P_l(x)$ is the Legendre polynomial with normalisation $P_l(1) = 1.$
+
+(*) When the system is not axisymmetric, the Laplace's equation becomes 
+\[
+    \nabla ^{2} \Phi = \frac{1}{r^{2} } \frac{\partial }{\partial r} \left(r ^{2} \frac{\partial \Phi }{\partial r} \right) + \frac{1}{r^{2} \sin{\theta }}\frac{\partial }{\partial \theta } \left( \sin{\theta} \frac{\partial \Phi }{\partial \theta } \right) + \frac{1}{r^{2} \sin{\theta }} \frac{\partial^{2}  \Phi }{\partial \phi ^{2} } = 0. 
+\]
+It needs to be separated into $\Phi(r,\theta,\phi) = R(r) \Theta(\theta ) P(\phi )$ with two separation constants, as shown below:
+\[
+    \begin{dcases}
+       \frac{\sin^{2}{\theta }}{R} \frac{\mathrm{d}}{\mathrm{d}r} \left( r^{2} \frac{\mathrm{d}R}{\mathrm{d}r} \right) + \frac{\sin{\theta }}{\Theta}\frac{\mathrm{d}}{\mathrm{d}\theta } \left( \sin{\theta } \frac{\mathrm{d}\Theta }{\mathrm{d}\theta } \right)  = -\frac{1}{P}\frac{\mathrm{d}^{2} P}{\mathrm{d}\phi ^{2} } &= \lambda_1,   \\
+       \frac{1}{R}\frac{\mathrm{d}}{\mathrm{d}r} \left(r^{2} \frac{\mathrm{d}R}{\mathrm{d}r} \right) = -\frac{1}{\Theta \sin{\theta }}\frac{\mathrm{d}}{\mathrm{d}\theta } \left( \sin{\theta } \frac{\mathrm{d}\Theta }{\mathrm{d}\theta } \right) + \frac{\lambda_1}{\sin^{2}{\theta }} &= \lambda_2.    
+    \end{dcases}
+\]
+\subsection{Uniqueness of solutions to Poisson's equation} 
+The uniqueness theorem states that if $\nabla^{2} \Phi = \rho(\mathbf{r})$ in $V$ and Dirichlet or Neumann boundary conditions are satisfied on $\partial V,$ then the solution must be unique, or unique up to a constant for Neumann conditions. This can be proved by showing that $\Psi = \Phi_2 - \Phi_1 $ satisfies 
+\[
+\int_{V}^{} \left\vert \nabla \Psi  \right\vert ^{2}  \,\mathrm{d}V  = 
+    \oint_{\partial V} \Psi \nabla \Psi \cdot \mathrm{d}\mathbf{S} = 0
+\]
+using the vector identity $\boxed{\nabla\cdot(\Psi \nabla \Psi) = \left\vert \nabla \Psi  \right\vert ^{2} + \Psi \nabla ^{2} \Psi}. $ 
+
+This allows us to use the method of image to convert a Poisson's equation in a confined space to a Poisson's equation over all space. 
+\subsection{Green's function to a point source}
+Green's function to the Poisson's equation in $V$ bounded by $S$ is 
+\[
+    \boxed{
+        \nabla_r ^{2} G(\mathbf{r}, \mathbf{r^\prime }) = \delta^{(3)}(\mathbf{r}-\mathbf{r^\prime })
+    }
+\]
+satisfying $\boxed{G = 0 \text{ on } S}$ for a Dirichlet problem or $\boxed{\nabla \cdot G = 1/A \text{ on } S}$ for a Neumann problem, where $A$ is surface area of $S$. It is not hard to verify that $G(\mathbf{r}, \mathbf{r^\prime } )$ is symmetric under $\mathbf{r}  \Leftrightarrow \mathbf{r^\prime }.$ The condition on Neumann problem comes from conserving the flux 
+\[
+    \oint_S \nabla G \cdot \mathrm{d}\mathbf{S} = \int_{V}^{} \nabla ^{2} G \,\mathrm{d}V = \int_{V}^{} \delta^{(3)}(\mathbf{r}-\mathbf{r^\prime }) \,\mathrm{d}V=1. 
+\]
+\subsubsection{3D fundamental solution}
+A fundamental solution $G(\mathbf{r}, \mathbf{r^\prime })$ is the Green's function satisfying the boundary conditions in the whole space. Just as what we did in finding the Green's function of an ODE, $G$ can be obtained by solving the Laplace's equation but allowing for discontinuity with determined strength at the origin. 
+\subsubsection{2D fundamental solution}
+\subsubsection{The method of image for complicated geometry}
+\subsection{Integral solution to Poisson's equation}
 \end{document} 
