@@ -9,9 +9,10 @@
 \usepackage{mathtools}
 \usepackage{physics}
 \usepackage{xcolor}
+\usepackage{caption}
+\usepackage{subcaption}
 % needed for framed theorems
 \usepackage{framed} % or, "mdframed"
-%
 \usepackage{bm}
 \newframedtheorem{frm-res}{Result}
 \theorembodyfont{\upshape}
@@ -163,7 +164,7 @@ The uniqueness theorem states that if $\nabla^{2} \Phi = \rho(\mathbf{r})$ in $V
 \]
 using the vector identity $\boxed{\nabla\cdot(\Psi \nabla \Psi) = \left\vert \nabla \Psi  \right\vert ^{2} + \Psi \nabla ^{2} \Psi}. $ 
 
-This allows us to use the method of image to convert a Poisson's equation in a confined space to a Poisson's equation over all space. 
+This allows us to use the method of image to convert Poisson's equation in a confined space to a Poisson's equation over all space. 
 \subsection{Green's function to a point source}
 Green's function to the Poisson's equation in $V$ bounded by $S$ is 
 \[
@@ -171,13 +172,90 @@ Green's function to the Poisson's equation in $V$ bounded by $S$ is
         \nabla_r ^{2} G(\mathbf{r}, \mathbf{r^\prime }) = \delta^{(3)}(\mathbf{r}-\mathbf{r^\prime })
     }
 \]
-satisfying $\boxed{G = 0 \text{ on } S}$ for a Dirichlet problem or $\boxed{\nabla \cdot G = 1/A \text{ on } S}$ for a Neumann problem, where $A$ is surface area of $S$. It is not hard to verify that $G(\mathbf{r}, \mathbf{r^\prime } )$ is symmetric under $\mathbf{r}  \Leftrightarrow \mathbf{r^\prime }.$ The condition on Neumann problem comes from conserving the flux 
+satisfying homogeneous $\boxed{G = 0 \text{ on } S}$ for a Dirichlet problem or $\boxed{\nabla \cdot G = 1/A \text{ on } S}$ for a Neumann problem, where $A$ is surface area of $S$ and $\mathbf{r^\prime }$ can be any point inside $V.$ It is not hard to verify that $G(\mathbf{r}, \mathbf{r^\prime } )$ is symmetric under $\mathbf{r}  \Leftrightarrow \mathbf{r^\prime }.$ The condition on Neumann problem comes from conserving the flux 
 \[
     \oint_S \nabla G \cdot \mathrm{d}\mathbf{S} = \int_{V}^{} \nabla ^{2} G \,\mathrm{d}V = \int_{V}^{} \delta^{(3)}(\mathbf{r}-\mathbf{r^\prime }) \,\mathrm{d}V=1. 
 \]
 \subsubsection{3D fundamental solution}
 A fundamental solution $G(\mathbf{r}, \mathbf{r^\prime })$ is the Green's function satisfying the boundary conditions in the whole space. Just as what we did in finding the Green's function of an ODE, $G$ can be obtained by solving the Laplace's equation but allowing for discontinuity with determined strength at the origin. 
+
+Since the proposed PDE is radially symmetric, we would expect $G$ to only have radial dependence, giving
+\[
+    \nabla^{2} G = \frac{1}{r^{2} }\frac{\partial }{\partial r} \left( r^{2} \frac{\partial G}{\partial r} \right) = 0 \quad \implies  G = \frac{C}{r}+A \quad (r \neq 0),
+\]
+where $A, C$ are arbitrary constants. The constant offset $A$ must be $0$ for a Dirichlet problem but can be left undetermined for a Neumann problem. The strength $C$ can be determined by the flux out from the origin:
+\[
+    \int_{r<\epsilon} \nabla^{2} G \mathrm{d} V = \oint_{r = \epsilon } \frac{\partial G}{\partial r} \mathrm{d} S = 1, 
+\]
+giving (shifting the origin)
+\[
+    \boxed{
+        G = -\frac{1}{4\pi \left\vert \mathbf{r} - \mathbf{r^\prime }  \right\vert }. 
+    }
+\]
 \subsubsection{2D fundamental solution}
+Similarly, the fundamental solution to the 2D Poisson's equation 
+\[
+    \nabla_r ^{2} G(\mathbf{r}, \mathbf{r^\prime } ) = \delta^{(2)} (\mathbf{r} - \mathbf{r^\prime } )
+\]
+is
+\[
+    \boxed{ 
+        G(\mathbf{r} , \mathbf{r^\prime } ) = \frac{1}{2\pi } \ln{\left\vert \mathbf{r} - \mathbf{r^\prime }  \right\vert } + \mathrm{const}. 
+    }
+\]
+Note that in two dimensions we can no longer require $G \to 0$ at infinity, so the Dirichlet boundary conditions are usually specified in other ways. 
 \subsubsection{The method of image for complicated geometry}
+We can seek Green's function over a infinite domain using the fundamental solution. However, we often want to find Green's functions in some more complicated domains, like a half-plane or a circle. This calls for the method of image which relies on uniqueness of solution to Poisson's equation. If we can cleverly introduce point sources \textbf{outside} the domain $V$ such that the fundamental solution over the whole space also \textit{happens} to satisfy the homogeneous boundary condition on the finite domain $V,$ we can claim to find the \textbf{unique} solution. 
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.4\linewidth]{figs/chap3_image_point_dirichlet.png}
+      \caption{Dirichlet boundary condition}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.4\linewidth]{figs/chap3_image_point_neumann.png}
+      \caption{Neumann boundary condition}
+    \end{subfigure}
+    \caption{Image charges (red) for an infinite plane boundary conditions.}
+    \label{fig:chap3-image-plane}
+    \end{figure}
+
+For example, for a infinite plane/line boundary, we could simply reflect the source, as shown in Fig.\ref{fig:chap3-image-plane} to give the Green's function as a superposition of fundamental solutions:
+\[
+    G = -\frac{1}{4\pi }\left( \frac{1}{\left\vert \mathbf{r} - \mathbf{r_0}  \right\vert } \pm \frac{1}{\left\vert \mathbf{r} - \mathbf{r_1}  \right\vert }\right),
+\]
+where $\mathbf{r_1}$ is the position of the image charge. With Dirichlet boundary conditions, an image source of opposite sign is introduced and we essentially have a dipole field with all flux through the wall (none to infinity). With Neumann boundary conditions, on the other hand, all the flux spreads out to infinity.
+
+For a spherical or circular boundary with Dirichlet boundary condition, we could put an image charge at the inverse point $\mathbf{x_1} = (a^{2} / \left\vert \mathbf{r_0}  \right\vert ) \mathbf{r_0} $ (so that $a$ is the geometric mean of $r_0$ and $r_1$). For a 2D circle, the strength of the image charge is just $q = -Q$ while for a 3D sphere the image charge must have a weaker strength $q = -a/r_0.$
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figs/chap3_inverse_point_dirichlet.png}
+    \caption{Inverse point for a spherical or circular Dirichlet boundary.}
+    \label{fig:chap3-inverse}
+\end{figure}
+
+If the boundary is in more complicated geometry, some numerical methods are probably needed to find the Green's function. However, an inhomogeneous forcing or an inhomogeneous boundary condition with a simple geometry could be resolved by the following integral solution. 
 \subsection{Integral solution to Poisson's equation}
+With the Green's function in hand, we could solve the inhomogeneous Poisson's equation $\nabla ^{2} \Phi = \rho(\mathbf{r} )$ with inhomogeneous boundary condition $\Phi = f(\mathbf{r})$ on $S$ or $\nabla \Phi \cdot \mathbf{\hat{n} } = f(\mathbf{r})$ on $S.$ From the same vector calculus identity we used in proving uniqueness of Poisson's equation, we could prove Green's second identity ($\Psi = G$ )
+\[
+    \boxed{ 
+        \int_V = (\Phi \nabla^{2} \Psi  - \Psi \nabla ^{2} \Phi ) \mathrm{d} V = 
+        \oint_S \left( \Phi \frac{\partial \Psi }{\partial n} - \Psi \frac{\partial \Phi }{\partial n} \right). 
+    }
+\]
+For a Dirichlet boundary condition, this simplifies to 
+\[
+    \boxed{
+        \Phi (\mathbf{r^\prime } ) = \int_V \rho(\mathbf{r} ) G(\mathbf{r}, \mathbf{r^\prime } ) \mathrm{d} V + \oint f(\mathbf{r} ) \nabla G \cdot \mathrm{d} \mathbf{S},  
+    }
+\]
+where the first term comes from superposition of different sources and the second term comes from inhomogeneous boundary conditions. Similarly, the solution from Neumann boundary condition is
+\[
+    \boxed{ 
+        \Phi (\mathbf{r^\prime } ) = \int_V \rho(\mathbf{r} ) G(\mathbf{r}, \mathbf{r^\prime } ) \mathrm{d} V - \oint f(\mathbf{r} ) G(\mathbf{r}, \mathbf{r^\prime } ) \mathrm{d}S + C.
+    }
+\]
 \end{document} 
