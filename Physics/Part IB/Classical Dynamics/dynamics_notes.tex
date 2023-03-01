@@ -285,4 +285,92 @@ Most many-body problems do not have analytical solutions, with the notable excep
     U = \mathbf{x} \cdot \overline{\overline{K}} \cdot \mathbf{x}, 
 \]
 where the tensors $\overline{\overline{M}} $ and $\overline{\overline{K}} $ are constructed to be symmetric. 
+
+\section{Elasticity}
+\section{Fluid Dynamics}
+The continuity equation of mass gives \( \frac{\partial \rho }{\partial t} + \nabla \cdot (\rho  \mathbf{v})  = 0\) and simplifies to \(\boxed{\nabla \cdot \mathbf{v} = 0}\) in an incompressible fluid with constant $\rho. $ 
+
+\subsection{Ideal Fluid}
+In an ideal fluid with no viscosity, shear stresses and non-isotropic shear stresses decay fast so that there is only isotropic normal stress left in the fluid $\tau_{ij} = -P \delta_{ij}. $ Note that this does not imply a uniform stress distribution, and this gives the Euler's equation of motion in an ideal fluid
+\[
+    \boxed{
+        \rho \frac{\mathrm{D}\mathbf{v} }{\mathrm{D}t} = -\nabla P + \rho \mathbf{g},
+    }
+\]
+where $\mathbf{g}$ is the gravitational field and 
+\[
+    \boxed{
+        \frac{\mathrm{D}\mathbf{v} }{\mathrm{D}t}  = \frac{\partial \mathbf{v} }{\partial t} + \mathbf{v} \cdot \nabla \mathbf{v} 
+    }
+\]
+is the convective derivative following the trace of individual particles. 
+Just like in particle dynamics, any curvature in the streamline must be associated with a pressure gradient. 
+
+In the steady flow, the energy flux must be conserved \textit{along a streamline}, giving Bernoulli's equation 
+\[
+    P + \frac{1}{2}\rho v^{2} + \rho \phi = \mathrm{const}.  
+\]
+It can be shown that if the flow is further irrotational, then the quantity is conserved \textit{everywhere} in the fluid.
+\subsection{Vorticity and potential flow}
+The vorticity $\boldsymbol{\mathbf{\omega}} = \nabla \times \mathbf{v}$ is related to the circulation of the fluids: 
+\[
+    K = \oint_C \mathbf{v} \cdot \mathrm{d} \mathbf{l}  = 
+    \int \mathbf{\omega} \cdot \mathrm{d} \mathbf{S}, 
+\]
+which is a constant 
+\[
+    \frac{\mathrm{D}K}{\mathrm{D}t} = 0
+\]
+throughout the fluid. Therefore, a fluid cannot spontaneously generate vortices. However, boundary layers could often generate such vortices. In the absence of any vorticity, the velocity field could be written as \(\mathbf{v}  = \nabla \Phi \) and we could study the flow of fluids using the potential theory 
+\[
+    \nabla ^{2} \Phi  = 0,
+\]
+and the Bernoulli's equation could help us find the pressure distribution. Usually, we are concerned with flow past some obstruction, posing Neumann boundary conditions. Note that the solution to 2D Laplace's equation admits a singular solution $\Phi = \ln(r)$ with non-zero vorticity $\boldsymbol{\mathbf{\kappa}} $ at the origin. This corresponds to a rotating core of fluid (or a cylindrical body) subjected to a \textit{\textbf{magnus force}}
+\[
+    \mathbf{F}  = \rho  \mathbf{V_{\infty }} \times \boldsymbol{\mathbf{\kappa}}   , 
+\] 
+where $\mathbf{V_\infty } $ is the velocity of the fluid at infinity. Two such vortices with opposite signs could travel along a straight line side by side while two with the same sign circle around each other. 
+
+\subsection{Viscous flow}
+For incompressible \textit{\textbf{Newtonian fluids}}, viscosity $\eta $ in the fluid gives rise to a shear stress
+\[
+    \boxed{
+    \tau_{ij} = \eta \left( 2 \frac{\mathrm{d}e_{ij}}{\mathrm{d}t} \right)
+    = \eta \left(\frac{\partial v_i}{\partial x_j} + \frac{\partial v_j}{\partial x_i} \right).} 
+\]
+With the total force $f_i$ per unit volume being 
+\[
+    F_i = \frac{\partial V}{\partial x} = \eta \left(\nabla ^{2} \mathbf{v} + \nabla \underbrace{(\nabla \cdot v)}_{=0}\right)_i,
+\]
+the general equation of motion could be summarised in the Navier-Stokes equation
+\[
+    \boxed{\rho \frac{\mathrm{D}\mathbf{v} }{\mathrm{D}t}  = -\nabla P + \rho \mathbf{g} + \eta \nabla^{2} \mathbf{v},}
+\]
+which added the diffusion of momentum from the boundary layers to the Euler's equation of motion. 
+
+Faced with such a complicated, and in general nonlinear, equation, we often need to make a few assumptions
+\begin{itemize}
+    \item Steady flow so that $\mathrm{D} \mathbf{v} / \mathrm{D} t = 0$ on the left hand side;
+    \item Unidirectional so that \textbf{v} becomes a scalar;
+    \item With hard boundary: non-slippery condition so that $v_{\mathrm{rel} } = 0$ on the boundary;
+    \item With free boundary: $P = P_0$ on the boundary.
+\end{itemize}
+This gives the quadratic $v(r)$ ubiquitous in \textit{\textbf{Poiseuille flow.}}
+
+\subsection{Turbulent flow}
+Just as the Navier-Stokes equation is a diffusion equation for $\mathbf{v},$ the transport of any quantity $Q$ is like a diffusion (i.e. caused by collisions of particles) with kinematic viscosity
+\[
+    \eta /\rho  = \frac{1}{3}\lambda_C v_{T},
+\]
+where $\lambda_C$ is the mean free path of collision and $V_T$ is the thermal velocity. 
+
+These can be combined to form a dimensionless \textit{\textbf{Reynolds number}}
+\[
+    N_R = \rho v L / \eta,
+\] 
+where $v$ and $L$ are the characteristic velocity and length scale. By dimensional analysis, the drag force
+\[
+    F = \rho d^2 v_0^2 \times C_D(N_R)
+\]
+and is dominated by viscosity (no $\rho $ dependence) under low $N_R$ and dominated by inertia under high $N_R$ ($N_R$ is viscosity drag over inertial drag). 
 \end{document}
