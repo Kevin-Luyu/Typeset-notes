@@ -31,6 +31,7 @@ The course is the first formal introduction to quantum mechanics for NST student
 The supplementary notes include detailed calculations and elaborations of the skipped derivations in the notes. They also answer the "questions of the day" sections in the lecture notes. 
 
 ### Classical Dynamics (IB Physics B, Lent 2023)
-Partial notes about rigid body dynamics are added. Orbits and Lagrangian mechanics will go shortly. The notes are mostly for revision, thus being quite brief.
+Partial notes about rigid body dynamics, Lagrangian mechanics, and fluid dynamics are added. Orbits will go shortly. The notes are mostly for revision, thus being quite brief.
 
 ### Application of Quantum Mechanics (II Mathematical Tripos, Lent 2023)
+Topics covered: Perturbation methods in scattering, variational methods, and partial notes on introduction to solid state physics.
