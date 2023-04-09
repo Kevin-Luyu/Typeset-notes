@@ -26,12 +26,12 @@
 \theorembodyfont{\normalfont}
 \theoremsymbol{\ensuremath{\square}}
 \newtheorem{proof}{Proof}
-\title{Identical Particles}
+\title{Multiple Particles}
 \author{Yu Lu}
 \begin{document}
 \maketitle
 \section{Symmetrisation postulate}
-\subsection{Schrödinger's equation for multiple particles}
+\subsection{Schrödinger's equation for multiple particles} \label{sec:multiple_particle}
 The Hamiltonian for a system with $N$ particles can be written as 
 \[
     \hat{H} = - \sum\limits_{j=1}^{N} \frac{\hbar ^{2} }{2 m_j} \nabla^{2}_j + V(\mathbf{r_1}, \mathbf{r_2}, \ldots , \mathbf{r_N},  t ),
@@ -58,7 +58,7 @@ For non-interacting particles (i.e. the system is only subject to external force
 \]
 and the energy is $E = \sum_{j=1}^{N} E_j.$ 
 
-Here, we are effectively combining wavefunctions from different Hilbert spaces using a direct product ($\ket{\psi_1}\otimes \ket{\psi_2}$ in the Dirac notation). Solutions that can be written as a direct product of two wavefunctions from their respective Hilbert space are said to be \textit{\textbf{pure}}, most generally 
+Here, we are effectively combining wavefunctions from different Hilbert spaces using a direct product ($\ket{\psi_1}\otimes \ket{\psi_2}$ in the Dirac notation). Solutions that can be written as a direct product of two wavefunctions from their respective Hilbert space are said to be \textit{\textbf{unentangled}}, most generally 
 \[
     \psi_{\text{pure}} = \psi_{1}(\mathbf{r_1}) \psi_{2}(\mathbf{r_2} ) \ldots  \psi_N (\mathbf{r_N}) =   
     \left( 
@@ -72,11 +72,11 @@ Here, we are effectively combining wavefunctions from different Hilbert spaces u
         \sum_{k=1} d_k h_{k} (\mathbf{r_N} )
     \right), 
 \]
-where $a_i, b_j, \ldots , d_k \in \mathbb{C} $ and $f_i, g_j, \ldots , h_k $ are the eigenfunctions. More generally, any wavefunction in the new Hilbert space can be written as a linear combination of pure states, as the direct products of the eigenfunctions form a complete basis for the new Hilbert space. When the linear combination has more than one term (i.e. it cannot be expressed as a single direct product of two wavefunctions in the respective subspace), the wavefunction is said to be \textit{\textbf{mixed}} (or \textit{\textbf{entangled}}). An important example is the singlet state of two spin-$1/2$ particles 
+where $a_i, b_j, \ldots , d_k \in \mathbb{C} $ and $f_i, g_j, \ldots , h_k $ are the eigenfunctions. More generally, any wavefunction in the new Hilbert space can be written as a linear combination of pure states, as the direct products of the eigenfunctions form a complete basis for the new Hilbert space. When the linear combination has more than one term (i.e. it cannot be expressed as a single direct product of two wavefunctions in the respective subspace), the wavefunction is said to be \textit{\textbf{entangled}}. An important example is the singlet state of two spin-$1/2$ particles 
 \[
     \ket{0 \, 0} = \frac{1}{\sqrt{2} } (\up \dn - \dn \up).
 \]
-In this example, the spin of one particle is completely dependent on the other particle's \textemdash though each particle can be spin up or down, once measurement of one particle's particle is done, the other particle will automatically take the opposite spin (collapse of the wavefunction turns it into a pure state). 
+In this example, the spin of one particle is completely dependent on the other particle's \textemdash though each particle can be spin up or down, once measurement of one particle's particle is done, the other particle will automatically take the opposite spin (collapse of the wavefunction turns it into a pure state). Note also that this state has the maximum randomness in the state of each qubit: the reduced density operator (see later) of each qubit has the maximum entropy. 
 
 In the case of a two-particle system, the Schrödinger's equation Eq.\eqref{eq:SE-multiple} could also be simplified when the particles only interact with each other (i.e. $V(\mathbf{r_1},\mathbf{r_2} ) \to V(\left\vert \mathbf{r_1} - \mathbf{r_2}   \right\vert   )$). This is done in a similar fashion as the effective one-body problems in classical mechanics by introducing the centre of mass and relative position 
 \[
@@ -89,12 +89,12 @@ and converting the Schrödinger's equation into
         -\frac{\hbar ^{2} }{2\mu } \nabla ^{2} _r \psi + V(\mathbf{r} ) \psi  = E_r \psi.
 \]
 \subsection{The symmetrisation postulate}
-By constructing the wavefunction $\psi(\mathbf{r_1}, \mathbf{r_2},\ldots ,\mathbf{r_N}  ) = \psi (\mathbf{r_1} ) \psi (\mathbf{r_2} )\ldots \mathbf{r_N}  $, we are distinguishing the particles\textemdash particle 1 is in $\psi_1$, particle 2 is in $\psi_2$, and so on. This, however, is not always allowed by the inherent indeterminacy of quantum mechanics that we can never know if two particles has secretly exchanged position with each other. Following this reasoning, we are \textit{forced} to conclude that all electrons are identical (so are other types of particles) and that $\left\vert \psi(\mathbf{r_1}, \mathbf{r_2},\ldots ,\mathbf{r_N} )  \right\vert ^2$ must be unchanged under interchange of any $\mathbf{r_i} \longleftrightarrow \mathbf{r_j}. $ Furthermore, we \textbf{postulate} that there are only two possibilities: 
+By constructing the wavefunction $\psi(\mathbf{r_1}, \mathbf{r_2},\ldots ,\mathbf{r_N}  ) = \psi (\mathbf{r_1} ) \psi (\mathbf{r_2} )\ldots \psi (\mathbf{r_N})  $, we are distinguishing the particles\textemdash particle 1 is in $\psi_1$, particle 2 is in $\psi_2$, and so on. This, however, is not always allowed by the inherent indeterminacy of quantum mechanics that we can never know if two particles has secretly exchanged position with each other. Following this reasoning, we are \textit{forced} to conclude that all electrons are identical (so are other types of particles) and that $\left\vert \psi(\mathbf{r_1}, \mathbf{r_2},\ldots ,\mathbf{r_N} )  \right\vert ^2$ must be unchanged under interchange of any $\mathbf{r_i} \longleftrightarrow \mathbf{r_j}. $ Furthermore, we \textbf{postulate} that there are only two possibilities: 
 \[
     \psi(\mathbf{r_1}, \mathbf{r_2}, \ldots  , \mathbf{r_i}, \ldots  , \mathbf{r_j}, \ldots  \mathbf{r_N}     )
     = \pm \psi(\mathbf{r_1}, \mathbf{r_2}, \ldots  , \mathbf{r_j}, \ldots  , \mathbf{r_i}, \ldots  \mathbf{r_N}  ). 
 \]
-Particles that take the plus sign are called \textit{\textbf{bosons}} while those with the minus sign are \textit{\textbf{fermions}}. From the \textit{\textbf{spin statistics theorem}}, bosons have integral spins while fermions have half-integral spins. Noting that this ``exchange operator'' $\hat{P} $ between identical particles would leave the system's Hamiltonian unchanged, $\expval{\hat{P} }$ is a constant of motion\textemdash bosons will stay bosons and fermions will stay fermions. 
+Particles that take the plus sign are called \textit{\textbf{bosons}} while those with the minus sign are \textit{\textbf{fermions}}. From the \textit{\textbf{spin statistics theorem}}, bosons have integral spins while fermions have half-integral spins. Noting that this ``exchange operator'' $\hat{P} $ between identical particles would leave the system's Hamiltonian unchanged, $\expval{\hat{P} }$ is a constant of motion\textemdash bosons will stay bosons and fermions will stay fermions. Furthermore, since $\hat{P}$ commutes with any operator, it can be shown that a fully symmetric wavefunction must be composed of fully symmetric eigenfunctions and measurement does not change the symmetry. 
 
 In the case of a two-particle systems, we can easily construct wavefunctions for fermions and bosons from the distinguishable wavefunction 
 \(
@@ -107,7 +107,7 @@ In the case of a two-particle systems, we can easily construct wavefunctions for
         \psi_2 (\mathbf{r_1} ) \psi_1 (\mathbf{r_2} )
     \right),
 \]
-where bosons take the plus sign and fermions take the minus sign, as usual. Failing to be pure, this no longer has the distinguishable interpretation ``particle 1 is in $\psi_1 $ while particle 2 is in $\psi_2$.'' Instead, either of the two particle can be in $\psi_1$ or $\psi_2$. However, we can still claim that \textit{one} particle is in $\psi_1$ while \textit{the other} is in $\psi_2$. Noting that the fermions' wavefunction would be zero if $\psi_1 = \psi_2,$ we arrive at the \textit{\textbf{Pauli exclusion principle}} for all fermions that the \textit{total wavefunction} (which may not only have the spatial dependence) of two identical particles must be different.
+where bosons take the plus sign and fermions take the minus sign, as usual. Failing to be unentangled, this no longer has the distinguishable interpretation ``particle 1 is in $\psi_1 $ while particle 2 is in $\psi_2$.'' Instead, either of the two particle can be in $\psi_1$ or $\psi_2$. However, we can still claim that \textit{one} particle is in $\psi_1$ while \textit{the other} is in $\psi_2$. Noting that the fermions' wavefunction would be zero if $\psi_1 = \psi_2,$ we arrive at the \textit{\textbf{Pauli exclusion principle}} for all fermions that the \textit{total wavefunction} (which may not only have the spatial dependence) of two identical particles must be different.
 
 For a more complete description, though, we need to incorporate spins into the picture by constructing the total wavefunction $\Psi = \psi(\mathbf{r_1},\mathbf{r_2} ) \chi(1,2)$, where $\chi (1,2)$ is the general spinor. In this sense, the antisymmetric requirement becomes 
 \[
@@ -124,18 +124,21 @@ When the system has more than two states, the symmetrisation may not be as trivi
         \psi_1 (\mathbf{r_3} ) & \psi_2 (\mathbf{r_3} ) & \psi_3(\mathbf{r_3} ) 
     \end{matrix} \right\vert
 \] 
-while the symmetric wavefunction can be constructed in a similar fashion by replacing the determinant by a permanent (no minus sign). It should be noted that a non-zero determinant requires $\psi_1 \neq \psi_2 \neq \psi_3 $ (generalised exclusion principle). Therefore, it is not possible to form an antisymmetric spinor $\chi(1,2,3)$ in this way. This sometimes implies that we could form a wavefunction by symmetrising $\psi$ and $\chi $ individually. Instead, we could construct an antisymmetric wavefunction by 
+while the symmetric wavefunction can be constructed in a similar fashion by replacing the determinant by a permanent (no minus sign). It should be noted that a non-zero determinant requires $\psi_1 \neq \psi_2 \neq \psi_3 $ (generalised exclusion principle). Therefore, it is not possible to form an antisymmetric spinor $\chi(1,2,3)$ in this way. This implies that sometimes we could not form a wavefunction by symmetrising $\psi$ and $\chi $ individually. Instead, we could construct an antisymmetric wavefunction by 
 \[\Psi = 
-    \left\vert 
+    \left\vert = C
     \begin{matrix}
         \psi_1(\mathbf{r_1} ) \up_1 & \psi_1(\mathbf{r_1} ) \dn_1 & \psi_2(\mathbf{r_1} ) \up_1 \\ 
         \psi_1(\mathbf{r_2} ) \up_2 & \psi_1(\mathbf{r_3} ) \dn_2 & \psi_2(\mathbf{r_2} ) \up_2 \\ 
         \psi_1(\mathbf{r_3} ) \up_2 & \psi_1(\mathbf{r_3} ) \dn_2 & \psi_2(\mathbf{r_3} ) \up_3 \\ 
     \end{matrix}
-    \right\vert .
+    \right\vert ,
 \]
+where $C$ is a normalisation constant to be discussed later. 
 
 When the particles are interacting with each other, the time-independent Schrödinger's equation may not be separable. In this case, it may not be possible to express any state by a single Slater determinant. Instead, a linear combination of Slater determinant might be needed. This means that the interpretation ``one particle is in $\psi_1$ while the other is in $\psi_2$'' loses its meaning as well. 
+\subsection{More on the symmetrisation postulate}
+Suppose we are combining $N$ particles together, each with $M$ states, then the new Hilbert space is formed by the direct product states $\ket{\psi_1^a} \ket{\psi_2^b} \ldots \ket{\psi_3^z}$ with $N*M$ degrees of freedom. 
 \subsection{Exchange interactions}
 The symmetrisation (in one dimension)
 \[
@@ -172,6 +175,55 @@ is the overlap integral, giving
 
 Therefore, identical particles with symmetric spatial wavefunctions are closer to each others while those with antisymmetric spatial wavefunctions are further from each other compared to distinguishable particles. This geometrical result is called the \textit{\textbf{exchange interaction}}, which are only related to the spatial wavefunctions and are not necessarily associated with either fermions or bosons. 
 
+\section{Entanglement and density operators}
+\subsection{Entanglement}
+Suppose we know all the possible state of two particles $\{\ket{\phi^i_1}\} \in V_1$ and $\{\ket{\phi^i_2}\} \in V_2,$ then the most complete information we have about the composite system is the \textit{\textbf{direct product}} state 
+\begin{equation}
+    \psi  = \sum_{n,m} c_{n,m} \ket{\phi^n_1} \ket{\phi^m_2} \in V_1 \oplus V_2. \label{eq:direct-product}
+\end{equation}
+When this direct product state cannot be separated into $\ket{\psi} = \ket{\psi_1} \otimes \ket{\psi_2},$ as shown in section \ref{sec:multiple_particle}, the state is said to be in entanglement. Such entanglement can be used to teleport quantum states in quantum informtion systems. The degree of entanglement is not an observable and is mathematically defined using the density operator discussed below. 
+
+\subsection{Density operator}
+The most information we have about a system is its wavefunction, often expressed as a superposition of eigenstates 
+\(\ket{\psi } = \sum_{i}^{} c_i \ket{\phi_i},\) giving the phase relations between composite states. This, however, is not always possible or useful, and we are often just concerned about the probability of different states the system can be in $\{p_i\}.$ This is called a ``classical ensemble of quantum states,'' where only the moduli of probability amplitudes are known and often occurs when a system is somehow coupled to the surrounding. In this case, we could instead choose to form a density matrix 
+\begin{equation}
+    \boxed{\hat{\rho} = \sum_{i}^{} p_i \ket{\phi_i} \bra{\phi_i},} \label{eq:density-operator}
+\end{equation}
+evolving in time as
+\[
+    \boxed{
+        \frac{\partial \hat{\rho} }{\partial t} = -\frac{i}{\hbar }[\hat{H}, \hat{\rho}].
+    }
+\]
+The expectation value of an operator in this ensemble is 
+\[
+    \expval{\hat{A}} = \mathrm{Tr}[\hat{A} \hat{\rho}], 
+\]
+where the trace of an operator is $\mathrm{Tr}[\hat{O}] = \sum_{i}^{} \mel{\phi_i}{\hat{O}}{\phi_i}.$ The trace of $\hat{\rho}$ is, by definition, unity. For example, the density operator of a quantum system in a heat bath (boltzmann distribution) is 
+\[
+    \rho = \frac{\mathrm{\exp}(-\hat{H} / k_B T) }{\mathrm{Tr}[\mathrm{\exp}(-\hat{H} / k_B T)] }.
+\]
+If there only one possible state, $\rho = \ket{\psi}\bra{\psi}$ and the ensemble is said to be \textit{\textbf{pure},} and $\hat{\rho}$ simply becomes the projection operator. In this case, it must be the case that
+\[
+    \mathrm{Tr}[\rho^{2}] = 1.  
+\]
+The density operator is completely determined by its eigenvalues $p_i$, as it is diagonal. We could extend the classical idea of entropy to become
+\[
+    S = - \mathrm{Tr} [\hat{\rho}  \ln \hat{\rho} ] = -\sum_{i}^{} p_i \ln p_i, 
+\]
+which is $0$ for a pure state and $\ln N$ for a random state (its classical value, c.f. equipartition theorem) 
+
+The definition of density operator in Eq.\eqref{eq:density-operator} looks suspiciously like the direct product state in Eq.\eqref{eq:direct-product}, but they are two different things: probability is superposed in $\rho$ while amplitude is superposed in $\psi.$ Mathematically, $\hat{\rho}$ is an operator in $V$ while $\psi$ is a state in $V_1 \oplus V_2.$ Moreover, entanglement, to some extent, reflects the cross-talk between states of different particles while the density operator only has diagonal terms. In particular, the phase relations are definitive in an entangled state, so an entangled state is pure and thus has zero entropy. 
+
+An entangled state is also intricately related to the density operator, illustrated in the example below: suppose we want to study a system $\{i\}$ weekly coupled to the environment $\{j\}$. The direct product state of the \textit{universe} is 
+\[
+    \ket{\psi} = \sum_{i,j}^{} \psi_{i,j} \ket{i} \ket{j}
+\]
+with a pure density operator $\ket{\psi}\bra{\psi},$ which is in no way known. The most we can do is to form the partial trace over the surrounding to give a reduced density matrix of the system 
+\[
+    \rho = \mathrm{Tr}_{j} [\ket{\psi}\bra{\psi}] = \sum_{i,i^\prime }^{} \rho_{i,i^\prime} \ket{i} \bra{i^\prime }. 
+\]
+This makes the system manifestly mixed and thus has a non-zero entropy. 
 \section{Atoms}
 The Hamiltonian for a neutral atom with atomic number $Z$ is 
 \[
