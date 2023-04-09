@@ -1,12 +1,9 @@
 # Typeset Notes
 This is a repository organising my typeset notes for maths and physics in the Natural Sciences Tripos at University of Cambridge.  The notes are best use as a short reference, since most derivation are skipped. I intend to use them during the intensive review period before the exam (so they are short compared to lecture handouts etc., but still longer than the "cheat sheets" that only contain formulae). As a result, they may not be suitable for people with no prior exposure to the course. There are some personal commentaries, though most of them are more like a ''guided tour'' of the course. 
 
-There are not a lot of notes currently (apparently, IA maths and physics are so easy that they don't deserve the efforts), but I aim to make typeset notes for most courses I take/audit from the coming term. Hopefully, this repository will get populated soon. Below are short introduction to the different notes. 
-
 I haven't proofread any of the notes (they're mostly just for my personal use), so they are certain to contain (a considerable number of) typos and mistakes. I would be incredibly grateful if you can just submit a pull request after spotting mistakes. 
 
 ## Mathematics 
-I learn about mathematics mostly from the natural sciences tripos, which treat it like a tool for science. For some topics that I find interesting, though, I will go to lectures in the mathematical tripos (mostly from DAMTP) and write notes. Since I have little incentive to remember the proof of theorems, I tend not to include them, other than cases where direct calculation can do the work. 
 
 ### Variational Principles (IA/IB Mathematical Tripos Easter 2022)
 The course talks about the Euler-Lagrange equation and its extension in the first half. In the second half, it introduces the Legendre transform and discusses its application in physics (thermodynamic and Hamiltonian mechanics). The second variation is briefly covered in the end. 
@@ -14,9 +11,7 @@ The course talks about the Euler-Lagrange equation and its extension in the firs
 My notes are mostly based on the notes I wrote in class, and to a lesser extent, the official notes from earilier versions of this course. 
 
 ### Complex Methods (IB Mathemtaical Tripos Lent 2022)
-The course is a standard one featuring complex variable functions and the application of residue calculus as well as various integral transform. The maths department offers another course covering complex analysis, but apparently I won't take it. 
-
-The notes, however, are mostly based on the book *Introduction to Complex Analysis* by Priestley and are quite brief. I haven't finished the parts on Cauchy's residue theorem and integral transforms and will be making further editions later in the year (maybe when I learn about it again in the lectures).
+The course is a standard one featuring complex variable functions and the application of residue calculus as well as various integral transform. The notes, however, are mostly based on the book *Introduction to Complex Analysis* by Priestley and are quite brief. I haven't finished the parts on Cauchy's residue theorem and integral transforms and will be making further editions later in the year (maybe when I learn about it again in the lectures).
 
 ### NST IB Mathematics Lent Notes (Lent 2023)
 Notes on Sturm-Liouville operators are added. These are brief are for revision only. 
@@ -34,4 +29,4 @@ The supplementary notes include detailed calculations and elaborations of the sk
 Partial notes about rigid body dynamics, Lagrangian mechanics, and fluid dynamics are added. Orbits will go shortly. The notes are mostly for revision, thus being quite brief.
 
 ### Application of Quantum Mechanics (II Mathematical Tripos, Lent 2023)
-Topics covered: Perturbation methods in scattering, variational methods, and partial notes on introduction to solid state physics.
+Topics covered: Perturbation methods in scattering, variational methods, and just starting solid state physics.
