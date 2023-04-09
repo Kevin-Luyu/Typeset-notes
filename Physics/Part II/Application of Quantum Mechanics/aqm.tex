@@ -1,0 +1,177 @@
+\documentclass{article}
+\usepackage[thmmarks, framed]{ntheorem} % ntheorem must come before amsmath, or the cross-reference will not be working
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{xcolor}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+%
+\usepackage{bm}
+\newcommand{\up}{\ket{\uparrow}} % spin up, needs the physics package 
+\newcommand{\dn}{\ket{\downarrow}} % spin down, needs the physics package 
+\newtheorem{theorem}{Theorem} 
+\newframedtheorem{frm-thm}{Theorem} %needed for framed theorems 
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-res}{Result}
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-def}{Definition}
+\theoremstyle{nonumberplain} 
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{Proof}
+\title{Application of Quantum Mechanics}
+\author{Yu Lu}
+\begin{document}
+\maketitle
+\section{Scattering}
+\subsection{Perturbation methods}
+Only a few quantum mechanical systems are exactly solvable, such as the free particle, the harmonic oscillator, and the hydrogen atom. The perturbation method allows us to solve for systems that differs from the analytic system only by a small amount. In this section, we are interested in small perturbation from the scattering particles, namely with a potential profile
+\[
+    V(\mathbf{r} ) = \lambda U(\mathbf{r}), \quad \lambda \ll 1,
+\]
+where $U(x)$ goes to zero at least as fast as $1 / x^2$ at infinity. The Schrodinger's equation becomes
+\[
+    (E - H_{\mathrm{free} }) \ket{\psi} = \lambda U \ket{\psi}
+\]
+with a formal solution 
+\[
+    \ket{\psi } = \ket{\psi_{\mathrm{free} }} + (E - H_{\mathrm{free} })^{-1} V \ket{\psi},
+\]
+where $\ket{\psi_{\mathrm{free} }}$ satisfies the free SE $ H_{\mathrm{free}}\ket{\psi_{\mathrm{free} }} = E\ket{\psi_{\mathrm{free} }}.$
+As a differential equation,
+\begin{equation}
+    \label{eq:SE-per}
+    \left(\nabla^{2} + k^{2} \right) \psi(\mathbf{r} ) 
+    = \frac{2 m \lambda }{\hbar ^{2} } U(\mathbf{r} ) \psi(\mathbf{r} ). 
+\end{equation}
+
+Normally, Eq.\eqref{eq:SE-per} can be solved by the Green's function method:
+\[
+    \left(\nabla^{2} + k^{2} \right) G_0(k;\mathbf{x}) = \frac{2m}{\hbar ^{2} }\delta^{(3)} (\mathbf{r} - \mathbf{r^\prime } ), 
+\]
+\[
+    \implies (-q ^{2}  + k^{2} )\tilde{G}(k, \mathbf{q} ) = \frac{2m}{\hbar^{2} }, 
+    \quad 
+    G_0 (k;x) = -\frac{2m}{\hbar ^{2} } \int \frac{\mathrm{d} ^3 q}{(2\pi )^3} \frac{e^{i \mathbf{q} \cdot \mathbf{x} }}{q ^{2} - k^{2} },
+\]
+where the translational invariance has been used to produce $G_0(k;\mathbf{r}, \mathbf{r^\prime } ) = G_0(k;\mathbf{x} = \mathbf{r} -\mathbf{r^\prime } ).$
+In this case, however, the Green's function integrates over the two singularities $q = \pm k.$ An ``$i \epsilon$ perturbation'' can be introduced to move the singularities away from the real axis, and the resulting integral can be evaluated in spherical polars with the aid of residue calculus as 
+\[
+    G_0^{+} (k;\mathbf{x} ) 
+    = \lim_{i \to 0} -\frac{2m}{\hbar ^{2} }\int \frac{\mathrm{d} ^3 q}{(2 \pi )^3} \frac{e^{i \mathbf{q} \cdot \mathbf{x} }}{q ^{2} - k^{2}  - i\epsilon }
+    \implies  
+    \boxed{
+    G_0^{+} (k;\mathbf{r} - \mathbf{r^\prime }  )
+    = -\frac{2m}{\hbar ^{2} }\frac{1}{4\pi } \frac{e^{ik \left\vert \mathbf{r} -\mathbf{r^\prime }  \right\vert }}{\left\vert \mathbf{r} -\mathbf{r^\prime }  \right\vert }.}
+\]
+
+This turns the Schrodinger's equation into an Lippmann-Schwinger equation
+\begin{equation}
+    \label{eq:ls}
+    \psi(k;\mathbf{r} ) = 
+    e^{i \mathbf{k} \cdot \mathbf{r} } -
+    \frac{2m \lambda }{\hbar ^{2} }\int \mathrm{d} ^3 r^\prime \frac{e^{ik \left\vert \mathbf{r} -\mathbf{r^\prime }  \right\vert }}{\left\vert \mathbf{r} -\mathbf{r^\prime }  \right\vert } U(\mathbf{r^\prime }) \psi(k;\mathbf{r^\prime } ), 
+\end{equation}
+comprised up of an incoming plane wave and an outgoing spherical wave from the origin. Looking at the asymptotic behaviour and comparing with the free solution gives the scattering amplitude
+\[
+    f(\theta, \phi)
+    = -\frac{2m \lambda}{\hbar ^{2}} \frac{1}{4 \pi} \left[ \int \mathrm{d}^3 r^\prime e^{-i k \mathbf{\hat{r} }\cdot \mathbf{r^\prime }  } V(\mathbf{r^\prime } )\psi(k;\mathbf{r^\prime } ). \right]
+\]
+
+The solution to Eq.\eqref{eq:ls} can be written as the Born series
+\[
+    \psi(\mathbf{r} ) = \sum\limits_{n=0}^{\infty} \phi_n(\mathbf{r} ) \lambda ^n
+\]
+with iterative solution
+\[
+    \phi_0(\mathbf{r} ) = e^{i \mathbf{k} \cdot \mathbf{r} }, \quad 
+    \phi_{n+1} = \int \mathrm{d}^3 r^\prime G_0^{+}(k;\mathbf{r} -\mathbf{r^\prime } ) V(\mathbf{r^\prime } ) \phi_n(\mathbf{r^\prime } ). 
+\]
+Evaluated with $\phi_0,$ the first-order scattering amplitude is 
+\[
+    f_1 (\theta ,\phi ) = -\frac{m \lambda }{2\pi \hbar ^{2} }\tilde{U}(\mathbf{q} ),
+\]
+which is related to simply the Fourier transform of the potential. 
+\section{Variational Methods}
+\subsection{The theory}
+When the perturbation is not small, we can resort to the variational approximation for a system with non-degenerative ground state $E_0 < E_1 \leq E_2 \leq \ldots.$ Assuming the system has a set of orthonormal eigenbasis $\{\phi_n\},$ the Rayleigh-Ritz quotient
+\[
+    \boxed{
+    R[\psi] \equiv
+    \frac{\ev{\hat{H} }{\psi}}{\braket{\psi}{\psi}}
+    \geq  E_0, }
+\]
+with equality iff $\psi = \phi_0.$ The variational method is simply taking a reasonable parametrised trial wavefunction $\psi_\alpha (\mathbf{x}; \alpha)$ and minimise the Rayleigh-Ritz quotient in the parameter space. This is usually done by letting 
+\[
+    \frac{\mathrm{d}R[\psi_\alpha ]}{\mathrm{d}\alpha } =0,
+\]
+and normalisation is taken care of by the denominator. 
+
+Apparently, this is not very systematic and the precision relies solely on the trial wavefunction. Thus, care needs to be taken in constructing the trial wavefunction, considering symmetry, nodes, asymptotic forms, etc. The magic of the variational approximation is that the error in the estimated ground state energy is second order for a first order error in the wavefunction. Mathematically speaking, if \(
+    \left\vert \ket{\psi} - \ket{\phi_0} \right\vert < \epsilon
+\) where $0 < \epsilon  \ll 1,$ then $R[\psi] - E_0 = \mathcal{\MakeUppercase{O}} (\epsilon ^{2} ). $
+
+A somewhat systematic approach could be developed by letting the trial wavefunction be a complete Fourier series and then determine the Fourier coefficient from the variational method. We won't go into the details here. 
+
+\subsection{Seeking the bound state}
+For example, in calculating the ground state energy of helium, we could either account for the interaction between electrons by the perturbation method or re-parametrise the ground state with no interaction by introducing the effective nuclear charge (i.e. screening). One particular use of the variational approximation is to seek the existence of a bound state, namely any state with $E<0.$ If the approximate method gives an $E_{\mathrm{approx} } <0,$ there must be a bound state with lower energy! 
+
+\begin{frm-thm}{Virial Theorem}
+
+    The \textit{\textbf{ground state}} $\psi_0$ of a homogeneous ventral potential $V(\mathbf{x}) = Ar^n$ in any dimension has kinetic and potential energy
+    \[
+        2 \expval{T}_{\psi_0} = n \expval{V}_{\psi_0}
+    \]
+    if it is \textit{\textbf{bounded}}. 
+\end{frm-thm}
+
+The above theorem can be proved by re-scaling the (assumed) ground state and comparing the limiting cases from the variational methods. Since the kinetic energy is by construction positive definite, the Virial theorem states that bound ceases to exist for $n \leq  -3,$ which is counterintuitive. 
+
+Bound states usually exist for potential wells, but may not exist for attracting ``scattering potentials'' that are asymptotically free (repulsive potentials definitely have no bound states). The variational approximation gives us a method to examine existence of bound states in this case. For homogeneous (power function like) attractive potentials, the virial theorem helps us determine whether bound states exist. 
+
+In 1D, there is another result, following from a Gaussian trial wavefunction. If $V(x) = 0$ for all $\left\vert x \right\vert > L,$ then a bound state exists if 
+\[
+    \int_{-\infty}^{\infty} V(x) \,\mathrm{d}x < 0,
+\]
+but the converse is NOT true. 
+
+Something can be said about the first excited state as well if we know the ground state \textit{exactly}: if the trial wavefunction $\psi_\alpha$ is orthogonal to the true ground state, 
+\[
+    \braket{\psi_\alpha}{\psi_0} = 0 \forall \alpha,
+\]
+then minimising the Rayleigh-Ritz quotient gives the approximate first excited states. 
+
+This is pretty useless, since if we know the state analytically, why bother using the variational method? However, when certain symmetries are present (e.g. parity), we can ensure orthogonality by going using a different quantum number. 
+
+\section{Introduction to solid state physics}
+In 1D, a lattice has translational invariance $V(x) = V(x+a),$ or equivalently $[H,T] = 0,$ where $\hat{T}_a: x\to x+a$ is the translation operator. A solid can be thought of as a lattice of cations with electrons hopping around. The electrons are not free, since the potential are non-zero at infinity; nor are they bounded, since they can hop around neighbouring atoms. Therefore, the energy are restricted to allowed bands separated by forbidden regions. The energy is continuous within the band and discrete between them. 
+
+\subsection{Bloch's theorem}
+Momentum can be regarded as the generator of translation, since 
+\[
+    \hat{T}_l = e^{i l \hat{p} /\hbar }.
+\]
+A free particle has continuous translational invariance and therefore $[H, T] = [H,p] = 0.$ Therefore, momentum eigenstates are also energy eigenstates, so we can label the energy eigenstates by $k.$ For discrete translational symmetry $T_a,$ though, the momentum operator is not compatible with the Hamiltonian. However, Bloch's theorem tells us that there is still a ``crystal wavevector'' associated and can be used to label the state. Furthermore, energy eigenstates in the periodic potential only differ from a plane wave by a periodic function. 
+
+\begin{frm-thm}{Bloch's theorem in 1D}
+
+    If the lattice has discrete translational symmetry $V(x) = V(x+a),$  then the wavefunction can be written as 
+    \[
+        \psi(x) = e^{i k x} u_k(x)
+    \]
+    for some $k \in \mathbb{R} $ such that $u_k(x+a) = u_k(x) \quad \forall x \in \mathbb{R}.$
+\end{frm-thm}
+The wave-vector $k$ is related to the \textit{\textbf{crystal momentum}} and does not equal the particle momentum $\hat{p} = -i \hbar \partial_x .$ This theorem follows from the unitarity of the translation operator $T_a. $ From this, we can write the action translation operator on its eigenvector as multiplication of a pure phase:
+\[
+    T_a \psi_k(x) = \psi(x+a) = e^{i k a} \psi_k(x),
+\]
+where $a$ is the lattice vector. 
+\end{document}
+
