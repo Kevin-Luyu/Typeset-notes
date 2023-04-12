@@ -162,7 +162,7 @@ A free particle has continuous translational invariance and therefore $[H, T] = 
 
 \begin{frm-thm}{Bloch's theorem in 1D}
 
-    If the lattice has discrete translational symmetry $V(x) = V(x+a),$  then the wavefunction can be written as 
+    If the lattice has discrete translational symmetry $V(x) = V(x+a),$  then there \textbf{exists} a basis of energy eigenstate $\psi(x)$ that can be written as 
     \[
         \psi(x) = e^{i k x} u_k(x)
     \]
@@ -172,6 +172,60 @@ The wave-vector $k$ is related to the \textit{\textbf{crystal momentum}} and doe
 \[
     T_a \psi_k(x) = \psi(x+a) = e^{i k a} \psi_k(x),
 \]
-where $a$ is the lattice vector. 
+where $a$ is the lattice vector. It is then to define $u_k(x) = e^{-ika} \psi(x)$ that manifestly obeys Bloch's theorem. Since $[H, T_a] = 0,$ then it is possible to pick a basis where the the Bloch states $\psi(x) = e^{i k a} u_k(x)$ are also the energy eigenstates. 
+
+\subsection{The Floquet Matrix}
+Bloch's theorem proves the existence of a basis where the Bloch states are also energy eigenstates. However, due to degeneracy in spectrum (does this argument hold?), the energy eigenstates \textit{can} $\{\psi_1, \psi_2\}$ in general different from eigenstates $\{\psi_\pm\}$ of the translation operator. However, they are not linearly independent states and can be related by 
+\[
+    \psi_\pm(x) = A_\pm \psi_1(x) + B_\pm \psi_2(x) = \mathbf{V}_\pm^{\mathrm{T}} \boldsymbol{\mathbf{\psi}}  , \quad 
+    \mathbf{V}_{\pm} = \begin{pmatrix} A_\pm \\ B_\pm \end{pmatrix} \quad 
+    \boldsymbol{\mathbf{\psi}} = \begin{pmatrix} \psi_1(x) \\ \psi_2(x) \end{pmatrix}.
+\]
+By translational invariance of the setting, $\psi_1(x+1)$ and $\psi_2(x+2)$ are also solutions to the Schrodinger's equation, so they can also be represented as linear combination of energy eigenstates:
+\[\boxed{
+    \boldsymbol{\mathbf{\psi}}(x+a)
+     = F(E) 
+     \boldsymbol{\mathbf{\psi}}(x), }
+\]
+where $F(E)$ independent of $x$ is the Floquet matrix satisfying $\boxed{\mathrm{det}(F) = 1 }$ (shown by constant Wronskian of SE) and $\mathrm{Tr}(F) \in \mathbb{R}. $ In other words, the floquet matrix translate the energy eigenstate. Like the S-matrix in scattering, the Floquet matrix contains everything we can know about the band structure. 
+
+Now we can translate a Bloch's state using either the eigenvalue of translation operator $\psi_{\pm} (x+a) = Q_{\pm} \psi(\pm)$ or by decomposing it into the basis of ${\psi_1, \psi_2}$ and applying the Floquet matrix. Comparing the results gives
+\[
+    F^{\top} \mathbf{V}_{\pm} = Q_{\pm} \mathbf{V}_{\pm}, 
+\] 
+so the eigenvalues $Q_{\pm}$ of $T_a$ are also eigenstates of $F,$ satisfying
+\[
+    \boxed{Q^2 - \mathrm{Tr}(F) Q + 1 =0 } \quad 
+    \implies 
+    Q_\pm = \frac{1}{2} (\mathrm{Tr}(F) \pm \sqrt{\mathrm{Tr}(F)^2 -4} ).  
+\]
+This gives two possibilities:
+\begin{itemize}
+    \item \(\mathrm{Tr}(F)^2 \leq  4\) \\
+    \( Q_{+} = Q_{-}^{\star} \) from the quadratic equation, so $Q_{\pm} = e^{\pm i k a},$ which is consistent with Bloch's theorem, giving $\psi_{\pm} (x+a) = e^{\pm ik a} \psi_{\pm} (x). $ This represents the bands of \textit{\textbf{allowed energy}} .  
+    \item  \(\mathrm{Tr}(F)^2 > 4\) \\
+    \(Q_{+} = Q_{-}^{-1},\) so one of the eigenvalues have modulus larger than 1. Since $\psi_{\pm}(x+a) = e^{i k a} \psi_{\pm}(x),$ the wavefunction diverges at infinity, thus are not normalisable.  
+\end{itemize}
+
+For example, in the Kronig-Penny potential 
+\[
+    V(x) = V_0 \sum_{n=-\infty }^{\infty} \delta(x - n a), 
+\]
+it can be shown that when $V_0 \to \infty,$ particles are essentially trapped between delta functions and the spectrum becomes discrete bound states; while when $V_0 \to 0,$ particles are essentially free in a single continuum. 
+
+\subsection{Dispersion relation}
+The dispersion relation $E(k)$ characterises the potential. For example, in the Kronig-Penny model above, the energy $E$ and crystal wave-number $k$ are related as
+\[
+    E = \frac{\hbar ^{2} y^{2} }{2ma^{2} }, \quad 
+    f(y) = \frac{1}{2}\mathrm{Tr}(F) = \cos (k a).  
+\]
+Apparently, $E$ is a periodic function of $k,$ giving rise to the different Brillouin zones(BZ)
+\begin{itemize}
+    \item 1st BZ: \(k \in [-\pi/a, \pi /a]\) 
+    \item nth BZ: 
+    \[k \in \left[-\frac{n \pi }{a}, \frac{(1-n) \pi }{a}\right] \bigcup \left[ \frac{(n-1)\pi}{a}, \frac{n \pi }{a}\right]\]
+\end{itemize}
+
+We could either use the extended zone scheme where different branches of $E$ are plotted on different sections of the real axis (with discontinuities corresponding to band gaps), or we can adopt the reduced zone scheme to plot everything in the first BZ. 
 \end{document}
 

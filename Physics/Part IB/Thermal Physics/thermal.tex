@@ -9,6 +9,8 @@
 \usepackage{mathtools}
 \usepackage{physics}
 \usepackage{xcolor}
+\usepackage{lmodern} % in conjugate with the fontenc package to prevent pixelisation of output
+\usepackage[T1]{fontenc} % to produce the ``dbar'' in thermo
 % needed for framed theorems
 \usepackage{framed} % or, "mdframed"
 %
@@ -92,6 +94,166 @@ The partial differential of a thermodynamic potential with respect to one thermo
     \qquad
     \left( \frac{\partial G}{\partial p} \right)_{T} = V.
 \]
+\section{Analytical thermodynamics}
+Unless specified otherwise, it is assumed that only ``$pV$-work'' is done with fixed particle number, so the master equation is 
+\[
+    dU = T \mathrm{d} S - p \mathrm{d} V. 
+\]
+\subsection{Thermodynamic potentials}
+The internal energy $U(S,T)$ quantifies energy stored in the system that can be converted to work or heat under certain conditions, but its change is expressed in terms of $S$ and $V$ which are not always convenient. Often, we want to study the heat flow or work done in terms of $p$ and $T$ as well. Moreover, the natural variables of $U$ are $S$ and $T$, so we only know complete information about the system if $U(S,T)$ is given (the other two quantities can be worked out by differentiation). Often, however, systems are not expressed in $S$ and $T$, motivating thermodynamic potentials with different natural variables. 
+
+Through Legendre transform, \textit{\textbf{enthalpy}} , \textit{\textbf{Helmholtz free energy}}, and \textit{\textbf{Gibbs free energy}} can be defined as (the natural variables are included in the arguments)
+
+\[
+    \boxed{
+    H(p,S) = U + p V, \qquad \mathrm{d} H = T \mathrm{d} S + V \mathrm{d} p ;}
+\]
+\[
+    \boxed{
+    F(V,T) = U - TS, \qquad \mathrm{d} F = - S \mathrm{d} T - p \mathrm{d} V;}
+\]
+\[
+    \boxed{
+    G(p,T) = H - TS = F + p V = U + pV - TS, \qquad \mathrm{d} G = -S \mathrm{d} T + V \mathrm{d} p.}
+\]
+
+The $+pV$ terms in Legendre transform can be interpreted as excluding $pV$-work while the $-TS$ terms can be interpreted as reflecting the maximum work extractable (see section \ref{subsec:availability}). Mathematically, thermodynamic variables can be extracted by differentiating these potentials. Moreover, we could arrive at \textit{\textbf{Maxwell relations}} using commuting partial derivatives, such as 
+\[
+    \frac{\partial ^{2} U}{\partial S \partial V}  = 
+    \left( \frac{\partial T}{\partial V} \right)_{S} = 
+    -\left( \frac{\partial p}{\partial S} \right)_{V} 
+\] 
+
+Sometimes we are interested in flow processes, in which gas with $(p_1, V_1)$ are put into some devices and gas with $(p_2, V_2)$ are ejected. In this case, the first law can be expressed in terms of the enthalpy
+\[
+    \boxed{H_1 + Q + W = H_2,}
+\]
+and enthalpy is conserved if no heat or work is given to the system. 
+
+Since $\dj q = T \mathrm{d} S$ for a reversible process, $\mathrm{d} U$ and $\mathrm{d} H$ quantifies the heat exchange under constant volume and pressure. They are conserved for adiabatic processes ($\mathrm{d} S = 0$) under constant volume or constant pressure. 
+The heat capacities are easily measurable, and they are defined as
+\[
+    \boxed{C_x = \left( \frac{\mathrm{\dj}q}{\mathrm{d}T} \right)_x 
+    = T \left( \frac{\partial S}{\partial T} \right)_{x}, 
+    } 
+\]
+where $x$ is the quantity held constant. Under constant pressure volume or pressure, these can be related to $U$ and $H$ as
+\[
+    C_V = \left( \frac{\partial U}{\partial T} \right)_{V},  \quad 
+    C_p = \left( \frac{\partial H}{\partial T} \right)_{p}.
+\]
+However, since $T$ are not natural coordinates of $U$ and $H$, these are more useful experimentally. 
+
+In situations with varying particle numbers (such as phase transition), the chemical potential
+\[
+    \boxed{\mu = \frac{G}{N}}
+\]
+is often useful. It is related to the total differential of $G$ as 
+\[
+    \mathrm{d} G = V\mathrm{d} p - S \mathrm{d} T + \mu \mathrm{d} N
+     = \mu \mathrm{d} N + N \mathrm{d} \mu. 
+\]
+Consider a two-phase (or multiple-phase in general) system. At equilibrium, the chemical potential of two phases must be equal ($\mathrm{d} G = 0$), which can be used to solve for the pressure distribution of the isothermal atmosphere (or contact potential) after including the gravitational potential energy in $U.$ The same idea is useful in studying phase transition. 
+\subsection{Free energy and availability}
+\label{subsec:availability}
+By definition, a surrounding is large enough so that its intensive variables $p_0$ and $T_0$ does not change in equilibrium. Then the second law requires
+\(
+    T_0 \mathrm{d} S \geq  \mathrm{\dj} q,
+\)
+which can be combined with the first law to yield
+\[
+    \mathrm{\dj} W_{\mathrm{non-pV} } = \mathrm{\dj} W + p_0 \mathrm{d} V
+    \geq \mathrm{d} A,  
+\]
+where 
+\[
+    \boxed{A = U + p_0 V - T_0 S,\qquad \mathrm{d}A = \mathrm{d} U + p_{0} \mathrm{d} V - T_0  \mathrm{d} S ,} 
+\]
+is the availability of the system. Note that this is quite similar to the definition of $G,$ just that $T_0$ and $p_0$ are properties of the surrounding, not the system itself. This leads to differences in their differentials.
+
+If we want to extract work from the system, then $\mathrm{\dj}w $ is negative and $\mathrm{d} A$ gives the maximum amount of work extractable from the system. Similarly, if the system is mechanically isolated with $\mathrm{\dj} w_{\mathrm{non-pV} } = 0, $ we must have
+\[
+    \mathrm{d}A \leq  0,
+\]
+Therefore, an isolated system always tries to minimise $A.$ Under different constraints, $\mathrm{d}A $ is equivalent to other thermodynamic variables that we try to extremise. 
+\begin{itemize}
+    \item Isolated with fixed volume ($\mathrm{d} U = \mathrm{d} V = 0$) \\
+    \[
+        \mathrm{d} A = -T_0 \mathrm{d} S \implies \underline{\mathrm{d} S \geq 0;} 
+    \]
+    \item Fixed volume at constant temperature ($\mathrm{d} V = \mathrm{d} T = 0$) \\
+    \[
+        \mathrm{d} A = \mathrm{d} F \implies \underline{\mathrm{d} F \leq  0;}
+    \]
+    \item Constant pressure and temperature ($\mathrm{d} p = \mathrm{d} T = 0$) \\ 
+    \[
+        \mathrm{d} A = \mathrm{d} G \implies  \underline{\mathrm{d} G \leq  0.}
+    \]
+\end{itemize} 
+
+Why do we define $\mathrm{d} F = \mathrm{d} U - T_0 \mathrm{d} S - S \mathrm{d} T$ in p.p.178 of Blundell, not the normal $\mathrm{d} F = \mathrm{d} U - T \mathrm{d} S - S \mathrm{d} T$? 
+
+\subsection{Examples}
+For an ideal gas,
+\[
+    S(T,V) = n (C_{V,m } \ln T + R \ln (V/n) + S_0), 
+\]
+The isothermal and adiabatic compressibilities are related by 
+\[
+    \frac{\kappa _{T} }{\kappa _{S} } = 
+    \frac{\left( \frac{\partial V}{\partial p} \right)_{T} }{\left( \frac{\partial V}{\partial p} \right)_{S} }
+    =\frac{C_p}{C_V} = \gamma.
+\]
+The pressure distribution of an isothermal atmosphere is 
+\[
+    p(h) = p_0 \exp \left(-\frac{m_r g h}{RT}\right),
+\]
+which can be obtained from setting the chemical potential $\mu(h)$ to be uniform.
+\subsection{Thermodynamics of other systems}
+The ideas and techniques of thermodynamics can be used to study other systems with a large number of particles, such as rubber molecules, liquid molecules, or magnetic dipoles. In these systems, instead of (only) having the $-p \mathrm{d} V$ work, other forms of work 
+\[
+    \mathrm{d} W = X \mathrm{d} x,
+\]
+may be of interest, such as $\mathrm{\dj} W = - \mathbf{m} \cdot \mathrm{d} \mathbf{B}$ for magnets, $\mathrm{\dj} W = f \mathrm{d} L$ for an elastic rod, or $\mathrm{\dj} W = \gamma \mathrm{d} A$ for a liquid.  
+We can also introduce the equivalence of free energy or enthalpy to calculate ``useful work.''
+
+\subsubsection{Elastic rod}
+For an elastic rod, the first law becomes
+\[
+    \mathrm{d} U = T \mathrm{d} S + f \mathrm{d} L. 
+\]
+For example, the entropy of the change as length at a constant tmeperature as
+\[
+    \left( \frac{\partial S}{\partial L} \right)_{T} = A E_T \alpha_f = \left( \frac{\partial f}{\partial L} \right)_{T} \left( \frac{\partial L}{\partial T} \right)_{f}. 
+\]
+This is positive for metallic bars, as pulling the bar distorts the crystal. Notably, for a rubber band, the expansivity $\alpha_f$ is negative, as pulling actually decreases the entropy by aligning the robber molecules. This also means that a rubber band heats up in an adiabatic expansion. 
+
+\subsubsection{Surface tension}
+For a liquid, the intermolecular attraction is isotropic in the bulk but points towards the inside of liquid near the surface. This gives rise to surface tension, making 
+\[
+    \mathrm{\dj} W = \gamma \mathrm{d} A. 
+\]
+At equilibrium, the pressure difference supports the surface tension (the principle of virtual work):
+\[
+    \mathrm{d} W = p \mathrm{d} V = \gamma \mathrm{d} A,
+    \] 
+giving $p - p_{\mathrm{atm} } = 2\gamma /r$ for a droplet. Expansion of the surface area requires injection of heat and would increase the entropy.
+
+\subsubsection{Paramagnetism}
+A magnet consists many magnetic spins, pointing up or down. Magnetic susceptability of a sample decreases as temperature increases due to Curies' law, giving 
+\[
+    \left( \frac{\partial \chi }{\partial T} \right)_{B} < 0
+\]
+and consequently
+\[
+    \left( \frac{\partial S}{\partial B} \right)_{T} < 0, \qquad
+    \left( \frac{\partial T}{\partial B} \right)_{S} > 0. 
+\]
+Therefore, isothermal magnetisation emits heat while adiabatic magnetisation heats the magnet up. Microscopically, this is because an external magnetic field aligns the spins, therefore decreasing the entropy. During adiabatic demagnetisation, entropy of the spins increases due to less alignment. However, since the total change of entropy is $0,$ the entropy of phonon (lattice vibration) must decrease, bringing the temperature down.
+
+The combination of isothermal magnetisation and adiabatic demagnetisation can cool a system down to millikelvins. The system is first magnetised in a heat bath of liquid helium to about $4$ Kelvin, after which it is isolated and the magnetic field is brought down. 
+
+Magnetisation of sample brings down entropy (the spins line up with $B$.) Adiabatic demagnetisation works because decreasing field increases entropy due to spins, but adiabatic => entropy of phonons (lattice vibration) decreases, cooling the sample. 
 \section{Phase Transition}
 \subsection{Real gases}
 Ideality of gas assumes that the gas molecules have no volumes and no intermolecular interactions. In reality, the long-range forces (van de Waals force, for example) drag the molecules together and the finite size of molecules reduces the available space for them to jiggle. We thus want to modify the ideal gas law $p_i V_{mi} = R T,$ where the subscript $m$ denotes molar quantity and $i$ denotes ideality. There are different phenomenological models to express $p_i$ and $V_{mi}$ using the measurable $p$ and $V_m$ (note that we assume them to be equal in the ideal gas law). 
@@ -224,11 +386,66 @@ In practice, we can liquefy different gas in a sequence, starting with the speci
 \] along the inversion temperature line with $\mu_{\mathrm{JK} } = 0,$ echoing the line that maximum efficiency is gained only in a reversible process. 
 
 \subsection{Phase Transition}
-Heat capacity and latent heat
-stable phase minimises Gibbs free energy 
-near the triple point, the L of sublimation of L of fusion + L of vaporization 
-Clausius-Clapeyron for all three transitions (approximations made). ideal phase diagram
-Integration: assuming constant L or not
-the gibbs phase rule and phase transition classification
+The continuous change of entropy as temperature increases is characterised by the heat capacity, but often the entropy changes discontinuously at a phase boundary, giving rise to latent heat 
+\[
+    \boxed{
+    L = T_C \Delta S,}
+\]
+where $T_C$ is the temperature of phase transition. The change in entropy from liquid to vapour can be estimated by the change in density of states 
+\[
+    \frac{\Omega_{\mathrm{vapour} }}{\Omega_{\mathrm{liquid} }} = \frac{\rho_{\mathrm{liquid} }}{\rho_{\mathrm{liquid} }}^{N_A}, 
+\]
+giving a rough estimate 
+\[
+    L \approx 10 R T_C. 
+\]
 
+In equilibrium under constant $p$ and $T$, a phase minimises its Gibbs free energy, as discussed in \ref{subsec:availability}. Therefore, if two phases are in equilibrium, $\mathrm{d} G = 0$ for an infinitesimal change from phase 1 to phase 2, giving $\mu_1 = \mu_2.$ This holds for any $p$ and $T$, giving the \textit{\textbf{Clausius-Clapeyron equation}} 
+\[
+    \mathrm{d} \mu_1 = \mathrm{d} \mu_2, \quad 
+    \implies  
+    \boxed{
+        \frac{\mathrm{d}p}{\mathrm{d}T} = \frac{\Delta s}{\Delta v} = \frac{l}{T \Delta v},  
+    }
+\]
+where the lowercase letters represent quantities per particle. 
+\subsubsection{Integration of Clausius-Clapeyron equation}
+The Clausius-Clapeyron equation can be integrated under different assumptions to give phase boundaries of different transitions. 
+
+For solid to gas or liquid to gas transitions, we often assume 
+\begin{itemize}
+    \item $V_{\mathrm{gas} } \gg  V_{\mathrm{liquid} } \approx V_{\mathrm{solid} } \implies \Delta V \approx V_{\mathrm{gas} }$
+    \item $p \ll p_{\mathrm{critical}}$ so that the pressure of gas can be modelled by the ideal gas equation $p v = R T;$
+    \item (weaker) $L$ is constant along the boundary.
+\end{itemize}
+These gives
+\[
+    \frac{\mathrm{d}p}{\mathrm{d}T} = \frac{L p}{R T^{2}}
+    \implies  
+    \underline{p(T) = p_0 \exp \left( -\frac{L}{RT}\right).} 
+\]
+
+For solid to liquid transitions, the ideal gas law is no longer applicable. Instead, we just assume that
+\begin{itemize}
+    \item $\Delta V$ is constant along the boundary, which can be calculated by the difference in densities;
+    \item (weaker) $L$ is constant along the boundary.
+\end{itemize}
+
+The assumption of constant $L$ can be relaxed in the liquid-gas and solid-gas transition, as its temperature dependence can be calculated explicitly by noting 
+\[
+    \frac{\mathrm{d}\Delta S(p,T)}{\mathrm{d}T} = \frac{\mathrm{d}}{\mathrm{d}T} \left(\frac{L}{T} \right) = \frac{1}{T}\frac{\mathrm{d}L}{\mathrm{d}T} - \frac{L}{T^2},
+\]
+\[
+    \implies  
+    \underline{L = L_0 + (C_{pg} - C_{pL}) T}. 
+\]
+
+\subsubsection{Phase Diagram}
+See Blundell and Blundell p.p.327 for an ideal phase diagram. Near the triple point, we should expect 
+\[
+    L_{sg} = L_{sl} + L_{lg}. 
+\]
+The volume change from solid to liquid is usually small, giving the steep boundary between solid and liquid. This slope is usually positive, since liquid is less dense than solid, with the notable exception of water due to hydrogen bonding. The phase boundary between solid and gas and liquid and gas takes the same functional form, with a change in the derivative at the triple point due to the change in $L.$
+
+The phase change from solid to liquid is inherently discontinuous and involve breakage of symmetry. This does not need to be the case for a liquid to gas transition or other transitions. 
 \end{document}
