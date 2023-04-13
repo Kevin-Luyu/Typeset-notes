@@ -94,13 +94,29 @@ The partial differential of a thermodynamic potential with respect to one thermo
     \qquad
     \left( \frac{\partial G}{\partial p} \right)_{T} = V.
 \]
+
+\section{The second law}
+Microscopically, everything is reversible due to thermal fluctiation. Macroscopically, things are irreversible if we cannot restore the motion of every microscopic particle (like in a lens). However, assuming that we move the system infinitesimally at a time, macroscopic reversibility is possible (the fluctiation will bring it towards equilibrium). 
+
+Kelvin: No process is possible whose only effect is the complete conversion of heat to work. 
+Clausius: No process is possible whose only effect is to transfer heat from a colder to a hotter body. 
+
+Reversibility of a process, in the absence of external forces, is determined by states of the system only: motivating a state variable. 
 \section{Analytical thermodynamics}
+In thermodynamics, we distinguish between a system and a surrounding. The surrounding is so large such that its intensive variables ($p,$ $T,$ and $\mu $) are regarded as constants. The boundaries between the system and the surrounding can be different nature 
+\begin{itemize}
+    \item open system: particle and energy flow $\mathrm{d} N,$ $\mathrm{\dj}q,$ and $\mathrm{\dj}w $ allowed
+    \item closed system: only energy flow $\mathrm{\dj}q $ and $\mathrm{\dj}w $ allowed 
+    \item isolated system: adiabatic $\mathrm{\dj} q = 0$ and $\mathrm{\dj}w  =0,$ but $\mathrm{d} S = 0$ only for reversible changes (think of Joules expansion as a counterexample).
+\end{itemize}
+The system is said to be in \textit{\textbf{thermal equilibrium}} once the heat flow is stopped. The system and the surrounding together forms an \textit{isolated} system, so any drop of energy in the system is matched by the same amount of increase in the surrounding. The only exception is the entropy, which stays the same or increases for the whole universe. Every change in the surrounding, therefore, can be expressed with only \textit{system variables.}
+
 Unless specified otherwise, it is assumed that only ``$pV$-work'' is done with fixed particle number, so the master equation is 
 \[
     dU = T \mathrm{d} S - p \mathrm{d} V. 
 \]
 \subsection{Thermodynamic potentials}
-The internal energy $U(S,T)$ quantifies energy stored in the system that can be converted to work or heat under certain conditions, but its change is expressed in terms of $S$ and $V$ which are not always convenient. Often, we want to study the heat flow or work done in terms of $p$ and $T$ as well. Moreover, the natural variables of $U$ are $S$ and $T$, so we only know complete information about the system if $U(S,T)$ is given (the other two quantities can be worked out by differentiation). Often, however, systems are not expressed in $S$ and $T$, motivating thermodynamic potentials with different natural variables. 
+The internal energy $U(S,T)$ quantifies energy stored in the system that can be converted to work or heat under certain conditions, but its change is expressed in terms of $S$ and $V$ which are not always convenient. Of course, $U$ can encapsulate other forms of energy, such as CoM kinetic energy and gravitational potential energy, so long as they are state functions. Often, we want to study the heat flow or work done in terms of $p$ and $T$ as well. Moreover, the natural variables of $U$ are $S$ and $T$, so we only know complete information about the system if $U(S,T)$ is given (the other two quantities can be worked out by differentiation). Often, however, systems are not expressed in $S$ and $T$, motivating thermodynamic potentials with different natural variables. 
 
 Through Legendre transform, \textit{\textbf{enthalpy}} , \textit{\textbf{Helmholtz free energy}}, and \textit{\textbf{Gibbs free energy}} can be defined as (the natural variables are included in the arguments)
 
@@ -142,7 +158,7 @@ where $x$ is the quantity held constant. Under constant pressure volume or press
     C_V = \left( \frac{\partial U}{\partial T} \right)_{V},  \quad 
     C_p = \left( \frac{\partial H}{\partial T} \right)_{p}.
 \]
-However, since $T$ are not natural coordinates of $U$ and $H$, these are more useful experimentally. 
+For an isentropic change, $dU = \mathrm{\dj} w,$ and $U$ truly behaves like an energy. However, since $T$ are not natural coordinates of $U$ and $H$, these are more useful experimentally. 
 
 In situations with varying particle numbers (such as phase transition), the chemical potential
 \[
@@ -171,11 +187,13 @@ where
 \]
 is the availability of the system. Note that this is quite similar to the definition of $G,$ just that $T_0$ and $p_0$ are properties of the surrounding, not the system itself. This leads to differences in their differentials.
 
-If we want to extract work from the system, then $\mathrm{\dj}w $ is negative and $\mathrm{d} A$ gives the maximum amount of work extractable from the system. Similarly, if the system is mechanically isolated with $\mathrm{\dj} w_{\mathrm{non-pV} } = 0, $ we must have
+If we want to extract work from the system, then $\mathrm{\dj}w $ is negative and $\mathrm{d} A$ gives the maximum amount of work extractable from the system. Under constant temperature and volume, for example, notionally the maximum work that can be harnessed is the drop in potential energy $\Delta U$(consider a mass dropping from a mountain). If this process has intrinsic entropy change (like in a electrochemical reaction), we could allow heat flow from the surrounding and convert it to work till the point that the entropy change of the universe is zero and the process becomes reversible. The maximum work extractable is then given by the drop in $F.$
+
+Similarly, if the system is mechanically isolated with $\mathrm{\dj} w_{\mathrm{non-pV} } = 0, $ we must have
 \[
     \mathrm{d}A \leq  0,
 \]
-Therefore, an isolated system always tries to minimise $A.$ Under different constraints, $\mathrm{d}A $ is equivalent to other thermodynamic variables that we try to extremise. 
+Therefore, an isolated system always tries to minimise $A.$ Irreversibility arises during this process, but again this can be harnessed and make the whole process reversible (In a reversible evaporation process ($T$ constant), for example, $\Delta G = 0$, and the maximum work done (including $pV$ work) is $-\Delta F.$) Under different constraints, $\mathrm{d}A $ is equivalent to other thermodynamic variables that we try to extremise. 
 \begin{itemize}
     \item Isolated with fixed volume ($\mathrm{d} U = \mathrm{d} V = 0$) \\
     \[
@@ -191,6 +209,16 @@ Therefore, an isolated system always tries to minimise $A.$ Under different cons
     \]
 \end{itemize} 
 
+Under constant $T,$ $-\Delta F$ gives the maximum work done by the system, including any $pV$ work in a reversible process. If no work is done and $V$ is a constant, then the process is irreversible and 
+\[
+    \mathrm{d} S_{\mathrm{tot} } = -\frac{\mathrm{d} F}{T}.
+\]
+Under constant $T$ and $p,$ $-\mathrm{d} G$ gives the maximum non-$pV$ work done by the system in a reversible process. If no non-$pV$ work is done, the process is irreversible and 
+\[
+    \mathrm{d} S_{\mathrm{tot} } = -\frac{\mathrm{d} G}{T}.
+\]
+Furthermore, if heat flow is allowed in the flow process, then $G_1 = G_2$ when no work is done on the system under constant temperature. 
+
 Why do we define $\mathrm{d} F = \mathrm{d} U - T_0 \mathrm{d} S - S \mathrm{d} T$ in p.p.178 of Blundell, not the normal $\mathrm{d} F = \mathrm{d} U - T \mathrm{d} S - S \mathrm{d} T$? 
 
 \subsection{Examples}
@@ -203,6 +231,10 @@ The isothermal and adiabatic compressibilities are related by
     \frac{\kappa _{T} }{\kappa _{S} } = 
     \frac{\left( \frac{\partial V}{\partial p} \right)_{T} }{\left( \frac{\partial V}{\partial p} \right)_{S} }
     =\frac{C_p}{C_V} = \gamma.
+\]
+The constant pressure and constant volume heat capacities are related by
+\[
+    C_p - C_V = T \left( \frac{\partial p}{\partial T} \right)_{V} \left( \frac{\partial V}{\partial T} \right)_{p}.
 \]
 The pressure distribution of an isothermal atmosphere is 
 \[
@@ -445,7 +477,7 @@ See Blundell and Blundell p.p.327 for an ideal phase diagram. Near the triple po
 \[
     L_{sg} = L_{sl} + L_{lg}. 
 \]
-The volume change from solid to liquid is usually small, giving the steep boundary between solid and liquid. This slope is usually positive, since liquid is less dense than solid, with the notable exception of water due to hydrogen bonding. The phase boundary between solid and gas and liquid and gas takes the same functional form, with a change in the derivative at the triple point due to the change in $L.$
+The volume change from solid to liquid is usually small, giving the steep boundary between solid and liquid. This slope is usually positive, since liquid is less dense than solid, with the notable exception of water due to hydrogen bonding. The phase boundary between solid and gas and liquid and gas takes the same functional form, with a change in the derivative at the triple point due to the change in $L.$ The pressure of the liquid-gas boundary can be interpreted as the ``vapour pressure,'' as 
 
 The phase change from solid to liquid is inherently discontinuous and involve breakage of symmetry. This does not need to be the case for a liquid to gas transition or other transitions. 
 \end{document}

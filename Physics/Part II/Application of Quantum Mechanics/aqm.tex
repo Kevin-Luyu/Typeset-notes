@@ -227,5 +227,67 @@ Apparently, $E$ is a periodic function of $k,$ giving rise to the different Bril
 \end{itemize}
 
 We could either use the extended zone scheme where different branches of $E$ are plotted on different sections of the real axis (with discontinuities corresponding to band gaps), or we can adopt the reduced zone scheme to plot everything in the first BZ. 
+
+\subsection{Tight-binding model}
+As mentioned before, most potentials do not admit analytic solutions, so we usually just study the limiting case of very weak or strong interaction between atoms, namely the tight-binding model and the nearly-free electron model. 
+
+For a single atom at $x = na$, we can model the system as
+\[
+    H_n = \frac{p^{2} }{2m} + V_0(x - na), \quad H_0 \psi_n = E_0 \psi_n
+\]
+where $V_0(x)$ is a highly localised potential. The lattice can then be modelled as
+\[
+    H = \frac{p^{2} }{2m} + V(x),
+    \quad 
+    V(x) = \sum_{n=-\infty }^{\infty } V_0(x - n a). 
+\]
+Since $H \approx H_n$ near the atoms, we know the energy eigenstates needs to behave like $\psi_n$ near the lattice sites, motivating
+\begin{equation}
+    \label{eq:tight-psi}
+    \psi(x) = \sum_{n=-\infty }^{\infty } e^{i k n a} \psi_0(x - na)
+\end{equation}
+from Bloch's theorem. The tight-binding model makes the two basic assumptions (the first one is implicit from Eq.\eqref{eq:tight-psi})
+\begin{itemize}
+    \item The potential $V_0$ is so deep that the first excited state is much higher in energy than the ground state, so that we can only consider the ground states;
+    \item The potential $V_0$ is so narrow that the electrons bound to different sites have negligible mixing: \(\braket{\psi_{n^\prime }}{\psi_n} \approx \delta_{n^\prime  n}\);
+    \item Only hopping between adjacent sites are allowed (quantified later.) 
+\end{itemize}
+
+We could study the energy spectrum by first imposing a cyclic boundary condition
+\[
+    \psi(x) = \psi(x+Na)
+\]
+for some large $N$ and then let $N\to \infty,$ giving quantisation of the crystal wavenumber 
+\[
+    k_m = \frac{2\pi m}{Na,} \qquad -\frac{N}{2} < m \in \mathbb{Z} \leq \frac{N}{2}. 
+\]
+
+Therefore, the allowed energy is 
+\[
+        \expval{H}_{\psi} = \frac{1}{N}
+    \sum_{n, n^\prime =-N/2 + 1}^{N/2} e^{ik (n - n^\prime )a} 
+    \left(\mel{\psi_{n^\prime }}{H_0}{\psi_n} + \mel{\psi_{n^\prime }}{V(x) - V_0(x - na)}{\psi_n} \right)  
+\]
+\[
+    \implies \boxed{    E(k) = E_0 - \alpha - 2 \gamma \cos (k a), }
+\]
+where 
+\[
+    \alpha  = -\ev{V(x) - V_0(x - na)}{\psi_n} \quad \gg \quad  
+    \gamma  = -\mel{\psi_{n \pm 1}}{V(x) - V_0(x - na)}{\psi_n}. 
+\]
+
+Alternatively, we could \textit{a priori} formulate the Hamiltonian as
+\[
+    H = E_0 \sum_{n}^{} \ket{\psi_n}\bra{\psi_n} - t \sum_{n}^{} \left( \ket{\psi_n} \bra{\psi_{n+1}} + \ket{\psi_{n+1}} \bra{\psi_n}\right)
+\]
+in the finite Hilbert space of dimension $N,$ which would give the same result. Regardless, the energy eigenstates form a single band. The loss of degeneracy at $E_0$ is a general feature after introducing potentials from multiple atoms, and the absence of a second band reflects that we only take the ground stand into consideration. This, together with the Kronig-Penny model, demonstrates the ubiquity of band structures in lattices. 
+
+It is interesting to see that even the slightest mixing $\gamma $ leads to complete delocalisation of the otherwise tightly bounded energy eigenstate. Furthermore, taylor expanding $E(k)$ around the origin gives a ``free-particle'' like dispersion relation
+\[
+    E \approx \frac{\hbar ^{2} k^{2} }{2m_{\mathrm{eff} }}, \quad 
+    m_{\mathrm{eff} } = \frac{\hbar ^{2} }{2 t a^{2}},
+\]
+where the effective mass only reflects properties of the lattice, not the electron. 
 \end{document}
 
