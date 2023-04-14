@@ -94,14 +94,107 @@ The partial differential of a thermodynamic potential with respect to one thermo
     \qquad
     \left( \frac{\partial G}{\partial p} \right)_{T} = V.
 \]
+\section{The zeroth and the first law}
+\subsection{The zeroth law}
+An isolated system will eventually display no noticeable change in the macrostate variables, coming to a state called \textit{equilibrium}. The zeroth law states that temperature is a function of macroscopic state only. Specifically, it states that thermal equilibrium is transitive. Consideration of this on three bodies in equilibrium allows us to define temperature $\theta(p,V)$ as a function of state. One possible form is the ideal gsa temperature 
+\[
+    T = \frac{p V}{N K_B}, 
+\]
+but to show that this \textit{is} the thermodynamic temperature $\theta(p,V)$ requires the second law. 
 
-\section{The second law}
-Microscopically, everything is reversible due to thermal fluctiation. Macroscopically, things are irreversible if we cannot restore the motion of every microscopic particle (like in a lens). However, assuming that we move the system infinitesimally at a time, macroscopic reversibility is possible (the fluctiation will bring it towards equilibrium). 
+\subsection{The first law}
+The first law states that energy is a function of state. It can be stated without introducing anything new that the amount of work required to change an isolated system from state 1 to state 2 is path independent, motivating the internal energy 
+\[
+    \mathrm{d} U = \mathrm{\dj} q + \dj w,  
+\]
+where $\mathrm{d} U$ is a state variable, but $\dj q$ and $\dj w$ \textit{individually} are not. For a gas in a reversible change, 
+\[
+    \dj w = - p \mathrm{d} V,
+\]
+which is not an exact differential, and thus is path dependent.  
+\section{The second law and entropy}
+\subsection{The statements}
+Microscopically, everything is reversible due to thermal fluctiation. Macroscopically, things are irreversible if we cannot restore the motion of every microscopic particle (like in a lens). However, assuming that we move the system infinitesimally at a time in the absence of dissipation, macroscopic reversibility is possible (the fluctuation will bring it towards equilibrium). 
 
-Kelvin: No process is possible whose only effect is the complete conversion of heat to work. 
-Clausius: No process is possible whose only effect is to transfer heat from a colder to a hotter body. 
+At its heart, the second law dictates the arrow of time of irreversible changes: what is done cannot be undone, ergo, the second law breaks the time-reversal symmetry. It is often stated in two different ways: 
 
-Reversibility of a process, in the absence of external forces, is determined by states of the system only: motivating a state variable. 
+\begin{itemize}
+    \item \textit{\`{A} la} Kelvin: No process is possible whose \textit{only} effect is the \textit{\textbf{complete conversion of heat to work}}.
+    \item  \textit{\`{A} la} Clausius: No process is possible whose \textit{only} effect is to transfer heat \textit{\textbf{from a colder to a hotter body}}. 
+\end{itemize}
+
+
+Reversibility of a process, in the absence of external work, is determined by states of the system only, motivating a state variable characterising reversibility. In other words, reversibility requires
+\begin{itemize}
+    \item Quasi-static process: the system comes to equilibrium at every stage of the change such that we can describe every stage of the system by the macroscopic variables $(p,V).$ (Essentially, a process that can be fully described by a curve on the $p-V$ diagram)
+    \item Absence of dissipation: there is no sources of friction etc. 
+\end{itemize}
+
+
+\subsection{Heat engines and the temperature scale}
+Carnot engine is a cyclic reversible heat engine, comprising of two isotherms connected by two adiabats. In a cycle, it draws heat $Q_H$ from the hot reservoir and expels heat $Q_C$ from the cold reservoir, with the rest $W = Q_H - Q_C$ being converted to work. By relying on the second law and reversibility of a carnot engine, it can be shown that
+\begin{itemize}
+    \item There are no super-Carnot engines in terms of heat efficiency 
+    \[
+        \eta  = \frac{W}{Q_H} = 1 - \frac{Q_C}{Q_H}.
+    \]
+    In other words, a Carnot engine produces the most work for a given $Q_H.$
+    \item All reversible heat engines are Carnot and have the same efficiency $\eta(T_H, T_C).$
+\end{itemize}
+
+By combining several Carnot engines together, it can be shown that the efficiency of a Carnot engine must take the form
+\[
+    \eta = 1- \frac{f(\theta_C)}{f(\theta_H)},
+\]
+which, without loss of generality, allows us to define the thermodynamic temperature in terms the carnot efficiency 
+\[
+    f(\theta ) = \theta \implies \eta  = 1 - \frac{\theta_C}{\theta_H}.
+\]
+Consider a Carnot engine driven by ideal gas, then, gives
+\[
+    \boxed{\frac{Q_1}{T_1} = \frac{Q_2}{T_2}} \implies  
+    T = \theta
+\]
+as promised. 
+
+\subsection{Clausius' theorem and Entropy}
+From Carnot's cycle, we can conclude that 
+\[
+    \frac{Q_1}{T_1} = \frac{Q_2}{T_2},
+    \quad \implies 
+    \oint_{\mathrm{rev} } \frac{\dj q}{T}= 0
+\]
+along any reversible path, where $\dj q$ is positive for any heat flowing into the system. Since we can always subdivide a Carnot cycle to any arbitrary shape by connecting more isotherms and adiabats around the corner, it is possible to represent any reversible change as a series of Carnot cycles. Therefore, the results above hold for any reversible path in the phase space. It is worth noting that while any path in the $pV$ diagram can represent a reversible change, it is not a sufficient condition for reversibility (essentially, only the quasistatic condition is met). Therefore, it is perfectly fine for the same path in the $pV$ space to represent a reversible change or an irreversible change\textemdash the difference lies in dissipation. In this sense, the ``path-dependence'' in the $pV$ space is not the same as the difference between a reversible and an irreversible change.
+
+The above statement also means that the integral is path-independent in the phase space for a reversible change, motivating us to define the entropy of \textit{the system}
+\[
+    \Delta S \coloneqq \int \frac{\dj q_{\mathrm{rev} }}{T}
+\]
+The Carnot's theorem tells us that the irreversible path always ejects more heat into the surrounding, making the integral more negative, thus
+\[
+    \boxed{\oint \frac{\dj q}{T} \leq 0, \quad 
+    \Delta S = \int \frac{\dj q_{\mathrm{rev} }}{T} \geq  \int \frac{\dj q}{T}}
+\]
+for a general change, with the equality achieved for a reversible change. Therefore, a reversible adiabatic change is also isentropic. Extending our notional box to encompass the universe (which is assumed to be isolated) gives that \(\Delta S_{\mathrm{universe}} \geq 0\) for any change allowed by the second law. 
+
+The entropy $S$ is, as we've seen mathematically, a function of state: a reversible change and an irreversible change following potentially different paths in the $pV$ space lead to the same (likely non-zero) entropy change of \textit{the system}. The reversibility should not matter at this stage, as entropy is \textit{defined} using the heat flow in a reversible change. The difference between a reversible and an irreversible change only lies in the entropy change of the surrounding, which is a function of state of the surrounding. In a reversible change, the entropy change of the surrounding exactly cancels with the entropy change of the system. However, by no means can we find the volume change of the rest of the universe, so this doesn't feel like a state variable to us, as we only have access to state variables of the system. In that regard, it is clear that a reversible change and an irreversible change put the universe into different states. 
+
+More specifically, as the irreversible heat is transferred to the surrounding, the only change in its state function is the enthalpy change, equal to the heat received. To calculate the entropy change of the surrounding, we need to regard it as our new system and subject it to the new system, but we should end up with the same enthalpy change, giving $\Delta S = \frac{q}{T_{\mathrm{surr} }}. $ As a recipe, the entropy change of the universe in an irreversible process can be calculated as
+\[
+    \Delta S_{\mathrm{universe} } = \int \frac{\dj q_{\mathrm{rev} }}{T_{\mathrm{sys} }} + \sum_{}^{} - \frac{q_{\mathrm{irre} }}{T_{\mathrm{surr} }}, 
+\]
+where $q$ is positive for heat flow into the system and $q_{\mathrm{rev} }$ is the heat flow of a devised reversible process with the same start and final state. 
+
+\subsection{Adiabatic changes}
+The second law can also be stated as the existence of an adiabatic surface (total differential). The adiabatic curve can be either solved by 
+\[
+    \mathrm{\dj} q = \mathrm{d} U - p \mathrm{d} V = 0 
+\]
+when $U(p, V)$ is known or by 
+\[
+    \mathrm{d} S = 0
+\]
+when the total derivative of $S(p,V)$ is known in analytic thermodynamics.
 \section{Analytical thermodynamics}
 In thermodynamics, we distinguish between a system and a surrounding. The surrounding is so large such that its intensive variables ($p,$ $T,$ and $\mu $) are regarded as constants. The boundaries between the system and the surrounding can be different nature 
 \begin{itemize}
@@ -113,7 +206,7 @@ The system is said to be in \textit{\textbf{thermal equilibrium}} once the heat 
 
 Unless specified otherwise, it is assumed that only ``$pV$-work'' is done with fixed particle number, so the master equation is 
 \[
-    dU = T \mathrm{d} S - p \mathrm{d} V. 
+    \boxed{dU = T \mathrm{d} S - p \mathrm{d} V.} 
 \]
 \subsection{Thermodynamic potentials}
 The internal energy $U(S,T)$ quantifies energy stored in the system that can be converted to work or heat under certain conditions, but its change is expressed in terms of $S$ and $V$ which are not always convenient. Of course, $U$ can encapsulate other forms of energy, such as CoM kinetic energy and gravitational potential energy, so long as they are state functions. Often, we want to study the heat flow or work done in terms of $p$ and $T$ as well. Moreover, the natural variables of $U$ are $S$ and $T$, so we only know complete information about the system if $U(S,T)$ is given (the other two quantities can be worked out by differentiation). Often, however, systems are not expressed in $S$ and $T$, motivating thermodynamic potentials with different natural variables. 
