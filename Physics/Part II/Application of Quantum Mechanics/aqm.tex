@@ -289,5 +289,99 @@ It is interesting to see that even the slightest mixing $\gamma $ leads to compl
     m_{\mathrm{eff} } = \frac{\hbar ^{2} }{2 t a^{2}},
 \]
 where the effective mass only reflects properties of the lattice, not the electron. 
+
+\subsection{Nearly-free electron model}
+Now we consider the opposite extreme with the nearly-free electron model, where 
+\[
+    H = \frac{p^{2} }{2m} + \lambda U(x), \lambda \ll 1, 
+\]
+where $U(x+a) = U(x)$ is a periodic potential with Fourier series
+\[
+    U(x) = \sum_{l=-\infty }^{\infty } U_l \exp \left( \frac{2 \pi  i}{a} l  \right) \in \mathbb{R}. 
+\]
+As usual, we also impose a cyclic boundary condition $\psi(x + N a) = \psi (x)$ to avoid boundary effects. When $\lambda = 0,$ the eigenstates are the familiar
+\[
+    E_0(k) = \frac{\hbar ^{2} k^{2} }{2m}, \ket{k} = \frac{1}{\sqrt{N a} } e^{i k x},
+\]
+with $k$ discretised as usual and the spectrum is trivially degenerate with $E_0(-k) = E_0(k)$. The actual energy eigenvalues can be solved by perturbation theory, giving
+\[
+    \begin{aligned}
+        E(k) 
+        &= E_0(k) + \lambda \ev{U}{k} + \lambda ^{2} \sum_{k^\prime \neq k}^{} \frac{\mel{k}{U}{k^\prime } \mel{k^\prime }{U}{k}}{E_0(k) - E_0(k^\prime )} + \mathcal{\MakeUppercase{O}}(k^3)\\
+        &= E_0(k) + \lambda U_0 + \sum_{l=-\infty \neq 0}^{\infty} \frac{\lambda ^{2} \left\vert U_l \right\vert ^{2} }{E_0 (k) - E_0(k + 2\pi l /a)} + \mathcal{\MakeUppercase{O}}(k^3). 
+    \end{aligned}
+\]
+Therefore, $E(k)$ is the shifted free dispersion relation apart from the edges of Brillouin zones
+\[
+    k_l = -\frac{\pi  l }{a}. 
+\]
+
+Near the edges, however, the non-degenerative perturbation theory breaks down due to significant mixing $\mel{k^\prime }{U}{k}.$ From degenerative perturbation theory, the true energy eigenstate $\ket{\psi }$ can be approximated to the first order as a linear combination in the degenerate subspace spanned by
+\[
+    \ket{k_l^\prime } = -\frac{\pi  l}{a} + \delta , \quad 
+    \ket{k_l} = \frac{\pi  l}{a} + \delta. 
+\] 
+The Schrodinger's equation in this subspace can thus be written as
+\[
+    \begin{pmatrix}
+        \mel{k}{H}{k} & \mel{k}{H}{k^\prime } \\
+        \mel{k^\prime }{H}{k} & \mel{k^\prime }{H}{k^\prime }
+    \end{pmatrix}
+    \begin{pmatrix}
+        \alpha \\ 
+        \beta 
+    \end{pmatrix} 
+    = 
+    E(k) 
+    \begin{pmatrix}
+        \alpha \\ 
+        \beta 
+    \end{pmatrix},
+\]
+giving 
+\[
+    \begin{aligned}
+        E_{\pm} (k) 
+    &=  \frac{\hbar ^{2} }{2 m} \left(\delta ^{2} + \frac{\pi ^{2} l^{2} }{a^{2} }\right) + \lambda U_0 \pm
+    \sqrt{\frac{\hbar ^{2} \pi ^{2} l^{2} }{m^{2} a^{2} }\delta ^{2} + \lambda \left\vert U_l \right\vert ^{2} } \\
+    &= {\frac{\hbar ^{2} \pi ^{2} l^{2} }{2ma^{2} } + \lambda  U_0} \underbrace{\pm\lambda \left\vert U_l \right\vert}_{\text{band gap}}
+    + \underbrace{\frac{\hbar ^{2} \delta ^{2} }{2m}\left( 1 \pm \frac{1}{\lambda \left\vert U_l \right\vert } \frac{\hbar ^{2} l^{2} \pi ^{2} }{ma^{2} }\right)}_{\text{quadratic dispersion}} + \mathcal{\MakeUppercase{O}} (\delta ^{4} ), 
+    \end{aligned}
+\]
+where the second line expands around the edge of Brillouin zones. Therefore, the otherwise continuous dispersion relation opens up band gaps of width $\boxed{\Delta E_l = 2 \lambda \left\vert U_l \right\vert} $ at the edges of the Brillouin zones. The latest two sections should have justified the ubiquity of band gaps and quadratic dispersion relations in solid state physics. 
+
+\subsection{Conducting behaviours of solids}
+We can model a solid as free valence electrons (this is the mean field approximation) filling in the dispersion relation $E(k)$ plus an external electric potential $V(x).$ Discretisation of the momentum space gives $N$ sites, each able to accommodate two electrons. Therefore, an valence-1 element has a half-filled band. 
+
+At equilibrium, the lowest $N /2$ states will be filled symmetrically with $\sum p = 0.$ However, as an electric field $V(x) = q E x$ is applied, it would be energetically favourable for electrons on one side of the band to hop to the other side, giving a net momentum and thus a net current flowing. For a valence-2 element, however, one band is filled and if the electric field is not strong enough to overcome the band gap, then the solid cannot respond to the field with a net flow of electrons. THis explains conducting behaviours of solids. 
+
+\subsection{Effective mass}
+We could identify the group velocity of a wavefunction as
+\[
+    v_g = \frac{1}{\hbar } \frac{\mathrm{d}E(k)}{\mathrm{d}k} 
+\]
+and define the inertial mass from the acceleration as
+\(
+    m^{\star} = \frac{F}{\dot{v_g}}. 
+\)
+For an electric field, 
+\[
+    F = E q, \quad \mathrm{d} E = E q v_g \mathrm{d} t,
+\]
+thus the effective mass can be identified as
+\[
+    m^{\star } = \hbar ^{2} \left(\frac{\mathrm{d}^{2} E}{\mathrm{d}k^{2} } \right)^{-1},
+\]
+which is positive near the centre of a Brillouin zone and negative towards the edges. Therefore, it is better can study the motion of a near-filled band using the motion of positively charged holes (absence of electrons). 
+\section{Lattice}
+\subsection{Bravais Lattice}
+A lattice is a structure with translational symmetry and a Bravais lattice is a lattice that can be described as
+\[
+    \Lambda = \{ \mathbf{l} \in \mathbb{R}^3: \mathbf{l} = l_1 \mathbf{a_1} + l_2 \mathbf{a_2}+ l_3 \mathbf{a_3}; l_1, l_2, l_3 \in \mathbb{Z},  \}
+\]
+where $\mathbf{a_i} $ are the primitive vectors. The choice of primitive vectors are non-unique and can be linked by a linear transformation with determinant 1 (thus preserving that $l_i$ are integers). A Bravais lattice is essentially a lattice where all points are identical. Apparently, not all lattices are Bravais, but any lattice can be written as a superposition of shifted Bravais lattices 
+\[
+    \bigcup_i \{ \Lambda_i + \mathbf{d_i}. \}
+\]
 \end{document}
 

@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage[thmmarks, framed]{ntheorem} % ntheorem must come before amsmath, or the cross-reference will not be working
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{subcaption}
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+\usepackage{bm}
+\newframedtheorem{frm-res}{Result}
+\theorembodyfont{\upshape}
+\title{NST IB Mathematical Methods III}
+\date{Easter, 2023}
+\author{Yu Lu}
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Normal modes}
+An $n$-particle system coupled by spring-like forces with a Lagrangian
+\[
+    \mathcal{\MakeUppercase{l}} = \frac{1}{2} T_{ij} \dot{\theta_i} \dot{\theta_j} - \frac{1}{2} V_{ij} \theta_i \theta_j = \frac{1}{2} \mathbf{\dot{q} ^{\top}} \mathbf{T} \mathbf{\dot{q} } -   \frac{1}{2} \mathbf{q ^{\top}} \mathbf{V} \mathbf{q }, 
+\]
+where $T_{ij}, V_{ij} $ are constants, has an equation of motion
+\begin{equation}
+    \label{eq:normal-modes}
+    \mathbf{T} \ddot{\mathbf{q} } = - \mathbf{V} \mathbf{q}. 
+\end{equation}
+
+Eq.\eqref{eq:normal-modes} admits $n$ linearly independent normal modes $q(t)$ such that
+\[
+    q_i(t) = Q_i \sin( \omega_i t - \phi_i), 
+\]
+where $Q_i$ and $\phi_i$ are undetermined constants while $\omega_i$ are the normal modes frequencies. From the form of the guessed solution, the angular frequency of modes $\omega_i$ can be found through the generalised eigenvalue problem 
+\[
+    \boxed{
+        (-\omega ^{2} \mathbf{T} + \mathbf{V} ) \mathbf{Q} = \textbf{0},
+    }
+\]
+where $Q^{(1)}, \ldots Q^{(N)} $ are generalised eigenvectors satisfying the \textbf{orthogonal} relation
+\[
+    (\mathbf{Q}^{(i)})^{\top} \mathbf{T} Q^{(j)} = 0, \quad i \neq j. 
+\]
+
+The general solution of the system is
+\[
+    \mathbf{q}(t) = \sum_{m=1}^{N} A^{(m)} \mathbf{Q}^{(m)} \sin(\omega_m t - \phi_m),
+\]
+where $A^{(m)}$ are undertermined coefficients from the initial conditions. From the orthogonality conditions, it can be shown that a linear combination of generalised coordinates $q_1, q_2, \ldots $ oscillates at a single frequency $\omega_i$ of the i-th eigenvector $Q^{(i)}$
+\[
+    \boxed{\alpha^{(n)}(t) = q_i (t) T_{ij} Q_{j}^{(n)} } = A^{(n)} \sin(\omega_i t - \phi_i). 
+\]
+The proof is easy after expanding $\mathbf{q}$ in the eigenvector basis $q_i = \sum_{m} \alpha^{(m)}(t) Q_i^{(m)} $
+\section{Groups and representations}
+\end{document}

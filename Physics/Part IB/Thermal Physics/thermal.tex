@@ -28,10 +28,13 @@
 \theorembodyfont{\normalfont}
 \theoremsymbol{\ensuremath{\square}}
 \newtheorem{proof}{Proof}
-\title{Thermal Physics}
+\title{NST IB Physics B: Thermal Physics}
+\date{Lent - Easter, 2023}
 \author{Yu Lu}
 \begin{document}
 \maketitle
+\tableofcontents 
+\newpage
 \section{Mathematical tricks}
 A few important results from multivariate calculus include
 \begin{itemize}
@@ -107,11 +110,43 @@ The first law states that energy is a function of state. It can be stated withou
 \[
     \mathrm{d} U = \mathrm{\dj} q + \dj w,  
 \]
-where $\mathrm{d} U$ is a state variable, but $\dj q$ and $\dj w$ \textit{individually} are not. For a gas in a reversible change, 
+where $\mathrm{d} U$ is a state variable, but $\dj q$ and $\dj w$ \textit{individually} are not. For a gas in a quasi-static change, 
 \[
     \dj w = - p \mathrm{d} V,
 \]
-which is not an exact differential, and thus is path dependent.  
+which is not an exact differential, and thus is path dependent. Mathematically, this means that $w$ cannot be properly defined (or as a function of state).
+
+For an ideal gas, the internal energy is a function of $T$ only. For a monatomic gas, $U = 3 N k_B T /2$ (three KE modes). For a diatomic gas, $U = 5 N k_B T /2$ under low temperature (six KE modes, but rotation around the radial vector connecting their COM is prohibited, since we assume them to be point masses) or $U = 7 N k_B T /2$ under high temperature (plus one KE and one PE from vibration). 
+
+The heat capacity of gas is defined as the total derivative
+\[
+    C_x = \left. \frac{\dj q}{\mathrm{d}T} \right \vert_x = \left. \frac{\mathrm{d}A}{\mathrm{d}T} \right \vert_x, 
+\]
+where $A$ is a suitable function of state (usually found from the first law). Then, we just need to express $A$ with $x$ being one of its natural variable and compute the partial derivative 
+\(
+    \left( \frac{\partial A}{\partial T} \right)_{x} 
+\)
+from chain rule. 
+
+For example, it can be shown that
+\[
+    C_p = C_V + \left[ \left( \frac{\partial U}{\partial V} \right)_{T} + p\right] \left( \frac{\partial V}{\partial T} \right)_{p} 
+\]
+and 
+\[
+    C_{p,m} = C_{V,m} + R
+\]
+for ideal gas. 
+We also define
+\[
+    \gamma \coloneqq C_p / C_V
+\]
+and the adiabatic expansion of ideal gas gives 
+\[
+    \mathrm{d} U = -p \mathrm{d} V \implies 
+    p V^\gamma  = \mathrm{const}. 
+\]
+
 \section{The second law and entropy}
 \subsection{The statements}
 Microscopically, everything is reversible due to thermal fluctiation. Macroscopically, things are irreversible if we cannot restore the motion of every microscopic particle (like in a lens). However, assuming that we move the system infinitesimally at a time in the absence of dissipation, macroscopic reversibility is possible (the fluctuation will bring it towards equilibrium). 
@@ -130,6 +165,9 @@ Reversibility of a process, in the absence of external work, is determined by st
     \item Absence of dissipation: there is no sources of friction etc. 
 \end{itemize}
 
+Suppose we go through a closed path in the $pV$ diagram, then that means at least some parts of the process is irreversible. Assuming everything is quasistatic, then there must be some form of dissipation process. In our context, this is usually due to a temperature gradient between objects. Thermal contact with a reservoir of different temperature essentially breaks the time-reversal symmetry (now the temperature gradient marks the direction of irreversibility). This can be thought as some kind of hysteresis. 
+
+A quasistatic process can be regarded as a process that can be made to go arbitrarily slowly. For example, we have no control over the rate of Joule expansion, making it \textit{\textbf{not}} quasistatic. Similarly, the free motion of a piston in a pressure gradient is also not quasistatic: the piston would accelerate, making it impossible to go arbitrarily slowly. In this case, the pressure wave from the piston disturbs the equilibrium assumption. To make the piston move slowly, we need to include a friction, which can be added as work done on the system or heat dissipated. 
 
 \subsection{Heat engines and the temperature scale}
 Carnot engine is a cyclic reversible heat engine, comprising of two isotherms connected by two adiabats. In a cycle, it draws heat $Q_H$ from the hot reservoir and expels heat $Q_C$ from the cold reservoir, with the rest $W = Q_H - Q_C$ being converted to work. By relying on the second law and reversibility of a carnot engine, it can be shown that
@@ -141,6 +179,12 @@ Carnot engine is a cyclic reversible heat engine, comprising of two isotherms co
     In other words, a Carnot engine produces the most work for a given $Q_H.$
     \item All reversible heat engines are Carnot and have the same efficiency $\eta(T_H, T_C).$
 \end{itemize}
+
+It is intuitive to see that the only reversible heat engine connecting two reservoirs is a Carnot engine comprising of two adiabatic processes and two isothermal processes because there must be no temperature gradient between the system and the reservoir as far as heat flow is concerned. For example, the Otto cycle comprises of two adiabatic processes and two isochoric processes. Since temperature of the system changes during the isochoric processes, there must be a temperature gradient between the system and the reservoir during heat exchange, bringing about irreversibility. Similarly, when there is a temperature gradient, there must be no heat flow, i.e. the process is adiabatic if it is reversible. 
+
+To calculate the efficiency of a heat engine, we usually use the two adiabats to relate the ratio of volumes and calculate the heat flow from the other two processes (usually isothermal, isobaric, or isochoric).
+
+We could also run a heat engine backwards to make it a heat pump ($\eta = Q_H / W$) or a refrigerator ($\eta  = Q_C / W$). The efficiency of both scales as $(T_H - T_C )^{-1}$ and can thus be greater than 1. For practical purposes, the efficiency of a heat pump is always larger than unity, since otherwise we can just heat the source by dumping all the work as heat without any difficulties (converting orderly energy to unordered energy).
 
 By combining several Carnot engines together, it can be shown that the efficiency of a Carnot engine must take the form
 \[
@@ -391,6 +435,8 @@ To account for the finite size of molecule sizes, we simply let $V_i = V - b,$ w
     }
 \end{equation}
 
+The $1/V_m ^{2} $ dependence can be justified in a more \textit{ad hoc} fashion by noting that the interaction would have a $n^2$ dependence, one from the number of particle and the other from the strength of interaction one particular particle feels. The division of $V^2$ then naturally comes from making the $n^2$ dependence intensive. 
+
 Eq.\eqref{eq:vdw-eq} cannot be solved explicitly (easily) for $V$, but it is relatively easy to give an explicit expression for $p$ as 
 \[
     p(V,T) = \frac{RT}{V-b} - \frac{a}{V^{2}.}
@@ -573,4 +619,100 @@ See Blundell and Blundell p.p.327 for an ideal phase diagram. Near the triple po
 The volume change from solid to liquid is usually small, giving the steep boundary between solid and liquid. This slope is usually positive, since liquid is less dense than solid, with the notable exception of water due to hydrogen bonding. The phase boundary between solid and gas and liquid and gas takes the same functional form, with a change in the derivative at the triple point due to the change in $L.$ The pressure of the liquid-gas boundary can be interpreted as the ``vapour pressure,'' as 
 
 The phase change from solid to liquid is inherently discontinuous and involve breakage of symmetry. This does not need to be the case for a liquid to gas transition or other transitions. 
+
+\section{Introduction to statistical mechanics}
+\subsection{The postulate of equal a priori probability}
+A \textit{\textbf{microstate}}  specifies the state (i.e. energy and position) of all particles (e.g. particle 1 is at $x_1$ with energy $E_1,$ and particle 2 is at $x_2$ with energy $E_2\ldots  $) while a \textit{\textbf{macrostate}} specifies collective properties of the system, such as the total energy $E.$ The number of possible microstates corresponding to a macrostate with total energy $E$ can be denoted by $\Omega(E).$ An \textit{\textbf{ensemble}} of several systems contains all the possible microstates, subjected to some constraints:
+\begin{itemize}
+    \item The microcanonical ensemble: each system has the same fixed energy 
+    \item The canonical ensemble: each system is thermally connected to the same large reservoir and the total energy of the systems and the reservoir is fixed. 
+    \item The grand canonical: each system can exchange heat and particles with the reservoir. 
+\end{itemize}
+
+From the time-reversal symmetry in quantum mechanics, a single isolated system has a conserved energy $E$. Due to interaction, different particles can exchange energy with each other, resulting in the system going through different microstates. The reversal symmetry in such energy exchange means that the probability for each microstate in $\Omega(E)$ is the same, which is known as the \textit{\textbf{postulate of equal a priori probability.}} Furthermore, a microstate in $\Omega(E_1)$ occurs with the same probability as a microstate in $\Omega(E_2).$ This way, we can compute probability distribution of macrostates just based on $\Omega.$
+
+This sheds new light on reversibility of thermodynamic processes. Passive(kinetic) change of a system such as the size of the hole in Joule expansion doesn't change reversibility in equilibrium because they affect the forward and backwards processes simultaneously. Macroscopic irreversibility only occurs because a change in the constraint, such as the position of the poston, that changes the space of possible microstates (the states before change is only a small subset of the states after change). 
+\subsection{The Boltzmann factor}
+Consider two systems in thermal equilibrium with fixed total energy $E = E_1 + E_2.$ Maximising the total configuration number then gives 
+\[
+    \frac{\mathrm{d}}{\mathrm{d}E_1} (\Omega(E_1) \Omega(E_2)) = 0, 
+    \implies  
+    \frac{\mathrm{d}\ln \Omega_1 (E_1)}{\mathrm{d} E_1} =\frac{\mathrm{d}\ln \Omega_2 (E_2)}{\mathrm{d} E_2},
+\]
+suggesting identifying a statistical temperature scale
+\[
+    \boxed{\beta = \frac{\mathrm{d}\ln \Omega}{\mathrm{d} E}. }
+\]
+Note that the temperature $\beta$ already takes the specific form of configuration $\Omega$ into account. 
+
+In the canonical ensemble with total energy $E$, the probability of getting a \textit{microstate} of the system with energy $\epsilon $ a \textit{macrostate} of the reservoir with energy $E - \epsilon$ is $P(\epsilon ) \propto \Omega(E-\epsilon )\times 1.$ Assuming that the temperature $\beta$ of the reservoir (and thus the system, since they are in equilibrium) doesn't change, Taylor expanding $\ln{\Omega}$ gives the Boltzmann factor 
+\[
+    \boxed{ P(\epsilon ) \propto e^{-\beta \epsilon}}
+\]
+subjected to normalisation. Note that this does not take the multiplicity of microstates in the system $\Omega_s(\epsilon)$ into consideration since that is not contained in the thermodynamic temperature $\beta.$ The Boltzmann is purely a result of the dropping $\Omega_R(E- \epsilon)$ as the energy of the reservoir drops. 
+
+For a system in equilibrium with reservoir of constant temperature $T,$ the probability distribution of its energy $E$ follows the Boltzmann distribution
+\begin{equation*}
+    \boxed{
+    P(\mathrm{macrostate} \, q) = \frac{1}{Z} g_q e^{-E_q / k T}, \quad 
+    Z = \sum_{i=1} g_i e^{-E_i / kT}, }
+\end{equation*}
+where $Z$ is the partition function for normalisation and $g_q$ counts the number of microstates in the macrostate $q.$ Consequently, its average total energy can be written as
+\[
+    U = \sum_{i=1}^{} P_i E_i = -\frac{1}{Z}\frac{\mathrm{d}Z}{\mathrm{d}\beta }
+    = k_B T^2 \frac{\mathrm{d}\ln Z}{\mathrm{d}T} . 
+\]
+Note that the zero of energy is arbitrary and shall not affect the form of the spectrum. 
+
+For a low-temperature system, mostly all configurations reside in the ground states and the heat capacity tends to zero (i.e. quantisation of states is significant). Under this case, if we manage to excite a large number of particles into the excited states (population inversion), statistics would eventually force them all back down to the ground state. This forms the working principle of LASER. 
+
+For a high-temperature state, all the states are nearly equally occupied and the heat capacity would tend to a constant. This ``recovers'' the postulate of equal a priori probability, since in the high temperature (by its definition), the reservoir would not feel the increase in the system's energy and all microstates of the system would have an equal a priori probability of occupation. Therefore, a system whose energy spacing is equal or smaller than $k_B T$ can be said to be classical. 
+
+\subsection{Equipartition theorem}
+If an \textit{\textbf{independent}} generalised coordinate $u$
+\begin{itemize}
+    \item is \textit{\textbf{classical}} : with $k_B T$ larger than the spacing between states, so that the sum in $U = \sum_{}^{} P_i E_i$ can be replaced by an integral
+    \item has \textit{\textbf{uniform}}  a priori probability: its microstates have a uniform degeneracy $g$,
+    \item is associated with a \textit{\textbf{quadratic}}  energy $E = \alpha u^{2}$. This puts a upper limit on $T$ so that no anharmonicity arises. 
+\end{itemize}
+then the average energy associated with this generalised coordinate is $k_B T /2.$ THis can be applied to many ``modes,'' including positions (Hook potential) and velocities (kinetic energy). 
+
+Two such modes can add, supposing the total energy can be superposed, giving the average total energy of a particle
+\[
+    \boxed{\bar{E} = \frac{1}{2} N K_B T,}
+\]
+where the degree of freedom $N$ is the number of such independent quadratic coordinates (a bit different from the conventional degrees of freedom). 
+
+This result is purely classical but applies regardless of other underlying potential in the system. That is, particle would have the same translational kinetic energy everywhere on a potential landscape. This unintuitive result arises because only particles with high KE can make their ways up the potential barrier in the first place, and would on average retain the same KE when they settle down. This can be used to give an upper limit of the rate of a chemical reaction, subjected to hindrance due to viscosity (Brownian motion) and going past the desired product. 
+
+This can also be used to explain the heat capacity of a diatomic gas, with 3 translational modes, 2 rotational modes (no rotation along the axis), and 2 vibrational modes, which are excited in this order due to their decreasing delocalisation (thus smaller curvature of the wavefunction). Note that some species may be able to sustain the temperature to excite all of the modes before dissociation. 
+
+\subsection{The Gibbs entropy}
+Armed with the Boltzmann factor, we can give a statistical motivation for the classical entropy defined with reversible heat flow. The change in the total energy of the system with macrostate probability $p_i$ can be written as
+\[
+    \mathrm{d} \expval{U} = \sum_{i=1}^{} \mathrm{d} (p_i E_i) = \sum_{i=1}^{} E_i \mathrm{d} p_i + p_i \mathrm{d} E_i . 
+\]
+In a \textit{\textbf{reversible}} process, we can associate the first term as the heat flow $\dj Q$ to change the occupation of the same energy states $\ket{\phi}$ and the second term as the work done $\dj w $ to alter the states themselves $\ket{\phi} \to \ket{\phi^\prime }$. If the process is adiabatic ($\dj Q = 0$) (for example, by contracting a box very slowly), then the energy eigenstates changes continuously but occupation of these states remains constant. The adiabatic expansion of monatomic gas $T V^{-2 /3} = \mathrm{const} $ can be recovered. 
+
+In this context, an adiabatic process avoids excitation of irreversibility by decomposing a wavefunction into new states. This requires to motion to be sufficiently slow than than the local equilibrium timescale of molecules (around $10^{-10} s$). However, this can still be much faster than the heat exchange, which may take up to minutes. Thus, an adiabatic process actually requires both conditions to hold true: thermal isolation and gradual change to avoid irreversibility. Doesn't this, however, mean that $\mathrm{d} Q = 0$ always? 
+
+The classical definition of entropy can be written as
+\[
+    \mathrm{d} S = \frac{\dj Q_{\mathrm{rev} }}{T} = - \frac{\sum_{i=1}^{} k_B T \ln(p_i / Z) \mathrm{d} p_i}{T},  
+\]
+giving 
+\[
+    \boxed{S_{\mathrm{Gibbs} } = -k \sum_{}^{} p_i \ln{p_i} = -k \ln p_{\mathrm{TAGM} } ,}
+\]
+where 
+\[
+    p_{\mathrm{ATGM} }  = \lim_{N\to \infty } \sqrt[N]{\Pi p_i} = p_i^{p_i}
+\]
+is the geometric mean of $p_i$ if we observe the system for a long time. The inverse of this average probability gives the effective number of microstate of a system. 
+
+The geometric mean is always larger or equal than the average mean $\frac{1}{N},$ which would give the familiar boltzmann entropy
+\[
+    \boxed{S_{Boltzmann} = k_B \ln \Omega.}
+\]
+The second law and the postulate of equal a priori probability tell us that the system always evolve to equally occupy all possible microstates until any microstate in \textit{\textbf{available}} has the same time-averaged probability. Consequently, the entropy always rises in this equilibrating process and eventually converges to the Boltzmann entropy in equilibrium for a isolated system (if it's connected to a reservoir, the probability will follow the Boltzmann distribution). We can explain irreversible processes as the motion of constraints open up new available microstates.
 \end{document}

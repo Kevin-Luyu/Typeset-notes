@@ -1,0 +1,123 @@
+\documentclass{article}
+\usepackage[thmmarks, framed]{ntheorem} % ntueorem must come before amsmath, or the cross-reference will not be working
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{xcolor}
+\usepackage{lmodern} % in conjugate with the fontenc package to prevent pixelisation of output
+\usepackage[T1]{fontenc} % to produce the ``dbar'' in thermo
+% needed for framed theorems
+\usepackage{framed} % or, "mdframed"
+%
+\usepackage{bm}
+\newtheorem{theorem}{Theorem} 
+\newframedtheorem{frm-thm}{Theorem} %needed for framed theorems 
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-res}{Result}
+\theorembodyfont{\upshape}
+\newframedtheorem{frm-def}{Definition}
+\theoremstyle{nonumberplain} 
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{Proof}
+\title{NST IB Physics A: Introduction to Condensed Matter Physics}
+\date{Easter, 2023}
+\author{Yu Lu}
+\begin{document}
+\maketitle 
+\tableofcontents
+\section{Lattices and reciprocal lattices}
+A crystal can be regarded as convolution of atoms on a lattice of delta functions $\Lambda.$ With a choice of three linearly independent basis vectors $\mathbf{a}, \mathbf{b}, \mathbf{c},$ any lattice vector can be written as
+\[
+    \mathbf{r} = u \mathbf{a}  + v \mathbf{b} + w \mathbf{c} = [uvw]. 
+\]
+We are mostly interested in cubic P, I, and F lattices. In a cubic system, there might be equivalent directions due to symmetry. For example, $<100>$ denotes any edge of a cube. 
+
+All lattice points are identical, and we divide the lattice into unit cells. A conventional is the easiest to work with, but it can contain more than one lattice point. Alternatively, a primitive unit cell only has one unit cell, but may not reflect the symmetry of the lattice explicitly. 
+
+We are interested in functions with translational invariance $f(\mathbf{x} ) = f(\mathbf{x} + \mathbf{r}),$ and the lattice of $k$ vectors needed to form a Fourier series of $f$ is the reciprocal lattice $\Lambda^{*}.$ It is defined so that 
+\[
+    \mathbf{G}  \cdot \mathbf{R}  = 2\pi n, \quad \mathbf{G} \in \Lambda^{*}, \mathbf{R} \in \Lambda.
+\]
+
+The reciprocal lattice has basis vectors $A, B, C$ defined as 
+\[
+    \boxed{\mathbf{e}_i \cdot \mathbf{e^\prime }_j   = 2\pi \delta_{ij}, \quad \mathbf{A} = 2\pi \frac{b\times c}{a\cdot b \times c}, }
+\]
+with permutation. Planes waves with wavefronts on $(hkl)$ are normal to the reciprocal vector $G_{hkl}$ and the phase difference between successive planes is $\mathbf{k} \cdot \mathbf{r}  = 2\pi.$ 
+
+Bragg diffraction requires the incoming wavevector $\mathbf{k_i}$ and the outgoing one $k_f$ satisfy
+\[
+    \boxed{\mathbf{k_f} - \mathbf{k_i}  = \mathbf{G} \in \Lambda^{*}}
+\]
+\section{Phonons}
+\subsection{Monatomic chain}
+Consider a $1D$ harmonic chain of $N$ atoms. We would expect its motion to be fully described by the $N$ normal modes. From the equation of motion and symmetry, we've found that the displacement $u_n$ of the $n$th atom is essentially a plane wave with equal amplitude, and $y_n$ differs by a constant phase shift $e^{i \delta}$ from site to site:
+\[
+    \boxed{u_n = u_0 e^{i(q x - \omega t)}, \quad \delta  = q a}, 
+\]
+where the frequency of the wave is linked to the $\delta $ via a dispersion relation
+\[
+    \omega(\delta ) = \sqrt{\frac{4 \alpha }{m}} \left\vert \sin \left( \frac{\delta }{2}\right) \right\vert. 
+\]
+Inclusion of further interaction (next nearest-neightbour etc.) creates deviation from this relation and is effectively a Fourier series. 
+
+From the form of the equation, we can interpret this as a phonon passing through a lattice with momentum $p = \hbar q$ and energy $E = \hbar \omega.$ Under a cyclic boundary condition, the allowed $q$ is quantised (though finely under large $N$).
+
+Since $q$ ultimately corresponds to a phase shift, it's only unique in the range $q \in (-\pi /a, \pi /a),$ which is the \textit{\textbf{first Brillouin zone}}. In general, this corresponds to Wigner-Seitz cell of the reciprocal lattice $\Lambda^{*}.$ This non-uniqueness stems from the discrete translational symmetry in a lattice and resembles aliasing. Phonons with $q$ and $q + n 2\pi /a$ have different crystal momentum, which is just a construct and represents the lattice as a reservoir, but corresponds to the same wave propagating in the lattice. 
+
+Furthermore, two phonons with wavevectors $\mathbf{q_1} $ and $\mathbf{q_2} $ can coalesce into a single photon $\mathbf{q_1} + \mathbf{q_2} ,$ or plus any reciprocal lattice vector $\mathbf{G} $ due to the non-uniqueness. Such coalescence is only possible due to the slight anharmonicity in the lattice, meaning it's a second-order process that rarely occurs. Conservation of energy (the dispersion of phonons is non-linear, so we need to find two frequencies that does obey conservation) before and after the coalescence further restricts this. A mode can be thought of as $n$ phonons with $E = (n + 1 / 2) \hbar \omega.$
+
+The dispersion relation $\omega(q)$ recovers the speed of sound in the solid under long wavelength $q \to 0.$ The shortest wavelength $\lambda  = 2a$ ($q = \pi /a$) corresponds to a standing wave with adjacent atoms moving exactly out of phase. 
+
+Similar to optical diffraction, since phonons are discrete, they restrict inelastic scattering of particles (e.g. neutron scattering) as $k_f = k_i + q.$ Considering the possible non-uniqueness thus gives conservation of momentum and energy as
+\[
+    \boxed{\hbar \omega = \frac{\hbar ^{2} }{2m}(k_i ^{2} - k_f ^{2} ), \quad 
+    \mathbf{k_f} - \mathbf{k_i} = \mathbf{q} + \mathbf{G},  \quad \mathbf{G} \in \Lambda^{*}}
+\]
+where $q$ is a allowed phonon wavevector. In such interactions, only excitation of one phonon at a time is a first-order processes. Therefore, it's likely that one particle will only excite one phonon in the lattice. 
+
+Phonons with non-zero $\mathbf{q}$ actually have zero momenta. The ``conservation law'' above is actually a selection rule of wavevectors based on scattering. The extra momentum is offset by minuscule translational motion of the lattice as a whole, corresponding to the $q=0$ mode. 
+\subsection{Diatomic chain}
+
+In a diatomic chain connected by the same spring, we still requires the phase between adjacent atoms to be the same, but now the two different atoms can move with different amplitudes. There are thus two modes associated with each $\mathbf{q},$ corresponding to in-phase oscillation with lower frequency (\textit{\textbf{acoustic}} branch) and out-of-phase oscillation with higher frequency (\textit{\textbf{optical}} branch). The optical branch can also be regarded as ``back-folding'' of the monatomic dispersion curve in $q \in [\pi / 2a, \pi /a],$ which is now outside the new first Brillouin zone (since the repeating distance of the lattice is now $2a$). 
+
+The acoustic branch is essentially the same dispersion relation as in the monatomic chain, recovering the continuum speed of sound in small $q$ and representing a standing wave near the zone boundary. The only difference is that the standing wave has a wavelength of $4a$, corresponding to only the heavier atom moving. 
+
+Photons can excite phonons into the optical branches, which corresponds to out-of-phase oscillation of adjacent atoms. The $q=0$ corresponds to the two atoms moving out of phase but with their CoM stationary, and the zone boundary corresponds to a standing wave of only the lighter atom moving. 
+
+In general, in a 3D lattice with $p$ atoms in a primitive cell, $3p$ branches, each containing $N$ phonon modes, will be present in the system. $3$ of these branches will be acoustic, out of which 2 are transverse and 1 is longitudinal with larger energy. The rest are optical branches. 
+
+\subsection{Thermal properties}
+\subsubsection{Heat capacity}
+Phonons are quanta of lattice vibration that carry thermal energy. Therefore, we could account for thermal properties of a solid by considering the phonon properties. Key observations about heat capacities include the $T^3$ dependence at low temperature and the asymptote $3 k_B$ at high temperature. 
+
+In a lattice, the allowed modes of vibration frequency $\omega_i$ are finely spaced, so the average internal energy can be approximated by an integral
+\[
+    \expval{U} = \sum_{i=1}^{N} \expval{U_i} \approx \int_{0}^{\infty} \expval{U(\omega)} g(\omega) \,\mathrm{d}\omega, 
+\]
+where $g(\omega) = \mathrm{d} N / \mathrm{d} \omega $ is the density of states between $\omega$ and $\omega + \mathrm{d} \omega$ and $\expval{U(\omega)}$ is the average energy associated with each vibration mode $\omega_i$. The average energy of a vibration mode (different numbers of phonons could be in the mode) can be found by Planck's formula from Boltzmann distribution
+\[
+    Z(\omega ) = \sum_{n=0}^{\infty} n \hbar \omega \exp(-\beta n \hbar \omega) \implies  \expval{U(\omega )} = -\frac{1}{Z }\frac{\partial Z}{\partial \beta } \boxed{= \frac{\hbar \omega}{\exp(\hbar \omega \beta ) - 1}}. 
+\]
+At low temperatures, 
+\[
+    \braket{U(\omega )} \approx \hbar \omega \exp \left( -\frac{\hbar \omega }{k_B T}\right)
+\]
+and under high temperatures
+\[
+    \expval{U(\omega )} \approx k_B T.
+\]
+The latter asymptote recovers the result from equipartition theorem, giving $C \approx 3 N k_B T$ under high temperature, since $N$ atoms would have requires $3N$ coordinates and $6N$ quadratic modes, where the heat capacity $C$ is defined as
+\[
+    C = \frac{\partial \expval{U}}{\partial T}. 
+\] 
+\section{Models of solids}
+\section{Semiconductors}
+\end{document}

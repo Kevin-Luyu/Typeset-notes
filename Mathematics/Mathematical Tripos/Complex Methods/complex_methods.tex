@@ -256,5 +256,104 @@ A pole is \textit{\textbf{simple}} if it has degree $1$ and \textit{\textbf{mult
         \mathrm{res} \{f(z); a \} = \frac{1}{(m-1)!}g^{(m-1)}(a).
     \]
 \end{frm-res}
-just a test 
+
+Typical contours include
+\begin{itemize}
+    \item Semicircular contour (or a part of the circular arc): when the integral vanishes on the large $C_R$. For example, 
+    \[
+        \int_{-\infty}^{\infty} \frac{1}{1+ x^4} \,\mathrm{d}x; 
+    \]
+    \item Rectangular contour: when one the integral on branch of the contour can be related to the other branch, and the contributions from the other two branches cancel
+    \[
+        \int_{0}^{\infty} \cos(x^{2} ) \,\mathrm{d}x; 
+    \]
+    \item Keyhole contour: when there is a branch point or pole in the contour and the contribution from $C_{\epsilon}$ vanishes or can be calculated. 
+    \[
+        \int_{0}^{\infty} \frac{\ln x}{1+x^{2} } \,\mathrm{d}x 
+    \]
+\end{itemize}
+
+The residue theorem can also be used to evaluate integrals involving trigonometric functions using 
+\[
+    \cos x = \mathfrak{R}(e^{iz})
+\]
+or 
+\[
+    \cos x = \frac{1}{2} (e^{iz} + e^{-iz}). 
+\]
+The first one is easier to calculate, but it cannot be combined with addition or subtraction (i.e. $\frac{1}{\mathfrak{R}(z) + 1} \neq \frac{1}{\mathfrak{R}(z + 1)}$). The two can be combined, for example, 
+\[
+    \frac{\cos (n \theta )}{1 - \cos(\theta )} 
+    = 
+    \mathfrak{R}\left( 
+        \frac{e^{i n \theta }}{1 - (e^{i n \theta } + e^{- i n \theta }) /2 }. 
+    \right)
+\]
+\section{Transform Methods}
+\subsection{Jordan's lemma}
+Fourier inversion integrals can be calculated using residue theorem. We usually construct a semicircular contour and use Jordan's lemma
+\begin{frm-thm}{Jordan's lemma}
+
+    If $g(z) \to 0$ uniformly on $C_R$ as $R \to  \infty $ and $\lambda \in \mathbb{R}$, then
+    \[
+        \lim_{R \to \infty} \int_{C_R} g(z) e^{i \lambda  z}\mathrm{d} z = 0, 
+    \]
+    where $C_R$ is the upper semicircle if $\lambda > 0 $ and the lower semicircle if $\lambda < 0.$
+\end{frm-thm}
+Its proof relies on the observation \( 1 \geq  \sin \theta \geq 2\theta / \pi \) for $0 \leq  \theta  \leq \pi /2.$ This can be used to show
+\[
+    \int_{-\infty}^{\infty} \frac{\sin x}{x} \,\mathrm{d}x = \pi 
+\]
+with a keyhole contour. 
+
+\subsection{Solving differential equations}
+Fourier transform can be used to turn ODEs into algebraic equations using
+\[
+    \mathcal{\MakeUppercase{F}} [\frac{\mathrm{d}f(x)}{\mathrm{d}x} ] (k) 
+     = i k \mathcal{\MakeUppercase{F}} [f(x)](k)
+\]
+or to turn PDEs into ODEs by Fourier transforming with respect to one variable. 
+\[
+    \tilde{f}(k) = \mathcal{\MakeUppercase{F}} [f(x)] = \int_{-\infty}^{\infty} f(x)e^{-i k x} \,\mathrm{d}x, \quad 
+    \mathcal{\MakeUppercase{F}}^{-1} [\tilde{f}(k)]= 
+    \frac{1}{2\pi }\int_{-\infty}^{\infty} \tilde{f}(k) e^{+i k x} \,\mathrm{d}k.  
+\]
+
+For example, in finding the Green's function to the damped harmonic oscillator
+\[
+    \ddot{x} + 2 \gamma  \dot{x} + p^{2}  G(t) = \delta(t),
+\]
+we could Fourier transform both sides to give
+\[
+    \tilde{G(\omega )} = - \frac{1}{\omega ^{2} - 2 i \gamma  \omega - p^{2} }
+    \implies  
+    G(t) = \frac{1}{2\pi } \int_{-\infty}^{\infty} - \frac{1}{[\omega ^{2} - 2 i \gamma  \omega - p^{2} ]}e^{i \omega  t} \,\mathrm{d}\omega,  
+\]
+which can be evaluated from the residues at the two simple poles at $\omega = \omega_{\pm} = i (\gamma  \pm \sqrt{\gamma ^{2}  -p^{2} } ).$ This however, relies on Jordan's lemma to hold, which in turn requires
+\[
+    \frac{1}{\omega ^{2} - 2 i \gamma  \omega - p^{2} } \to 0
+\]
+uniformly on the large semicircle $C_R.$ While this is almost certainly the case for a rational, functions like exponentials (including the seemingly innocent $e^{-t}$) or trigonometric functions have essential singularities. 
+For example, proceeding with the same method for the 1D diffusion equation 
+\[
+    \frac{\partial T}{\partial t} = \lambda \frac{\partial ^{2} T}{\partial x^{2} } 
+\]
+gives
+\[
+    u(x,t) = \frac{1}{2\pi  } \int_{-\infty}^{\infty} \tilde{u}(k,0) \exp (- \lambda k^{2} t) \exp (ikx) \,\mathrm{d}k,
+\]
+which cannot be calculated using Jordan's lemma. 
+In this case, we need to invoke the convolution theorem of Fourier transform
+\[
+    \tilde{h}(k) = \tilde{f}(k) \tilde{g}(k) \Longleftrightarrow    h(t) = \int_{-\infty}^{\infty} f(s) g(t-s)\,\mathrm{d}s 
+\]
+to get
+\[
+    u(x,t) = u(x,0) \star G(x,t) = \int_{-\infty}^{\infty} u(y,0) G(x-y,t) \,\mathrm{d}y,
+\]
+where $G(x,t)$ is the inverse Fourier transform
+\[
+    G(x,t) = \frac{1}{2\pi } \int_{-\infty}^{\infty} \exp (-\lambda k^{2} t) \exp (ikx) \,\mathrm{d}k = \frac{1}{\sqrt{4 \pi  \lambda  t} } \exp \left( - \frac{x^{2} }{4\lambda t}\right).
+\]
+For the diffusion equation, the solution thus often involve the error function. 
 \end{document}

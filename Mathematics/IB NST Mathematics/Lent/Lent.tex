@@ -21,6 +21,8 @@
 \author{Yu Lu}
 \begin{document}
 \maketitle
+\tableofcontents
+
 \section{Sturm-Liouville Theory}
 \subsection{The operator}
 A Sturm-Liouville operator
@@ -73,6 +75,92 @@ and the self-adjoint condition becomes
 \) 
 Under this convention, $\tilde{\mathcal{\MakeUppercase{L}} }$ satisfying the original eigenvalue equation is self-adjoint with weight $w(x)$ while $\mathcal{\MakeUppercase{L}} $ satisfying the generalised eigenvalue equation is self-adjoint with weight 1. 
 
+\subsection{Solving differential equations}
+The eigenfunctions $y_n(x)$ of $\mathcal{\MakeUppercase{L}} $ can often assumed to be orthogonal even in the case of degeneracy
+\[
+    \mathcal{\MakeUppercase{L}} y_n = \lambda_n w(x) y_n, \quad 
+    \braket{y_n}{y_m} = \delta_{nm}. 
+\]
+For a orthogonal set of eigenfunctions $\{y_n\}$, the completeness condition can be expressed as
+\[
+    \sum_{n=1}^{\infty} y_n(x) y_n(x^\prime )^{*} = \frac{1}{w(x)} \delta(x - x^\prime). 
+\]
+
+Unlike the method of undetermined coefficient, we can always guarentee that our solution to the inhomogeneous equation satisfy the homogeneous boundary conditions if we construct $\{y_n\}$ to meet the boundary conditions. After finding a set of orthogonal eigenfunctions satisfying whatever boundary conditions posed such that
+\[
+    \mathcal{\MakeUppercase{L}} y_n(x) = \lambda_n w(x) y_n,
+\]
+the eigenfunction expansion of the solution
+\[
+    y(x) = \sum_{n=1}^{\infty} a_n y_n(x)
+\]
+to the equation 
+\[
+    \mathcal{\MakeUppercase{L}} y(x) = f(x)
+\]
+can be found by expressing both sides in $\{y_n\},$ multiplying through by $y_m^*$ and invoking the orthogonality (this is slightly different from expanding $f(x)$ in the eigenfunction, which is off by a weight function). This gives
+\[
+    y(x) = \sum_{k=1}^{\infty} y_k(x) \frac{\braket{y_k}{f}_{w=1}}{\lambda_k},
+\]
+which is identical to the Green's function method with 
+\[
+    G(x, x^\prime ) = \sum_{k=1}^{\infty} \frac{1}{\lambda_k} y_k(x) y_k^*(x^\prime ). 
+\]
+
+The expansion of any function in the eigenfunction basis is 
+\[
+    f(x) = \sum_{n=1}^{\infty} y_n(x) \braket{y_n}{f}_w
+\]
+and this expansion is optical even in the truncated case, giving Bessel's inequality
+\[
+    \braket{f(x)}_w \geq \sum_{n=1}^{\infty} \left\vert a_n \right\vert ^{2}.
+\]
+
+\section{Calculus of variation}
+To extremise a functional $F[y] = \int f(x, y, y^\prime )\mathrm{d} x,$ we can set the functional derivative under $y \to  y + \delta y$
+\[
+    \delta F = \int \delta y \frac{\partial f}{\partial y} + \delta y^\prime \frac{\partial f}{\partial y^\prime } \mathrm{d} x
+\]
+to zero and use IBP to yield the Euler-Lagrange equation
+\[
+    \boxed{
+    \frac{\partial f}{\partial y} - \frac{\mathrm{d}}{\mathrm{d}x} \left( \frac{\partial f}{\partial y^\prime } \right) = 0, }
+\]
+with first integrals
+\[
+    \boxed{
+    \frac{\partial f}{\partial x} = 0 \implies 
+    f - \sum_{i=1}^{N}  y^\prime \frac{\partial f}{\partial y^\prime } = \text{const},}
+\]
+\[
+    \boxed{
+    \frac{\partial f}{\partial y} = 0 \implies 
+    \frac{\partial f}{\partial y^\prime } = \text{const}. }
+\]
+Note that there is only one energy integral. 
+
+Extremising $F[y]$ under the constraint that $G[y] = 0$ is the same as extremising without constraint
+\[
+    F[y] - \lambda  G[y],
+\]
+where $\lambda $ is an undetermined constant. 
+
+It is often useful to extremise the functional ($\mathcal{\MakeUppercase{L}} $ is an Sturm-Liouville operator with weight $w(x)$)
+\[
+    \Lambda[y] = \frac{F[y]}{G[y]} = \frac{\braket{y}{\mathcal{\MakeUppercase{L}}  y}_{w=1}}{\braket{y}_w},
+\]
+which is achieved when 
+\[
+    \boxed{
+    \mathcal{\MakeUppercase{L}} y = \Lambda w y, }
+\]
+in other words the extremal values of $\Lambda$ are the eigenvalues of $\mathcal{\MakeUppercase{L}}, $ which can be shown either by doing a constrained optimisation problem with the Euler-Lagrange equation or by extremising the functional from first principle. Note that the minimum value of $\Lambda[y]$ is still larger than the ground state eigenvalue, so this can be used to find the ground state energy (the Rayleigh-Ritz approximation method). 
+
+Fermat's principle states that the functional 
+\[
+    \int \mu(x) \mathrm{d} x
+\]
+is extremised for light. 
 \section{Laplace's and Poisson's equation}
 Many physical systems, including incompressible irrotational fluids, heat conduction, and electrostatics, can be described by Poisson's equation 
 \begin{equation}
@@ -258,4 +346,45 @@ where the first term comes from superposition of different sources and the secon
         \Phi (\mathbf{r^\prime } ) = \int_V \rho(\mathbf{r} ) G(\mathbf{r}, \mathbf{r^\prime } ) \mathrm{d} V - \oint f(\mathbf{r} ) G(\mathbf{r}, \mathbf{r^\prime } ) \mathrm{d}S + C.
     }
 \]
+
+\section{Cartesian Tensors}
+
+\[
+    L_{ij} = \mathbf{e_i^\prime } \cdot \mathbf{e_j}, \quad L L^{\top}  = I
+\]
+and $v_i$ is a tensor of order one if
+\[
+    v_i^\prime  = L_{ij} v_j; 
+\]
+it is a axial-vector if 
+\[
+    v_i^\prime  = \mathrm{det}(L)  L_{ij} v_j; 
+\]
+
+An antisymmetric second-order tensor can be associated with an axial vector as
+\[
+    A_{ij} = \epsilon_{ijk} \omega_k, \quad 
+    \omega_k = \frac{1}{2} \epsilon_{klm} A_{lm}. 
+\]
+Any symmetric second-order tensor $S$ can be decomposed into an isotropic tensor and a traceless tensor $\tilde{S}$
+\[
+    S = \tilde{S} + \frac{1}{3}\mathrm{Tr}(S)\mathbb{I}.
+\]
+
+Any symmetric tensor can be diagonalised (it has real eigenvalues and eigenvectors) by a change of basis into the eigenbasis 
+\[
+    S^\prime = L S L^{\top}. 
+\]
+
+The moment of inertia tensor is 
+\[
+    I_{ij} = \int \rho(\mathbf{x} ) (x_k x_k \delta_{ij} - x_i x_j) \mathrm{d} V.  
+\]
+
+All scalars are isotropic; all first order isotropic tensors are zero; the most general second order isotropic tensor is $\lambda \delta_{ij}$; the most general third order isotropic tensor is $\lambda  \epsilon_{ijk}.$ It can be argued that integrals over the symmetric volume 
+\[
+    X_i = \int_{V} x_i \rho(r) \mathrm{d} V, \quad 
+    K_{ij} = \int_{V} x_i x_j \rho(r) \mathrm{d} V
+\]
+are both isotropic. The undetermined coefficient in $K_{ij}$ can be found by calculating a trace, which is just one integral. 
 \end{document} 

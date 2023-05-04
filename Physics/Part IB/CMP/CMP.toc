@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}Lattices and reciprocal lattices}{1}{}%
+\contentsline {section}{\numberline {2}Phonons}{1}{}%
+\contentsline {subsection}{\numberline {2.1}Monatomic chain}{1}{}%
+\contentsline {subsection}{\numberline {2.2}Diatomic chain}{2}{}%
+\contentsline {subsection}{\numberline {2.3}Thermal properties}{3}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}Heat capacity}{3}{}%
+\contentsline {section}{\numberline {3}Models of solids}{3}{}%
+\contentsline {section}{\numberline {4}Semiconductors}{3}{}%

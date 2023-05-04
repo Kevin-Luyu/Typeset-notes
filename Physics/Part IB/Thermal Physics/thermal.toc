@@ -1,0 +1,30 @@
+\contentsline {section}{\numberline {1}Mathematical tricks}{2}{}%
+\contentsline {section}{\numberline {2}The zeroth and the first law}{3}{}%
+\contentsline {subsection}{\numberline {2.1}The zeroth law}{3}{}%
+\contentsline {subsection}{\numberline {2.2}The first law}{3}{}%
+\contentsline {section}{\numberline {3}The second law and entropy}{3}{}%
+\contentsline {subsection}{\numberline {3.1}The statements}{3}{}%
+\contentsline {subsection}{\numberline {3.2}Heat engines and the temperature scale}{4}{}%
+\contentsline {subsection}{\numberline {3.3}Clausius' theorem and Entropy}{5}{}%
+\contentsline {subsection}{\numberline {3.4}Adiabatic changes}{6}{}%
+\contentsline {section}{\numberline {4}Analytical thermodynamics}{6}{}%
+\contentsline {subsection}{\numberline {4.1}Thermodynamic potentials}{6}{}%
+\contentsline {subsection}{\numberline {4.2}Free energy and availability}{7}{}%
+\contentsline {subsection}{\numberline {4.3}Examples}{8}{}%
+\contentsline {subsection}{\numberline {4.4}Thermodynamics of other systems}{8}{}%
+\contentsline {subsubsection}{\numberline {4.4.1}Elastic rod}{9}{}%
+\contentsline {subsubsection}{\numberline {4.4.2}Surface tension}{9}{}%
+\contentsline {subsubsection}{\numberline {4.4.3}Paramagnetism}{9}{}%
+\contentsline {section}{\numberline {5}Phase Transition}{9}{}%
+\contentsline {subsection}{\numberline {5.1}Real gases}{9}{}%
+\contentsline {subsection}{\numberline {5.2}Phase transition of gas to liquid}{10}{}%
+\contentsline {subsection}{\numberline {5.3}The law of corresponding states}{12}{}%
+\contentsline {subsection}{\numberline {5.4}Cooling real gases: Joule-Kelvin expansion}{12}{}%
+\contentsline {subsection}{\numberline {5.5}Phase Transition}{13}{}%
+\contentsline {subsubsection}{\numberline {5.5.1}Integration of Clausius-Clapeyron equation}{13}{}%
+\contentsline {subsubsection}{\numberline {5.5.2}Phase Diagram}{14}{}%
+\contentsline {section}{\numberline {6}Introduction to statistical mechanics}{14}{}%
+\contentsline {subsection}{\numberline {6.1}The postulate of equal a priori probability}{14}{}%
+\contentsline {subsection}{\numberline {6.2}The Boltzmann factor}{14}{}%
+\contentsline {subsection}{\numberline {6.3}Equipartition theorem}{15}{}%
+\contentsline {subsection}{\numberline {6.4}The Gibbs entropy}{16}{}%
