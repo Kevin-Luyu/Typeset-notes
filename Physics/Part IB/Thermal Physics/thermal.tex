@@ -694,7 +694,7 @@ Armed with the Boltzmann factor, we can give a statistical motivation for the cl
 \]
 In a \textit{\textbf{reversible}} process, we can associate the first term as the heat flow $\dj Q$ to change the occupation of the same energy states $\ket{\phi}$ and the second term as the work done $\dj w $ to alter the states themselves $\ket{\phi} \to \ket{\phi^\prime }$. If the process is adiabatic ($\dj Q = 0$) (for example, by contracting a box very slowly), then the energy eigenstates changes continuously but occupation of these states remains constant. The adiabatic expansion of monatomic gas $T V^{-2 /3} = \mathrm{const} $ can be recovered. 
 
-In this context, an adiabatic process avoids excitation of irreversibility by decomposing a wavefunction into new states. This requires to motion to be sufficiently slow than than the local equilibrium timescale of molecules (around $10^{-10} s$). However, this can still be much faster than the heat exchange, which may take up to minutes. Thus, an adiabatic process actually requires both conditions to hold true: thermal isolation and gradual change to avoid irreversibility. Doesn't this, however, mean that $\mathrm{d} Q = 0$ always? 
+In this context, an adiabatic process avoids excitation of irreversibility by decomposing a wavefunction into new states. This requires to motion to be sufficiently slow than than the local equilibrium timescale of molecules (around $10^{-10} s$). Note that adiabatic processes in quantum mechanics may not be classically adiabatic ($\dj Q = 0$): it is merely a synonym for reversibility. It provides a powerful way of manipulating quantum states. 
 
 The classical definition of entropy can be written as
 \[
@@ -714,5 +714,96 @@ The geometric mean is always larger or equal than the average mean $\frac{1}{N},
 \[
     \boxed{S_{Boltzmann} = k_B \ln \Omega.}
 \]
-The second law and the postulate of equal a priori probability tell us that the system always evolve to equally occupy all possible microstates until any microstate in \textit{\textbf{available}} has the same time-averaged probability. Consequently, the entropy always rises in this equilibrating process and eventually converges to the Boltzmann entropy in equilibrium for a isolated system (if it's connected to a reservoir, the probability will follow the Boltzmann distribution). We can explain irreversible processes as the motion of constraints open up new available microstates.
+The second law and the postulate of equal a priori probability tell us that the system always evolve to equally occupy all possible microstates until any microstate \textit{available} has the same time-averaged probability. Consequently, the entropy always rises in this equilibrating process and eventually converges to the Boltzmann entropy in equilibrium for a isolated system (if it's connected to a reservoir, the probability will follow the Boltzmann distribution). We can explain irreversible processes as the motion of constraints open up new available microstates.
+
+If the system is connected to a reservoir and the allowed states are not degenerative, we could instead approximate the Gibbs entropy by an integral
+\[
+    S = - k \int g(E) p(E) \ln{p(E)} \mathrm{d} E,
+\]
+where $p(E)$ is the rapidly decaying Boltzmann factor and the degeneracy of the system $g(E)$ is a rapidly rising factor for a large system. As a result, $g(E) p(E)$ is strongly peaked at an average energy. Therefore, in the limit of a large system, we can only observe microstates over a short range of energy $\Delta E$ and the Gibbs energy can be well approximated by the Boltzmann entropy, with an error on the order of $k\ln{\Delta E}.$
+
+\subsection{The third law}
+Experimentally, it has been shown that all systems \textit{in internal equilibrium} has the same entropy at absolute zero ($\Delta H \to \Delta G$ asymptotically as $T \to 0$). Quantum mechanically, this is because the interaction between particles cannot be neglected as $T\to 0,$ thus splitting up degenerate states. Therefore, at $T=0,$ there should be a unique system ground state. Sometimes two phases can have exactly the same energy, then the third law tells us that the latent heat for transition must go to zero. 
+
+This means the heat capacity and thermal expansion goes to zero near the absolute zero, and graphically (TS diagram) it can be shown that we cannot cool a system to absolute zero in a finite numbers of steps because all states have the same entropy at absolute zero. 
+
+\section{Thermodynamics of radiation}
+\subsection{Radiation in thermal equilibrium}
+Consider a cavity at temperature $T$ in thermal equilibrium. The atoms on its wall jiggles around due to thermal motion and hence produces electromagnetic radiation which exists as standing waves with finely-discretised wavevectors in the cavity characterised by a spectral energy density $u_\lambda (\lambda , T).$ Since the cavity cannot do work on the photons, time reversal symmetry dictates that the energy transferred between any two cavities at the same temperature $T$ in any spectral interval must be equal in either directions (otherwise there will be a net flow of heat in equilibrium), known as detailed balancing. In other words, the spectral energy density $u_\lambda(\lambda, T)$ only depends on these two parameters and is a universal function. 
+
+There will be a photon flux exerting radiation pressure on the wall. For a cavity with photon volume density $n$ and energy volume density $u,$ photons can hit the wall with angle to the normal $\theta \in [0, \pi / 2]$, coming from a cylinder of height $c \mathrm{d} t \cos{\theta}.$ Thus, the total number of photons hitting an area $\Delta A$ in time $\Delta  t$ is 
+\[
+    \Delta N = \Delta A \Delta t \int_{0}^{\pi /2 } (c \cos \theta) n \frac{\mathrm{d} \Omega / \mathrm{d} \theta }{4\pi }\,\mathrm{d}\theta   \implies \boxed{\mathrm{Flux} = \frac{1}{4} n c }. 
+\]
+Consequently, the radiation flux per unit area (intensity) is 
+\[
+    I = \frac{1}{4} u c, \quad I_{\lambda} = \frac{1}{4} u_\lambda c.
+\]
+
+To maintain thermal equilibrium, any radiation absorbed by the wall must eventually be emitted, perhaps as another photon at some later time. In other words, \textbf{the absorbed energy equals the emitted energy} (what comes in must go out) and the wall cannot stop the flow of radiation. Suppose the spectral density of emitted radiation is $e_\lambda$ and that of absorption is $\alpha_\lambda,$ this gives the \textit{\textbf{Kirchhoff's law}} 
+\[
+    \boxed{
+        \frac{e_\lambda }{\alpha_\lambda} = e^{\mathrm{blackbody} }_{\lambda} = \frac{1}{4}u_\lambda(\lambda, T) c, 
+    }
+\]
+where the right hand side is a universal function of $\lambda$ and $T.$ Good absorbers are also good emitters, and a blackbody is perfect at both. 
+
+The radiation pressure of any cavity is therefore the same as that for a perfect reflector, since all photons are eventually reflected off its surface, giving a momentum exchange of $2 \varepsilon \cos{\theta} / c$ per photon. Therefore, the radiation pressure is simply the flux of particles multiplied by the momentum exchange integrated over all possible energy and angles
+\[
+    p = \int_{0}^{\infty} \int_{0}^{\pi/2}  \frac{2 \varepsilon \cos{\theta}}{c}  \left( c \cos \theta n \frac{\mathrm{d} \Omega / \mathrm{d} \theta }{4\pi } \right) \,\mathrm{d}\theta   \,\mathrm{d}\varepsilon \implies \boxed{p = \frac{1}{3}u,}   
+\]
+where it is clear that the spectral density doesn't matter. 
+
+Note that all the calculation in this section assumes the source is point-like with a uniform angular distribution of velocities. The geometric factor would be different for a beam of light, which is quite straightforward with
+\[
+    I = u c = \sigma T^4, \quad p = u. 
+\]
+
+\subsection{Classical thermodynamics of photon gas}
+The collective behaviour of photons in a cavity can be studied like a gas, using the machinery of classical thermodynamics. Specifically, under constant temperature (such that the number of photons doesn't change)
+\[
+    U(T(N),V) = u(T) V \implies \left( \frac{\partial U}{\partial V} \right)_{T} = u. 
+\]
+Thus the master equation with $\mathrm{d} N = 0$ and the Maxwell relation gives
+\[
+    u = \frac{1}{3}\left(T \frac{\mathrm{d}u}{\mathrm{d}T} - u \right) \implies u = A T^4,
+\]
+and the emission intensity thus follows the \textit{\textbf{Stefan-Boltzmann law}} 
+\[
+    \boxed{I = \frac{1}{4} A c T^4 = \sigma T^4,}
+\]
+and the total power is simply the intensity multiplied by the surface area. Far away from a point source, we can treat the wavefront as spherical with the distance being travelling as its radius of curvature. 
+
+We can formulate an ``equation of state'' for such gas as 
+\(
+    p = A T^4 /3 .
+\)
+With the entropy per unit volume being
+\[
+    s = \int_{0}^{T} \frac{\dj q}{T} = \int_{0}^{T} \frac{\mathrm{d}u}{\mathrm{d}T}  \,\mathrm{d}T = \frac{4}{3}A T^3,   
+\]
+it can be established that the chemical potential
+\[
+    \mu \propto \frac{G}{V} = u + p - T s = 0. 
+\]
+In other words, merely changing the number of photons doesn't increase entropy of the system because we don't need to ``borrow'' them from a reservoir: we just create them. The zero chemical potential reflects the nature of photons as a quasiparticle that is essentially a packet of energy, so a non-zero chemical potential would double count its energy. Similarly, the chemical potential of a phonon is also zero. 
+
+Increasing the size of the box increases the total radiation energy inside. During expansion, the wall emits photons at the same rate but the number of photons bouncing off the retreating wall decreases (but $v < c$ so there are always photons bouncing off the wall). As a result, the extra photons emitted from the wall populate the expanded cavity with the same density, and thus expanding a cavity increases the number of photons inside. 
+
+\subsection{The black-body distribution}
+The form of $u_\omega$ can relate the Einstein A and B coefficients. For a two level system with the energy difference equivalent to a photon of frequency $\omega$ and connected to a radiation bath with spectral energy density $u_\omega,$ three processes can occur: 
+\begin{itemize}
+    \item Spontaneous emission of a photon with probability $N_2 A_{21};$
+    \item Absorption of a photon for the transition from 1 to 2 with probability $N_1 B_{12} u_\omega;$
+    \item The reverse of the above: absorption of a photon, but the system transits from 2 to 1 to emit a photon of the same energy, and re-emit the absorbed photon, with probability $N_2 B_{21} u_{\omega}$ (stimulated emission).
+\end{itemize}
+In the steady state, there is no net transfer between the two states, 
+\[
+    N_2 B_{21} u_{\omega } + N_2 A_{21} = N_1 B_{12} u_\omega, 
+\]
+which can be used to show that population inversion 
+\[
+    \frac{N_2}{g_2} > \frac{N_1}{g_1}
+\]
+is required to achieve a net gain in laser, where $g$ is the degeneracy. 
 \end{document}

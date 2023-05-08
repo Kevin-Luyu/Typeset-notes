@@ -28,3 +28,8 @@
 \contentsline {subsection}{\numberline {6.2}The Boltzmann factor}{14}{}%
 \contentsline {subsection}{\numberline {6.3}Equipartition theorem}{15}{}%
 \contentsline {subsection}{\numberline {6.4}The Gibbs entropy}{16}{}%
+\contentsline {subsection}{\numberline {6.5}The third law}{17}{}%
+\contentsline {section}{\numberline {7}Thermodynamics of radiation}{17}{}%
+\contentsline {subsection}{\numberline {7.1}Radiation in thermal equilibrium}{17}{}%
+\contentsline {subsection}{\numberline {7.2}Classical thermodynamics of photon gas}{18}{}%
+\contentsline {subsection}{\numberline {7.3}The black-body distribution}{18}{}%

@@ -57,5 +57,91 @@ where $A^{(m)}$ are undertermined coefficients from the initial conditions. From
     \boxed{\alpha^{(n)}(t) = q_i (t) T_{ij} Q_{j}^{(n)} } = A^{(n)} \sin(\omega_i t - \phi_i). 
 \]
 The proof is easy after expanding $\mathbf{q}$ in the eigenvector basis $q_i = \sum_{m} \alpha^{(m)}(t) Q_i^{(m)} $
-\section{Groups and representations}
+\section{Groups}
+\subsection{Definitions about groups}
+\textit{\textbf{Algebra}} is set with a binary operation defined for all its elements. \textit{\textbf{Groups}} $G$ is an algebra satisfying the group axioms
+\begin{itemize}
+    \item Closure: the group action of any two elements maps to an element in the group
+    \item Identity: there is a unique identity element in $G$ s.t. $g I = I g = g.$
+    \item Inverse: there is a unique inverse for any $g \in G$ s.t. $g g^{-1} = g^{-1} g = I$
+    \item Associativity
+\end{itemize}
+For example, $\mathbb{Z}$ is a group under addition. It can be proved by contradiction that the group identity and inverse is unique. A group is also \textit{\textbf{Abelian}} if the group action commutes. The group action in a finite group can be summarised in a \textit{\textbf{group table}}. The uniqueness of inverse dictates that there is no repeating element in a row or a column of a group table. 
+
+A subset $H \subseteq G$ is said to \textit{\textbf{generate}} $G$ if any elements of $G$ can be formed by composition of group elements in $H.$ The \textit{\textbf{order}}  of a group $\left\vert G \right\vert $ is the number of distinct elements in a group. The \textit{\textbf{order}} of a group element $g$ is the smallest integer $q$ such that 
+\[
+    g^q = I. 
+\]
+Due to the closure of groups, the order of $G$ and any $g \in G$ must follow
+\[
+    \left\vert g \right\vert \leq \left\vert G \right\vert. 
+\]
+
+A group $H$ is a \textit{\textbf{subgroup}} of $G$ if it is a subset of $G$ and obeys the group axioms, denoted $H \leq  G.$
+A subgroup of $G$ is \textit{\textbf{proper}} if it is not the identity or $G$ itself. 
+
+A mapping $f$ from $G$ to $G^\prime $ is said to be \textbf{1-1} if every $g^\prime \in G^\prime $ is mapped only once, or 
+\[
+    f(g_1) = f(g_2) \implies g_1 = g_2. 
+\] 
+A mapping $f$ is said to be \textit{\textbf{onto}} if any $g^\prime \in G^\prime $ is mapped to at least once. Two properties out of 1-1, onto, and $\left\vert G \right\vert = \left\vert G^\prime  \right\vert $ implies the other. Following this, two groups $G$ and $G^\prime $ are said to be \textit{\textbf{isomorphic}} if there \textit{exists} a \textbf{1-1 onto} mapping $f$ between $G$ and $G^\prime $ that preserves the group structure, i.e.
+\[
+    f(g_2) f(g_1) = f(g_2 g_1 ) \qquad \forall g_1, g_2 \in G,
+\]
+and the mapping $f$ is the \textit{\textbf{isomorphism}} of the two groups. Inverses and identities of two isomorphic groups are mapped onto each other. 
+
+\subsection{Dihedral group}
+A \textit{\textbf{dihedral group}} $D_n$ is a group of symmetry transformation of regular $n$-gons. For a square ($D_4$), all such transformations include rotation clockwise by $90\deg$ and reflection about two sides and its diagonals $m_1, m_2, m_3, m_4.$ Apparently, $D_n$ is not Abelian. It has $8$ distinct group elements $\{I,R,R^{2}, R^3,  m_1, m_2, \newline m_3, m_4\}.$ The generators of a dihedral group are $\{R, m\}.$ 
+
+The dihedral group $D_4$ has 5 order-2 subgroups, each consisting $I$ and a self-inversed group action $R^2$ or $m_i.$ There are also 3 order-4 subgroups, one is the cyclic group $\{I, R, R^2, R^3\}$ and the other twos are Kelin four groups $\{I, R^2, m_1, m_2\}$ and $\{I, R^2, m_3, m_4\}.$
+A group with a single generator of order $n$ is a \textit{\textbf{cyclic group}} $C_n.$ A cyclic group is isomorphic to multiplication of a pure phase $e^{2 i \pi / n}. $ 
+The two Klein four-groups are isomorphic to each other, with a simple relabelling being the isomorphism. It can also be shown that all elements of $D_4$ are isomorphic to 2-by-2 matrices 
+\[
+    R = \begin{pmatrix}
+        0 & 1 \\
+        -1 & 0
+    \end{pmatrix}, \quad 
+    m_1 = \begin{pmatrix}
+        -1 & 0 \\
+        0 & 1
+    \end{pmatrix}
+\]
+This is called a \textit{\textbf{faithful representation}} of $D_4$ because all $g \in D_4$ are represented by distinct matrices.  
+
+\subsection{Conjugacy relations}
+Note that action of $g_1$ followed by action of $g_2$ is denoted $g_2 g_1$ (i.e. group actions are read from right to left, like matrix multiplication). It can be easily shown that $(g_2 g_1 )^{-1} = g_1^{-1} g_2^{-1}.$ 
+
+Two group elements $g_1, g_2 \in G$ are \textit{\textbf{conjugacy}} of each other ($g_1 ~ g_2$)if there \textit{exists} $g \in G$ such that 
+\[
+    g_2 = g g_1 g^{-1} \Leftrightarrow g_2 g = g g_1.
+\]
+Conjugacy is a form of equivalency relation, and all equivalency relations observe
+\begin{itemize}
+    \item reflexivity: $g_1 ~ g_1$ 
+    \item symmetry: $g_1 ~ g_2 \Leftrightarrow  g_2 ~ g_1$
+    \item transitivity: $g_1 ~ g_2 \,, \, g_2 ~ g_3 \implies g_1 ~ g_3.$ 
+\end{itemize}
+
+Any group $G$ can be partitioned into disjoint \textit{\textbf{conjugacy classes}}, where all elements within the same classes are conjugate to each other and any two elements from different classes are not. The disjointness of conjugacy classes is obvious following transitivity. It can also be shown that all elements in an Abelian group form their own conjugacy classes. All elements conjugate to $g_1$ can be found by forming $g g_1 g^{-1}$ for any $g \in G$
+
+A subgroup $H \leq G$ is said to be a \textit{\textbf{normal subgroup}} of $G$ if it contains complete conjugacy classes of $G$, i.e
+\[
+    g h g^{-1} \in H \qquad \forall h \in H, \forall g \in G,   
+\]
+denoted $H \unlhd G.$
+
+The three order-4 subgroups of $D_4$ are normal. Normality of a subgroup also depends on $G.$ For example, while ${I, m_1}$ is not a normal subgroup of $D_4,$ it is a normal subgroup of the Klein four-group. 
+
+A vector that is left invariant (up to multiplication of $\lambda \in \mathbb{R}$)under any operation $g \in G$ is said to be in the \textit{\textbf{invariant subspace}} of $G.$ For example, the Klein four-group leaves vectors (anti)parallel
+to $(1,0)$ and $(0,1)$ invariant. 
+\subsection{Cosets}
+A \textit{\textbf{left coset}} of a subgroup $H \leq  G$ by a group element $g \in G$ is a \textit{set}
+\[
+    gH = \{ g, gh_1, gh_2, \ldots  \}. 
+\]
+Similarly, we may also form the right coset
+\[
+    Hg = \{ g, h_1 g, h_2 g, \ldots  \}.
+\]
+\section{Representations}
 \end{document}

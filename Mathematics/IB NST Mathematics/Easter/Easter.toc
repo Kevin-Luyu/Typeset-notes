@@ -1,2 +1,7 @@
 \contentsline {section}{\numberline {1}Normal modes}{1}{}%
-\contentsline {section}{\numberline {2}Groups and representations}{1}{}%
+\contentsline {section}{\numberline {2}Groups}{2}{}%
+\contentsline {subsection}{\numberline {2.1}Definitions about groups}{2}{}%
+\contentsline {subsection}{\numberline {2.2}Dihedral group}{2}{}%
+\contentsline {subsection}{\numberline {2.3}Conjugacy relations}{3}{}%
+\contentsline {subsection}{\numberline {2.4}Cosets}{3}{}%
+\contentsline {section}{\numberline {3}Representations}{3}{}%

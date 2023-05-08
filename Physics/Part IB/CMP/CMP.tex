@@ -104,11 +104,11 @@ In a lattice, the allowed modes of vibration frequency $\omega_i$ are finely spa
 \]
 where $g(\omega) = \mathrm{d} N / \mathrm{d} \omega $ is the density of states between $\omega$ and $\omega + \mathrm{d} \omega$ and $\expval{U(\omega)}$ is the average energy associated with each vibration mode $\omega_i$. The average energy of a vibration mode (different numbers of phonons could be in the mode) can be found by Planck's formula from Boltzmann distribution
 \[
-    Z(\omega ) = \sum_{n=0}^{\infty} n \hbar \omega \exp(-\beta n \hbar \omega) \implies  \expval{U(\omega )} = -\frac{1}{Z }\frac{\partial Z}{\partial \beta } \boxed{= \frac{\hbar \omega}{\exp(\hbar \omega \beta ) - 1}}. 
+    Z(\omega ) = \sum_{n=0}^{\infty}  \exp(-\beta n \hbar \omega) \implies  \expval{U(\omega )} = -\frac{1}{Z }\frac{\partial Z}{\partial \beta } \boxed{= \frac{\hbar \omega}{\exp(\hbar \omega \beta ) - 1}}. 
 \]
 At low temperatures, 
 \[
-    \braket{U(\omega )} \approx \hbar \omega \exp \left( -\frac{\hbar \omega }{k_B T}\right)
+    \expval{U(\omega )} \approx \hbar \omega \exp \left( -\frac{\hbar \omega }{k_B T}\right)
 \]
 and under high temperatures
 \[
@@ -118,6 +118,102 @@ The latter asymptote recovers the result from equipartition theorem, giving $C \
 \[
     C = \frac{\partial \expval{U}}{\partial T}. 
 \] 
-\section{Models of solids}
+
+More generally, the average internal energy of the solid is
+\begin{equation*}
+    \boxed{
+        \expval{U} = \int_{0}^{\infty} \expval{U(\omega )}g(\omega ) \,\mathrm{d}\omega = 
+        \int_{0}^{\infty} \frac{\hbar \omega }{\exp \left( \frac{\hbar \omega }{k_B T} \right) - 1}g(\omega )  \,\mathrm{d}x , 
+    }
+\end{equation*}
+where $g(\omega )$ is the density of states (vibration mode at frequency $\omega$), which can be determined from the ``particle in a box'' model. A reflection boundary condition gives the allowed vibrational modes as lattices $\mathbf{k} = [n_x \pi / a, n_y \pi / b, n_z \pi /c]$ which is related to $g(\omega)$ via the \textit{\textbf{Debye approximation}} of a linear dispersion relation $\omega = v_s \left\vert k \right\vert$
+\[
+    g(\omega ) = g(k) \frac{\mathrm{d}k}{\mathrm{d}\omega } = 
+    \frac{3 \cdot 4 \pi k^{2} / 8 }{\pi ^3 / (ABC)} \frac{1}{v_s} = 
+    \frac{3V \omega ^{2} }{2 \pi  ^{2} v_s^3,}
+\]
+where the speed of sound $v_s$ is taken as a constant. The factor of $3$ in the numerator accounts for the fact that there are three degrees of freedom (phonon modes) for each vibrational mode (1 longitudinal and 2 transverse, all acoustic since there is only one atom per unit cell). This approximation essentially ignores the atomic nature of solids and treats it purely classically. The degeneracy $g(\omega)$ needs to be cut off at a \textit{\textbf{Debye frequency}} $\omega_D$ to prevent the ultraviolet catastrophe, which is done by normalising the total number of vibration modes
+\[
+    3N = \int_{0}^{\omega_D} g(\omega ) \,\mathrm{d}\omega , \implies  \omega_D^3 = \frac{6\pi ^{2} v_s^3 N}{V}.  
+\] 
+
+Thus, the integral for the heat capacity becomes 
+\[
+    C = 9 N k_b \frac{T}{\theta_D}^3 \int_{0}^{\theta_D / T} x^4 \frac{e^x}{(e^x - 1)^{2} } \,\mathrm{d}x,
+\]
+where $\theta_D$ is the Debye temperature $\hbar \omega_D = k_B \theta_D$ marking the quantum to classical transition. This integral doesn't have a closed-form expression, but at high temperature we can Taylor expand $e^x$ to carry out this finite integral and arrives at the Dulong-Petit law; at low temperatures, the upper limit goes to infinite and the integral can be evaluated to give the $T^3$ law. 
+
+The Debye temperature $\theta_D$ reflects the natural oscillation frequency in an atom, so heavier atoms have a lower Debye temperature. Most metals have their Debye temperature around $300$ Kelvins so they obey the Dulong-Petit law at room temperature. 
+
+\subsubsection{Thermal conductivity}
+Motion of phonons can be used to explain conduction of heat in metals. Due to crystal anharmonicity, phonons can interact with each other by scattering, effectively randomising their velocity after a mean-free-path $l$ and thus propagate any excessive heat. The thermal conductivity of a metal is relates the temperature gradient and heat flux as
+\[
+    H = -\kappa \frac{\mathrm{d}T}{\mathrm{d}z}, 
+\] 
+where $H$ across a plane is the excessive heat carried by phonons multiplied by their velocities normal to the plane, averaged over all solid angle and speed. Suppose the volume density of phonon is $n,$ the heat capacity per vibrational mode is $c_p,$ and the speed distribution is $f(c),$ then the total heat flux is 
+\[
+    H = \int_{0}^{\pi } \int_{0}^{\infty } \,\mathrm{d}c \,\mathrm{d}\theta  
+    (n f(c) ) \left( \frac{\mathrm{d} \Omega  / \mathrm{d} \theta }{4\pi } \right) (c \cos \theta) \left(- c_p \frac{\mathrm{d}T}{\mathrm{d}z} l \cos \theta \right), 
+\]
+where the first term accounts for the speed distribution, the second term accounts for the angular distribution, the third for the normal velocity, and the final one for the excessive heat per vibrational mode, giving
+\[
+    \boxed{\kappa = \frac{1}{3}C \expval{c} l }, 
+\]
+where $\expval{c}$ is the average sound speed, $l$ is the mean free path, and $C$ is the heat capacity per volume. 
+
+Temperature dependence of $\kappa $ is affected by the temperature dependence of $l$ and $C.$ The mean free path adds reciprocally from structural scattering (defects etc.) and phonon-phonon scattering, which scales with $\Gamma \propto n \propto T.$ At low temperatures, $C$ has a $T^3$ dependence and $l$ has most contribution from structural scattering which is independent of time, so $\kappa \propto T^3.$ At high temperatures, $C$ approaches a constant but $l$ is significantly shortened by phonon-phonon scattering which gives $l\propto 1/T.$ At intermediate temperatures, most phonon-phonon interaction leaves the resultant wavevector in the first Brillouin zone due to their low energy, resulting in insufficient randomisation and $\kappa $ rises above the asymptotes. It is only at high temperatures does the Umklapp scattering that truly randomises $\mathbf{q}$ dominates the mean free path. 
+
+It is worth revisiting the contribution from phonons and vibrational modes to the internal energy. At a certain temperature $T,$ the Debye model assumes that there will be vibrations with an almost continuous spectrum of frequency $\omega$ up to a certain Debye frequency $\omega_D.$ Each of the vibrational frequency $\omega$ will have different standing wave modes (or \textit{\textbf{phonon modes}}) that are encapsulated by distribution $g(\omega).$ For a lattice of $N$ atoms, there would be $3N$ such phonon modes, out of which $2N$ are transverse and $N$ are longitudinal. Every three of these phonon modes corresponds to a wavevector $\mathbf{q},$ but it may be populated by different numbers of phonons, each with energy $\hbar \omega$. The distribution of the number of phonons, and hence the average energy, in a particular mode is given by the Boltzmann distribution. 
+\section{Free electron model}
+\subsection{Statistics of electrons}
+The free electron model assumes that the electrons only interact with ions in the lattice through elastic collisions. The only other constraints on them is that they form travelling respecting the cyclic boundary condition according to Fermi-Dirac distribution. 
+
+The density of states in $k$ space is the same to that for phonons other than the spin degeneracy of $2$ instead of the threefold degeneracy of transverse and longitudinal vibration modes. With a different dispersion relation 
+\(
+    \varepsilon = \hbar ^{2} k^{2}  / 2 m^{*},
+\) 
+the density of states $g(\varepsilon)$ is now
+\[
+    g(\varepsilon ) \propto \varepsilon^{1 /2}
+\]
+in 3D. Note that geometric confinement along particular directions could make the first excited state inaccessible, effectively lowering the dimension of the problem. In lower dimensions, $g(\varepsilon)$ would have a lower energy dependence. 
+
+At $T = 0,$ the absence of thermal excitation gives a dispersion relation filled up to a Fermi energy $\varepsilon_F$ with a clear cut, like what we had in the Debye model, where $\mu(0) = \varepsilon_F$ can be calculated by finding the radius of the sphere in the $k$ space giving $N$ states. 
+
+At any finite temperature, however, the electrons would follow the Fermi-Dirac distribution, rationalised as putting energy and electrons from a thermal and particle reservoir into our system. Compared to the ground state configuration, the entropy decrease in the reservoir associated with taking one electron out from the system is
+\[
+    \mathrm{d} S = -\left(\frac{\mathrm{d} U}{T} - \frac{\mu \mathrm{d} N}{T}\right).
+\]
+Thus, from the boltzmann definition of entropy, the probability of a system microstate in energy $\varepsilon$ is 
+\[
+    P_F(\varepsilon) = \frac{1}{z}\sum_{i}^{} \exp \left[ -\frac{\varepsilon_i - \mu }{k_B T}\right] = \frac{1}{\exp \left[(\varepsilon  - \mu ) / k_B T + 1\right]}, 
+\]
+and the total density of states is 
+\[
+    \boxed{g_F(\varepsilon ) = g(\varepsilon ) P_F(\varepsilon ) = \frac{1}{\exp \left[(\varepsilon  - \mu ) / k_B T + 1\right]}},
+\]
+where the chemical potential $\mu$ can be determined from normalisation. As shown in Fig.\ref{fig:electron-fd}, the thermal smearing has a width of about $k_B T,$ giving to $g(\varepsilon) k_B T$ thermally active electrons. The heat capacities can either be calculate from the definition
+\[
+    C_{el} = \int_{0}^{\infty} \varepsilon g(\varepsilon ) P_F(\varepsilon ) \,\mathrm{d}\varepsilon  \approx \frac{\pi ^{2} }{2}N K_B \frac{T}{T_F},
+\]
+or by only considering the classical contribution of $3 k_B T /2$ thermal energy of the thermally active electrons that actually hops from low energy states to high energy states when $T$ increases, giving
+\[
+    C_{el} \approx \frac{9}{2} N k_B \frac{T}{T_F}. 
+\]
+Both relations scale with $T / T_F,$ where $k_B T_F = \varepsilon_F,$ giving a larger contribution to the heat capacity than electrons at low temperatures. For most metals, $T \ll T_F$ at room temperatures. 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figs/fd-distribution.png}
+    \caption{A plot of $g_F(\varepsilon)$ against $\varepsilon$ at temperature $T.$}
+    \label{fig:electron-fd}
+\end{figure}
+
+Both electrons and phonons contribute to the solid heat capacity, giving a total dependence of 
+\[
+    C = \gamma T + \beta T^3. 
+\]
+under low temperatures. 
+
+Note that we didn't consider the thermal smearing in Debye model. This is because phonons are bosons following Bose-Einstein distribution, so there can be any number of phonons occupying the same states. The density of states we saw in the phonon case are for the vibrational modes, which don't behave like particles and cannot be ``thermally excited'' to smear out the edges. 
 \section{Semiconductors}
 \end{document}
