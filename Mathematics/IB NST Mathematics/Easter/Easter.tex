@@ -14,6 +14,9 @@
 % needed for framed theorems
 \usepackage{framed} % or, "mdframed"
 \usepackage{bm}
+\newtheorem{theorem}{Theorem} 
+\newframedtheorem{frm-thm}{Theorem} %needed for framed theorems 
+\theorembodyfont{\upshape}
 \newframedtheorem{frm-res}{Result}
 \theorembodyfont{\upshape}
 \title{NST IB Mathematical Methods III}
@@ -113,7 +116,7 @@ Note that action of $g_1$ followed by action of $g_2$ is denoted $g_2 g_1$ (i.e.
 
 Two group elements $g_1, g_2 \in G$ are \textit{\textbf{conjugacy}} of each other ($g_1 ~ g_2$)if there \textit{exists} $g \in G$ such that 
 \[
-    g_2 = g g_1 g^{-1} \Leftrightarrow g_2 g = g g_1.
+    \boxed{g_2 = g g_1 g^{-1}} \Leftrightarrow g_2 g = g g_1.
 \]
 Conjugacy is a form of equivalency relation, and all equivalency relations observe
 \begin{itemize}
@@ -126,7 +129,7 @@ Any group $G$ can be partitioned into disjoint \textit{\textbf{conjugacy classes
 
 A subgroup $H \leq G$ is said to be a \textit{\textbf{normal subgroup}} of $G$ if it contains complete conjugacy classes of $G$, i.e
 \[
-    g h g^{-1} \in H \qquad \forall h \in H, \forall g \in G,   
+    \boxed{g h g^{-1} \in H \qquad \forall h \in H, \forall g \in G, }  
 \]
 denoted $H \unlhd G.$
 
@@ -143,5 +146,31 @@ Similarly, we may also form the right coset
 \[
     Hg = \{ g, h_1 g, h_2 g, \ldots  \}.
 \]
+
+Noting that $h \in H$ is equivalent to $h H = H h = H,$ we can prove that two cosets $g_1 H$ and $g_2 H$ are identical iff $g_1 g_2^{-1} \in H$ and all the other cosets are disjoint. That means a group is \textit{partitioned} into cosets of equal order $\left\vert H \right\vert $ by any subgroup $H \leq G.$ Furthermore, if $H \unlhd G$ is a normal subgroup, any left coset $gH$ is identical to the right coset $Hg.$ 
+
+This gives the Lagrange's theorem
+\begin{frm-thm}{Lagrange's theorem}
+Let $G$ be a finite group and let $H\leq G,$ not necessarily normal, then
+\[
+    \frac{\left\vert G \right\vert }{\left\vert H \right\vert } \in \mathbb{Z}. 
+\]
+Similarly, for any $g \in G,$
+\[
+    \frac{\left\vert G \right\vert }{\left\vert g \right\vert } \in \mathbb{Z}.
+\]
+\end{frm-thm}
+Lagrange's theorem follows from partitioning $G$ into disjoint cosets of $H$ and the corollary follows from generating a cyclic subgroup from $g.$ As a result, for example, every order-4 group is isomorphic to $C_4$ or the Klein four-group. 
+
+We also define the \textit{\textbf{product}} of two cosets as the \textit{set} of all products of two elements from each coset. It can be proved that cosets form a group under this product. 
+
+\subsection{Homomorphism}
+Two groups $G$ and $G^\prime $ are said to be \textit{\textbf{homomorphic}} if there is a group \textit{\textbf{homomorphism}} $\Phi: G\to G^\prime$, not necessarily 1-1 or onto, that preserves group structure. $G$ is called the \textit{\textbf{source,}} $G^\prime $ is the \textit{\textbf{target,}} and the set $\{\Phi(g)\}$ is called the \textit{\textbf{image}}. 
+
+\[
+    \Phi(g_1) \Phi(g_2) = \Phi(g_1) \Phi(g_2).
+\]
+
+Isomorphism is a special case of homomorphism. Just like isomorphism, homomorphism maps identities and inverses to each other. If $\Phi$ is not 1-1, then there exists a non-trivial subgroup $H \leq G,$ called the \textit{\textbf{kernel}}, that maps to the identity of $G^\prime.$ It can be shown that the kernel $H$ is further a \textit{\textbf{normal}} subgroup. 
 \section{Representations}
 \end{document}

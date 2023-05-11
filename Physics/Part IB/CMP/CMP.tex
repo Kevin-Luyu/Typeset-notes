@@ -8,6 +8,7 @@
 \usepackage{amsfonts}
 \usepackage{mathtools}
 \usepackage{physics}
+\usepackage{siunitx}
 \usepackage{xcolor}
 \usepackage{lmodern} % in conjugate with the fontenc package to prevent pixelisation of output
 \usepackage[T1]{fontenc} % to produce the ``dbar'' in thermo
@@ -136,12 +137,17 @@ where the speed of sound $v_s$ is taken as a constant. The factor of $3$ in the 
 \[
     3N = \int_{0}^{\omega_D} g(\omega ) \,\mathrm{d}\omega , \implies  \omega_D^3 = \frac{6\pi ^{2} v_s^3 N}{V}.  
 \] 
+For a more general dispersion relation (still assuming the standing wave $g(k),$) we can integrate the area between two surfaces of constant $\omega$ to find the number of states in between, giving
+\[
+    D(\omega) \mathrm{d} \omega = \left( \frac{L}{2\pi }\right)^3 \int_{\mathrm{shell} } \mathrm{d} ^3 k = \frac{V}{8\pi ^3} \int \frac{\mathrm{d} S_\omega}{v_g},
+\]
+where $v_g$ is the group velocity, and the integral is taken over the whole surface of constant frequency $S_\omega.$ 
 
 Thus, the integral for the heat capacity becomes 
 \[
     C = 9 N k_b \frac{T}{\theta_D}^3 \int_{0}^{\theta_D / T} x^4 \frac{e^x}{(e^x - 1)^{2} } \,\mathrm{d}x,
 \]
-where $\theta_D$ is the Debye temperature $\hbar \omega_D = k_B \theta_D$ marking the quantum to classical transition. This integral doesn't have a closed-form expression, but at high temperature we can Taylor expand $e^x$ to carry out this finite integral and arrives at the Dulong-Petit law; at low temperatures, the upper limit goes to infinite and the integral can be evaluated to give the $T^3$ law. 
+where $\theta_D$ is the Debye temperature $\hbar \omega_D = k_B \theta_D$ marking the quantum to classical transition. This integral doesn't have a closed-form expression, but at high temperature we can Taylor expand $e^x$ to carry out this finite integral and arrives at the Dulong-Petit law; at low temperatures, the upper limit goes to infinite and the integral can be evaluated to give the $T^3$ law. This model works well for most dielectrics and insulators, but not nor amorphous materials like glass, where the low-temperature dependence is predominantly $\propto T.$
 
 The Debye temperature $\theta_D$ reflects the natural oscillation frequency in an atom, so heavier atoms have a lower Debye temperature. Most metals have their Debye temperature around $300$ Kelvins so they obey the Dulong-Petit law at room temperature. 
 
@@ -178,7 +184,10 @@ the density of states $g(\varepsilon)$ is now
 \]
 in 3D. Note that geometric confinement along particular directions could make the first excited state inaccessible, effectively lowering the dimension of the problem. In lower dimensions, $g(\varepsilon)$ would have a lower energy dependence. 
 
-At $T = 0,$ the absence of thermal excitation gives a dispersion relation filled up to a Fermi energy $\varepsilon_F$ with a clear cut, like what we had in the Debye model, where $\mu(0) = \varepsilon_F$ can be calculated by finding the radius of the sphere in the $k$ space giving $N$ states. 
+At $T = 0,$ the absence of thermal excitation gives a dispersion relation filled up to a Fermi energy $\varepsilon_F$ with a clear cut, like what we had in the Debye model, where $\mu(0) = \varepsilon_F$ can be calculated by finding the radius of the sphere in the $k$ space giving $N$ states. The fermi energy is related to the volume as
+\[
+    \boxed{\varepsilon_{F} \propto \left(\frac{N}{V}\right)^{2 / 3}}
+\]
 
 At any finite temperature, however, the electrons would follow the Fermi-Dirac distribution, rationalised as putting energy and electrons from a thermal and particle reservoir into our system. Compared to the ground state configuration, the entropy decrease in the reservoir associated with taking one electron out from the system is
 \[
@@ -200,7 +209,7 @@ or by only considering the classical contribution of $3 k_B T /2$ thermal energy
 \[
     C_{el} \approx \frac{9}{2} N k_B \frac{T}{T_F}. 
 \]
-Both relations scale with $T / T_F,$ where $k_B T_F = \varepsilon_F,$ giving a larger contribution to the heat capacity than electrons at low temperatures. For most metals, $T \ll T_F$ at room temperatures. 
+Both relations scale with $T / T_F,$ where $k_B T_F = \varepsilon_F,$ giving a larger contribution to the heat capacity than electrons at low temperatures. For most metals, $T \ll T_F$ at room temperatures so we are always in the ``low temperature'' limit when it comes to electronic heat capacities. 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.5\textwidth]{figs/fd-distribution.png}
@@ -215,5 +224,54 @@ Both electrons and phonons contribute to the solid heat capacity, giving a total
 under low temperatures. 
 
 Note that we didn't consider the thermal smearing in Debye model. This is because phonons are bosons following Bose-Einstein distribution, so there can be any number of phonons occupying the same states. The density of states we saw in the phonon case are for the vibrational modes, which don't behave like particles and cannot be ``thermally excited'' to smear out the edges. 
+
+It is probably more useful to just remember that 
+\[
+    \boxed{g_{\mathrm{ph} }(\omega) \propto \omega ^{2}, \quad 
+    g_{\mathrm{el, 3D} }(\omega ) \propto \omega ^{1 / 2}}
+\]
+
+\subsection{Electrical and optical properties of metals}
+The free electron models allow us to predict various properties of \textit{metals}. For example, the internal energy per electron is
+\[
+    \expval{U} = \frac{\int_{0}^{\varepsilon_F} \varepsilon g(\varepsilon ) \,\mathrm{d}\varepsilon  }{\int_{0}^{\varepsilon_F} g(\varepsilon ) \,\mathrm{d}\varepsilon  } = \frac{3}{2}\varepsilon_F,
+\]
+giving the Pauli pressure 
+\[
+    P = -\frac{\partial U}{\partial V} = \frac{2}{5}n \varepsilon_F
+\]
+and the \textit{\textbf{bulk modulus}}
+\[
+    B_T = -V \left( \frac{\partial p}{\partial V} \right)_{T} = \frac{2}{3}v \varepsilon_F. 
+\]
+This can account for most of the contribution to the bulk modulus in metals, even if it ignores correlation between electrons and long-range attraction from the lattice. 
+
+Just like phonons, electrons can scatter from phonons or structural defects as well (ignoring electron-electron scattering which is complicated), giving an exponential decay in the average speed that acts like a drag force
+\[
+    \expval{v} = v_0 \exp(- t / \tau), 
+\]
+where $\tau$ is the expected time between collisions. 
+
+Therefore, the net equation of motion in an EM field is 
+\[
+    \boxed{m^{*} \left(\frac{\mathrm{d}\mathbf{v} }{\mathrm{d}t} + \frac{\mathbf{v} }{\tau } \right) = - e \mathbf{E} - e \mathbf{v} \times \mathbf{B},} 
+\]
+where $m^{*}$ is the effective mass accounting for lattice interaction and the magnetic force can often be neglected. This gives a steady-state drift velocity and hence the \textit{\textbf{electrical conductivity}} as 
+\[
+    \sigma  = \frac{n e^{2} \tau }{m^*} \coloneqq n e \mu. 
+\]
+When the damping is ignored (at high $\omega$), the equation of motion just becomes that of a free plasma, with a \textit{\textbf{dielectric constant}} $\epsilon(\omega ) = 1 / \omega_{p^{2} } / \omega ^{2}. $ This explains the variation of optical reflectivity as a function of $\omega$ in metals. 
+
+Applying a constant $\mathbf{E} $ field essentially translates the Fermi sphere. Both phonon (high $q$ but low $\varepsilon,$ $40\mathrm{meV} \ll 5\mathrm{eV} $)and structural scattering changes the direction of the wavevector significantly, but not the magnitude. Therefore, the electrons in the Fermi sphere will be randomly scattered onto other parts on the surface of the sphere, with the higher $\left\vert k \right\vert $ states being scattered more, allowing the Fermi sphere to come to equilibrium at the drift velocity. 
+
+At low temperatures, the structural defects dominates, so $\tau$ tends to sample-dependent constants, whereas at high temperatures, we expect the phonon scattering to dominate, giving $\tau \propto 1/T.$ Therefore, \underline{resistivity tends to a constant at low $T$ and is $\propto T$ for high $T$.}
+
+Thermal conductivity can be determined from the usual \(\kappa  = \frac{1}{3} C_{el} \expval{c} l,\) where $\expval{c}$ is the average speed at the Fermi edge and $l = v_F \tau.$ It can be shown that good thermal conductors are usually also good electric conductors, since
+\[
+    \frac{\kappa }{\sigma } \propto T
+\]
+from the free electron model. This shows good agreement with experiments. Thermal conductivity of pure metals are hundreds times larger than those in insulators. 
+
+The sign of quantum hall effects cannot always be accurately predicted by the model, marking its limitations. 
 \section{Semiconductors}
 \end{document}

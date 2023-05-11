@@ -5,6 +5,7 @@
 \contentsline {subsection}{\numberline {2.3}Thermal properties}{3}{}%
 \contentsline {subsubsection}{\numberline {2.3.1}Heat capacity}{3}{}%
 \contentsline {subsubsection}{\numberline {2.3.2}Thermal conductivity}{4}{}%
-\contentsline {section}{\numberline {3}Free electron model}{4}{}%
-\contentsline {subsection}{\numberline {3.1}Statistics of electrons}{4}{}%
-\contentsline {section}{\numberline {4}Semiconductors}{6}{}%
+\contentsline {section}{\numberline {3}Free electron model}{5}{}%
+\contentsline {subsection}{\numberline {3.1}Statistics of electrons}{5}{}%
+\contentsline {subsection}{\numberline {3.2}Electrical and optical properties of metals}{6}{}%
+\contentsline {section}{\numberline {4}Semiconductors}{7}{}%

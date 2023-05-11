@@ -791,6 +791,20 @@ In other words, merely changing the number of photons doesn't increase entropy o
 Increasing the size of the box increases the total radiation energy inside. During expansion, the wall emits photons at the same rate but the number of photons bouncing off the retreating wall decreases (but $v < c$ so there are always photons bouncing off the wall). As a result, the extra photons emitted from the wall populate the expanded cavity with the same density, and thus expanding a cavity increases the number of photons inside. 
 
 \subsection{The black-body distribution}
+Classical thermodynamics can determine $u(\omega)$ up to a constant of proportionality, which can only be determined from statistical mechanics. The derivation greatly parallels that for phonons in the Debye model: the standing wave modes of the cavity are allowed, giving a orthorhombic lattice of allowed states. This can be multiplied with the dispersion relation $\omega  = c\left\vert \mathbf{k} \right\vert $ to give the density of states in $\omega$
+\[
+    \boxed{g_\omega(\omega ) \propto \omega ^{2},} \quad \Leftrightarrow \quad g_\lambda(\lambda) = \lambda^{-4}. 
+\]
+Each standing wave mode at frequency $\omega$ has an average energy $\expval{u(\omega)}$ according to Bose-Einstein distribution
+\[
+    \boxed{\expval{u(\omega)} = \frac{\hbar \omega}{\exp(\hbar \omega / k T) - 1}},
+\]
+so the overall energy density just follows the Planck distribution
+\[
+    u(\omega, T) \propto \frac{\omega ^3}{\exp(\hbar \omega  / kT) - 1}.
+\]
+The only difference between this and ths Debye model is that there is no upper bound on the frequency and there are only 2 polarisation states, not 3, for each mode in the $k$ space. It can be seen that temperature doesn't change the overall functional form, and the maximum spectral density occurs at $\lambda T = \mathrm{const} $ for different temperatures. 
+
 The form of $u_\omega$ can relate the Einstein A and B coefficients. For a two level system with the energy difference equivalent to a photon of frequency $\omega$ and connected to a radiation bath with spectral energy density $u_\omega,$ three processes can occur: 
 \begin{itemize}
     \item Spontaneous emission of a photon with probability $N_2 A_{21};$
@@ -806,4 +820,38 @@ which can be used to show that population inversion
     \frac{N_2}{g_2} > \frac{N_1}{g_1}
 \]
 is required to achieve a net gain in laser, where $g$ is the degeneracy. 
+
+\section{Kinetic gas theory}
+\subsection{Maxwell Distribution}
+The kinetic gas theory assumes that particles only exchange energy via collisions, so it is valid to trace the trajectory of one particle and regard all the others as reservoirs, thus applying the boltzmann distribution to give the relative probability of one \textit{velocity microstate} 
+\[
+    f(v) \propto \exp(- m v^{2} / 2 k T), 
+\]
+centring at the origin. Assuming the allowed states are uniform in the momentum space, the degeneracy of microstates is then the area of a spherical shell in the momentum space, giving the (non-normalised) Maxwell distribution of \textit{speed}
+\[
+    \boxed{P(v) \propto v^2 \exp\left(- \frac{mv^{2} }{2 k T}\right).}
+\]
+
+Simple scaling gives that the peak, and thus all measures of a typical speed, depends on mass and temperature as
+\[
+    v_m \propto \sqrt{\frac{T}{m}}.  
+\]
+The Maxwell distribution is skewed to the right, and the distribution of $v^2$ is even more skewed, allowing us to determine the relative order of the most probable speed, the average speed, and the root-mean-squared speed as 
+\[
+    v_m < \expval{v} < \sqrt{\expval{v^2}}. 
+\]
+Note the average is quite close to the rms speed (about a $7\%$ difference), which can easily determined from the equipartition theorem
+\[
+    \expval{v^{2} } = \frac{k T }{m}. 
+\]
+
+\subsection{Pressure}
+In the simple 1D case, a particle with speed $u_x$ either travels to the right or to the left, giving a collision rate of $A u_x n /2,$ where $A$ is the cross section of the wall. Assuming all collisions are elastic and averaging over all possible $u_x$ just gives
+\[
+    pV = N m \expval{u_x^2} = \frac{1}{3} N m \expval{u^2} = n R T,
+\]
+which predicts the internal energy as 
+\[
+    U =\frac{1}{2}N m \expval{u^2} = \frac{3}{2} n R T.
+\]
 \end{document}

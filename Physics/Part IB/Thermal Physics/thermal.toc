@@ -33,3 +33,6 @@
 \contentsline {subsection}{\numberline {7.1}Radiation in thermal equilibrium}{17}{}%
 \contentsline {subsection}{\numberline {7.2}Classical thermodynamics of photon gas}{18}{}%
 \contentsline {subsection}{\numberline {7.3}The black-body distribution}{18}{}%
+\contentsline {section}{\numberline {8}Kinetic gas theory}{19}{}%
+\contentsline {subsection}{\numberline {8.1}Maxwell Distribution}{19}{}%
+\contentsline {subsection}{\numberline {8.2}Pressure}{19}{}%
