@@ -8,4 +8,6 @@
 \contentsline {section}{\numberline {3}Free electron model}{5}{}%
 \contentsline {subsection}{\numberline {3.1}Statistics of electrons}{5}{}%
 \contentsline {subsection}{\numberline {3.2}Electrical and optical properties of metals}{6}{}%
-\contentsline {section}{\numberline {4}Semiconductors}{7}{}%
+\contentsline {section}{\numberline {4}Nearly free electron model}{7}{}%
+\contentsline {subsection}{\numberline {4.1}The theory}{7}{}%
+\contentsline {section}{\numberline {5}Semiconductors}{8}{}%

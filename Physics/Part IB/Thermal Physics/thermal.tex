@@ -729,6 +729,7 @@ This means the heat capacity and thermal expansion goes to zero near the absolut
 
 \section{Thermodynamics of radiation}
 \subsection{Radiation in thermal equilibrium}
+\label{subsec:blackbody-radiation}
 Consider a cavity at temperature $T$ in thermal equilibrium. The atoms on its wall jiggles around due to thermal motion and hence produces electromagnetic radiation which exists as standing waves with finely-discretised wavevectors in the cavity characterised by a spectral energy density $u_\lambda (\lambda , T).$ Since the cavity cannot do work on the photons, time reversal symmetry dictates that the energy transferred between any two cavities at the same temperature $T$ in any spectral interval must be equal in either directions (otherwise there will be a net flow of heat in equilibrium), known as detailed balancing. In other words, the spectral energy density $u_\lambda(\lambda, T)$ only depends on these two parameters and is a universal function. 
 
 There will be a photon flux exerting radiation pressure on the wall. For a cavity with photon volume density $n$ and energy volume density $u,$ photons can hit the wall with angle to the normal $\theta \in [0, \pi / 2]$, coming from a cylinder of height $c \mathrm{d} t \cos{\theta}.$ Thus, the total number of photons hitting an area $\Delta A$ in time $\Delta  t$ is 
@@ -845,7 +846,7 @@ Note the average is quite close to the rms speed (about a $7\%$ difference), whi
     \expval{v^{2} } = \frac{k T }{m}. 
 \]
 
-\subsection{Pressure}
+\subsection{Pressure and effusion}
 In the simple 1D case, a particle with speed $u_x$ either travels to the right or to the left, giving a collision rate of $A u_x n /2,$ where $A$ is the cross section of the wall. Assuming all collisions are elastic and averaging over all possible $u_x$ just gives
 \[
     pV = N m \expval{u_x^2} = \frac{1}{3} N m \expval{u^2} = n R T,
@@ -853,5 +854,38 @@ In the simple 1D case, a particle with speed $u_x$ either travels to the right o
 which predicts the internal energy as 
 \[
     U =\frac{1}{2}N m \expval{u^2} = \frac{3}{2} n R T.
+\]
+
+From the solid angle argument as in \ref{subsec:blackbody-radiation}, the pressure and flux in an ideal gas with only kinetic energy is
+\[
+    \boxed{p = \frac{1}{3}m n \expval{v^{2}} = n k_B T, \quad 
+    \Phi = \frac{1}{4}n \expval{v}, }
+\]
+where the flux in general is defined as the amount of stuff hitting a surface per unit time per unit area. 
+
+Consider a hole in a container so small that it doesn't perturb the equilibrium distribution of gas in the container and gas molecules pass through the hole without collisions. The \textit{\textbf{effusion rate,}} or the rate at which molecules escape from the hole is simply
+\[
+    r = \Phi A \propto \frac{p}{\sqrt{m k_B T}},
+\] 
+which can be used to separate radioactive isotopes, for example. The dependence of $r$ on $m$ is known as \textit{\textbf{Graham's law}}, where $p$ is the partial pressure of the effusing species. This can also be used to measure vapour pressure of dilute gases. 
+Note that the speed distribution of the effused molecules are \textit{not} Maxwellian, because faster molecules can arrive at the hole at a higher rate. More specifically, $P(v) \propto \Phi \propto v f(v) \propto v^3 \exp(- m v^{2} / 2 k_B T).$
+
+Hidden behind effusion is the assumption that the hole's size is much smaller than the mean free path of the gas. In this regime, the flux on both sides of the hole will equate. In the opposite regime where the hole is much larger than the mean free path, equilibrium can be established when the pressure gradient is zero. 
+
+\subsection{Cross section and mean free path}
+The apparent size of molecules felt by each other within which collision happens is characterised by the \textit{\textbf{cross section}}, more precisely defined from the differential relation between the number and angles of an incident beam of particles and the scattered beams. Classically, it can be regarded as a data reduction parameter. Often, the cross section is much larger than the actual size of the molecules. In the classical approximation, $\sigma = \pi (r_a + r_b)^{2}.$
+
+Consider a molecule with speed $v$, moving with other molecules of the same speed. The mean relative speed is then 
+\[
+    \expval{\mathbf{v}_r}^{2} = \expval{\mathbf{v}_2 - \mathbf{v}_1}^{2} = \expval{\mathbf{v_1} }^{2} + \expval{\mathbf{v_2}}^2 - 2 \expval{\mathbf{v_1}\cdot \mathbf{v_2}} = 2v^{2}. 
+\] 
+The conditional probability of collision within $\mathrm{d} t$ is then $n \sigma \mathrm{d} t,$ giving the probability of not hitting any particle as an exponential decay, and that of not hitting any particle up to $t,$ but colliding within $\mathrm{d} t$ is 
+\[
+    P(t) \mathrm{d} t = e^{- n \sigma  t} n v \sigma \mathrm{d} t
+\]
+which is automatically normalised. The this gives the mean interval between collision as 
+\[
+    \tau = \frac{1}{n \sigma v_r}, \quad 
+    \lambda = \expval{v} \tau  \approx \frac{k_B T}{\sqrt{2} \sigma p}. 
 \]
 \end{document}

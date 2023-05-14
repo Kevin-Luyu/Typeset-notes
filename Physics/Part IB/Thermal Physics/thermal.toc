@@ -35,4 +35,5 @@
 \contentsline {subsection}{\numberline {7.3}The black-body distribution}{18}{}%
 \contentsline {section}{\numberline {8}Kinetic gas theory}{19}{}%
 \contentsline {subsection}{\numberline {8.1}Maxwell Distribution}{19}{}%
-\contentsline {subsection}{\numberline {8.2}Pressure}{19}{}%
+\contentsline {subsection}{\numberline {8.2}Pressure and effusion}{19}{}%
+\contentsline {subsection}{\numberline {8.3}Cross section and mean free path}{20}{}%

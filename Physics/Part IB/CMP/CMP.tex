@@ -272,6 +272,54 @@ Thermal conductivity can be determined from the usual \(\kappa  = \frac{1}{3} C_
 \]
 from the free electron model. This shows good agreement with experiments. Thermal conductivity of pure metals are hundreds times larger than those in insulators. 
 
-The sign of quantum hall effects cannot always be accurately predicted by the model, marking its limitations. 
+The sign of quantum hall effects cannot always be accurately predicted by the model, marking its limitations.
+
+\section{Nearly free electron model}
+\subsection{The theory}
+The free electron model fails to account for the sign of the hall coefficient, as it doesn't include the periodicity of a lattice (the electrons Hamiltonian only has the kinetic term). A solid can be better modelled with a periodic potential with Fourier series
+\[
+    V(x) = \sum_{p=-\infty }^{\infty} V_p \cos(p G_1 x). 
+\]
+When the potential is weak, we could use a perturbative approach to investigate its expansion coefficients in the eigenstates of the free electron (plane waves).
+
+From the translational symmetry \(\left\vert \psi(x+a) \right\vert = \left\vert \psi(x) \right\vert \), the Bloch's theorem allows us to write the wavefunction as 
+\[
+    \psi_{\mathbf{k}} (\mathbf{r}) = u_{\mathbf{k}}(\mathbf{r}) e^{i \mathbf{k} \cdot \mathbf{r}}, 
+\] 
+where $\mathbf{k}$ is the free electron wavevector and $u_k{\mathbf{r}}$ is a periodic function, and the wavefunction can be in turn expanded into the Fourier series
+\[
+    \boxed{
+        \psi_k(x) = \sum_{n=-\infty }^{\infty} C_{k,n} \ket{\phi_{k,n}}, \quad 
+        \ket{\phi_{k,n}} \propto e^{i (k + n G_1) x}, 
+    }
+\]
+where the basis functions are discrete values of the free electron scattering states (plane waves) satisfying the periodicity of the lattice. Here $k$ is best interpreted as the crystal momentum of the electron and comes directly from Bloch's theorem. From the perturbation theory, the contribution from various basis states depend on the energy difference to the central state $n=0.$ To first order, we could approximate solution as a linear combination of the two eigenstates with the nearest energy $\ket{k,0}$ and $\ket{k,-1}:$
+\[
+    \psi_K(x) = C_{k,0} \ket{\phi_{k,0}} = C_{k,-1} \ket{\phi_{k,-1}}. 
+\]
+
+For small values of $k,$ the contribution from $\ket{\phi_{k,0}}$ and the energy is close to the free dispersion curve. It is only near the zone boundary does the potential starts to play a role, which we can analyse from degenerate perturbation theory. 
+
+In the finite eigenspace spanned by $\ket{\psi_{k,n}},$ the Schrodinger's equation for 
+\[
+    \psi(x) = \sum_{n=-\infty }^{\infty } C_{k,n} \ket{\phi_{k,n}(x)}
+\]
+can be rewritten as a eigenvalue equation on the expansion coefficients
+\[
+    \mathbf{\underline{H}} \mathbf{C} = \varepsilon \mathbf{C},  
+\]
+where the matrix elements of $\mathbf{H}$ in the eigenspace can be evaluated as a sum of delta functions
+\[
+    H_{nm} = \frac{\hbar^{2} (m G_1 + k)^{2} }{2m_e}\delta_{n,m} + \sum_{p=1}^{\infty} \frac{V_p}{2}(\delta_{n,m+p} + \delta_{n,m-p}). 
+\]
+The kinetic energy of the plane wave contributes to the diagonal entries and the Fourier components of $V(x)$ contribute to the off-diagonal elements. In the two-wave approximation, this becomes a matrix equation with contribution from the $V_1.$ 
+
+In general, there would be continuous energy bands followed by forbidden band gaps. The widths of the n-th band gaps will be $V_n.$ This can also be regarded as backfolding of the free electron dispersion curve into the first Brillouin zone and lifting the degeneracies at the zone boundaries due to lattice interactions. For a electrons, higher-order zones will have a larger energy range and higher-order gaps will be narrower. This is due to the quadratic dispersion curve of electrons. This is in sharp contrast with the phonons with increasing band gaps and decreasing band widths, as shown in Fig.\ref{fig:band-structure}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figs/nfe-band-gaps.png}
+    \caption{Band structures in the nearly free electron model.}
+    \label{fig:band-structure}
+\end{figure}
 \section{Semiconductors}
 \end{document}

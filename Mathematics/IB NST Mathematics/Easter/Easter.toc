@@ -5,4 +5,5 @@
 \contentsline {subsection}{\numberline {2.3}Conjugacy relations}{3}{}%
 \contentsline {subsection}{\numberline {2.4}Cosets}{3}{}%
 \contentsline {subsection}{\numberline {2.5}Homomorphism}{4}{}%
+\contentsline {subsection}{\numberline {2.6}Permutation group}{4}{}%
 \contentsline {section}{\numberline {3}Representations}{4}{}%
